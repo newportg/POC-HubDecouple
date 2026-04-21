@@ -1,0 +1,31 @@
+# Hub Decouple
+
+Hub is a old client server application written in Angular and C#. The C# server is a blob which has organically grown over time.
+Hub accesses its database using EntityFrameworks and uses a 'Code First' pattern in which to create and manage the database structure.
+
+We are now at a point where the old system is to large and costly to keep modification so it has been decided to migrate away from the current platform.
+During a staged migration the current and the new system will need to be kept in sync, and as operable as possible.
+
+# Architectural Choices.
+
+## Service Bus
+Every time a operation takes place a message containing the changed data is placed on a service bus for, some client, to consume.
+The issue with this is that data schemas will need to be defined, and maintained, and there has to be some syncronisation between the consumers and publisher as to what the schema contains.
+Messages can become complex and difficult to maintain.
+Service Busses need to be managed, and don't easily cross tenant boundries.
+
+## Event Bus
+Dont care....
+The system publishes that an event has happend, then client systems requests information from a GraphQL system.
+GraphQL allows the client to select the information they are interested in and no more.
+
+## RESTful API
+A REST API provides the Create/Update and Delete functionality to supply informaiton back into hub using its existing rules.
+
+**N.B.**  The Current hub REST API is specific for the Angular GUI. It can be used for this purpose as it is going to be updated to use more modern security and authentication patterns.
+
+## Conclusion
+The Ideal solution would be a Event Bus / REST API solution.
+
+
+

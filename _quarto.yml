@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: "Hub Decoupled Architecture"
+  author: "Gary Newport"
+  favicon: cover.png
+  date: "21/04/2026"
+  sidebar: 
+    background: "#F5F5F5"
+    logo: coverGB.png
+    search: true
+  chapters:
+    - index.md
+#    - Book/architectural-constraints/index.qmd
+#    - Book/system-scope-and-context/index.qmd
+#    - part: Book/building-block-view/building-block-view/index.qmd
+#      chapters:
+#        - Book/building-block-view/azure-function-detail/index.qmd
+#        - Book/building-block-view/cosmos-db-component/index.qmd
+#        - Book/building-block-view/domain-logic-component/index.qmd
+#        - Book/building-block-view/security-component/index.qmd
+#    - Book/solution-strategy/index.qmd
+#    - Book/runtime-view/index.qmd
+#    - Book/deployment-view/index.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+#  pdf:
+#    documentclass: scrreprt
+
+
+#diagram:
+#  engine:
+#    plantuml:
+#      execpath: "C:/Plantuml/plantuml.bat"
+
+filters:
+  - plantuml-diagram
