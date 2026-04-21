@@ -11,6 +11,18 @@ name: Render and Publish
 #     pages: write
 
 jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        
+      - name: Copy README.md to index.md
+        run: |
+          chmod +x .github/workflows/copyfile.sh
+          ./.github/workflows/copyfile.sh
+          
   build-deploy:
     runs-on: ubuntu-latest
     
@@ -25,8 +37,7 @@ jobs:
         with:
           # To install LaTeX to build PDF book 
           tinytex: true 
-          # uncomment below and fill to pin a version
-          # version: SPECIFIC-QUARTO-VERSION-HERE
+
       
       # add software dependencies here and any libraries
       
