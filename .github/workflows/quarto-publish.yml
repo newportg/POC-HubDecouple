@@ -13,16 +13,24 @@ name: Render and Publish
 jobs:
   copy-file:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        
-      - name: Copy README.md to index.md
-        run: |
-          chmod +x .github/workflows/copyfile.sh
-          ./.github/workflows/copyfile.sh
-          
+    - uses: actions/checkout@v4
+    - name: copy file
+      uses: canastro/copy-file-action@master
+      with:
+        source: "README.md"
+        target: "index.md"
+
+#    steps:
+#      - name: Check out repository
+#        uses: actions/checkout@v4
+#        
+#      - name: Copy README.md to index.md
+#        run: |
+#          chmod +x .github/workflows/copyfile.sh
+#          ./.github/workflows/copyfile.sh
+
   build-deploy:
     runs-on: ubuntu-latest
     
