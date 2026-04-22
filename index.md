@@ -94,7 +94,7 @@ The combined model is selected because it provides the best trade-off between mi
 
 ## Target Interaction Overview
 
-```mermaid
+```{mermaid}
 flowchart LR
 	A[Hub Domain Change] --> B[Event Published]
 	B --> C[Consumer Receives Event]
