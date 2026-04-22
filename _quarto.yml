@@ -4,11 +4,11 @@ project:
 book:
   title: "Hub Decoupled Architecture"
   author: "Gary Newport"
-  favicon: cover.png
+  favicon: KF.webp
   date: "21/04/2026"
   sidebar: 
     background: "#F5F5F5"
-    logo: coverGB.png
+    logo: KF.webp
     search: true
   chapters:
     - index.qmd
