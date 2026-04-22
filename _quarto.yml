@@ -11,7 +11,7 @@ book:
     logo: coverGB.png
     search: true
   chapters:
-    - index.md
+    - index.qmd
     - Book/Executive Summary & Objectives.qmd
     - Book/Current State Assessment.qmd
     - Book/Proposed Target Architecture.qmd
