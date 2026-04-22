@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Gary Newport">
-<meta name="dcterms.date" content="2027-09-04">
 
-<title>Hub Decoupled Architecture</title>
+<title>6&nbsp; Transition &amp; Rollout Plan – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,26 +23,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./Book/Executive Summary &amp; Objectives.html" rel="next">
-<link href="./KF.webp" rel="icon">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3ea88fb24c6fca115aefa7d130dd19cd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Book/Operations &amp; Maintenance.html" rel="next">
+<link href="../Book/Detailed Design &amp; Implementation.html" rel="prev">
+<link href="../KF.webp" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-3ea88fb24c6fca115aefa7d130dd19cd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,9 +71,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -88,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hub Decoupled Architecture</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Transition &amp; Rollout Plan.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,12 +98,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./coverGB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./coverGB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../coverGB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../coverGB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Hub Decoupled Architecture</a> 
+      <a href="../">Hub Decoupled Architecture</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -119,43 +115,43 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hub Decoupled Architecture</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Executive Summary &amp; Objectives.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Executive Summary &amp; Objectives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Detailed Design &amp; Implementation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
+  <a href="../Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
   </div>
 </li>
@@ -169,24 +165,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hub-decoupled-architecture" id="toc-hub-decoupled-architecture" class="nav-link active" data-scroll-target="#hub-decoupled-architecture"><span class="header-section-number">1</span> Hub Decoupled Architecture</a>
+  <li><a href="#phased-migration-strategy" id="toc-phased-migration-strategy" class="nav-link active" data-scroll-target="#phased-migration-strategy"><span class="header-section-number">6.1</span> Phased Migration Strategy</a>
   <ul class="collapse">
-  <li><a href="#purpose-of-this-document" id="toc-purpose-of-this-document" class="nav-link" data-scroll-target="#purpose-of-this-document"><span class="header-section-number">1.1</span> Purpose of This Document</a></li>
-  <li><a href="#current-context" id="toc-current-context" class="nav-link" data-scroll-target="#current-context"><span class="header-section-number">1.2</span> Current Context</a></li>
-  <li><a href="#architectural-decision-drivers" id="toc-architectural-decision-drivers" class="nav-link" data-scroll-target="#architectural-decision-drivers"><span class="header-section-number">1.3</span> Architectural Decision Drivers</a></li>
-  <li><a href="#options-considered" id="toc-options-considered" class="nav-link" data-scroll-target="#options-considered"><span class="header-section-number">1.4</span> Options Considered</a>
+  <li><a href="#phase-0-foundations" id="toc-phase-0-foundations" class="nav-link" data-scroll-target="#phase-0-foundations"><span class="header-section-number">6.1.1</span> Phase 0: Foundations</a></li>
+  <li><a href="#phase-1-pilot-domain-enablement" id="toc-phase-1-pilot-domain-enablement" class="nav-link" data-scroll-target="#phase-1-pilot-domain-enablement"><span class="header-section-number">6.1.2</span> Phase 1: Pilot Domain Enablement</a></li>
+  <li><a href="#phase-2-controlled-expansion" id="toc-phase-2-controlled-expansion" class="nav-link" data-scroll-target="#phase-2-controlled-expansion"><span class="header-section-number">6.1.3</span> Phase 2: Controlled Expansion</a></li>
+  <li><a href="#phase-3-coexistence-optimization" id="toc-phase-3-coexistence-optimization" class="nav-link" data-scroll-target="#phase-3-coexistence-optimization"><span class="header-section-number">6.1.4</span> Phase 3: Coexistence Optimization</a></li>
+  <li><a href="#phase-4-cutover-and-decommission" id="toc-phase-4-cutover-and-decommission" class="nav-link" data-scroll-target="#phase-4-cutover-and-decommission"><span class="header-section-number">6.1.5</span> Phase 4: Cutover and Decommission</a></li>
+  </ul></li>
+  <li><a href="#milestone-timeline-planning-baseline" id="toc-milestone-timeline-planning-baseline" class="nav-link" data-scroll-target="#milestone-timeline-planning-baseline"><span class="header-section-number">6.2</span> Milestone Timeline (Planning Baseline)</a></li>
+  <li><a href="#risk-register-and-mitigation" id="toc-risk-register-and-mitigation" class="nav-link" data-scroll-target="#risk-register-and-mitigation"><span class="header-section-number">6.3</span> Risk Register and Mitigation</a>
   <ul class="collapse">
-  <li><a href="#option-a-service-bus-with-rich-payload-contracts" id="toc-option-a-service-bus-with-rich-payload-contracts" class="nav-link" data-scroll-target="#option-a-service-bus-with-rich-payload-contracts"><span class="header-section-number">1.4.1</span> Option A: Service Bus with Rich Payload Contracts</a></li>
-  <li><a href="#option-b-event-notification-consumer-data-pull" id="toc-option-b-event-notification-consumer-data-pull" class="nav-link" data-scroll-target="#option-b-event-notification-consumer-data-pull"><span class="header-section-number">1.4.2</span> Option B: Event Notification + Consumer Data Pull</a></li>
-  <li><a href="#option-c-rest-command-interface-for-write-back" id="toc-option-c-rest-command-interface-for-write-back" class="nav-link" data-scroll-target="#option-c-rest-command-interface-for-write-back"><span class="header-section-number">1.4.3</span> Option C: REST Command Interface for Write-Back</a></li>
+  <li><a href="#key-risks" id="toc-key-risks" class="nav-link" data-scroll-target="#key-risks"><span class="header-section-number">6.3.1</span> Key Risks</a></li>
+  <li><a href="#mitigation-measures" id="toc-mitigation-measures" class="nav-link" data-scroll-target="#mitigation-measures"><span class="header-section-number">6.3.2</span> Mitigation Measures</a></li>
   </ul></li>
-  <li><a href="#recommended-architecture" id="toc-recommended-architecture" class="nav-link" data-scroll-target="#recommended-architecture"><span class="header-section-number">1.5</span> Recommended Architecture</a></li>
-  <li><a href="#decision-summary-matrix" id="toc-decision-summary-matrix" class="nav-link" data-scroll-target="#decision-summary-matrix"><span class="header-section-number">1.6</span> Decision Summary Matrix</a></li>
-  <li><a href="#target-interaction-overview" id="toc-target-interaction-overview" class="nav-link" data-scroll-target="#target-interaction-overview"><span class="header-section-number">1.7</span> Target Interaction Overview</a></li>
-  <li><a href="#transition-principle" id="toc-transition-principle" class="nav-link" data-scroll-target="#transition-principle"><span class="header-section-number">1.8</span> Transition Principle</a></li>
-  <li><a href="#phase-gates-at-a-glance" id="toc-phase-gates-at-a-glance" class="nav-link" data-scroll-target="#phase-gates-at-a-glance"><span class="header-section-number">1.9</span> Phase Gates at a Glance</a></li>
-  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book"><span class="header-section-number">1.10</span> How to Use This Book</a></li>
+  <li><a href="#rollback-and-contingency-procedures" id="toc-rollback-and-contingency-procedures" class="nav-link" data-scroll-target="#rollback-and-contingency-procedures"><span class="header-section-number">6.4</span> Rollback and Contingency Procedures</a>
+  <ul class="collapse">
+  <li><a href="#operational-rollback-principles" id="toc-operational-rollback-principles" class="nav-link" data-scroll-target="#operational-rollback-principles"><span class="header-section-number">6.4.1</span> Operational Rollback Principles</a></li>
+  <li><a href="#rollback-steps-per-domain" id="toc-rollback-steps-per-domain" class="nav-link" data-scroll-target="#rollback-steps-per-domain"><span class="header-section-number">6.4.2</span> Rollback Steps (Per Domain)</a></li>
   </ul></li>
+  <li><a href="#governance-and-communication" id="toc-governance-and-communication" class="nav-link" data-scroll-target="#governance-and-communication"><span class="header-section-number">6.5</span> Governance and Communication</a></li>
   </ul>
 </nav>
     </div>
@@ -195,26 +193,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hub Decoupled Architecture</h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Gary Newport </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2027</p>
-    </div>
-  </div>
   
     
   </div>
@@ -224,199 +210,117 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hub-decoupled-architecture" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Hub Decoupled Architecture</h1>
-<section id="purpose-of-this-document" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="purpose-of-this-document"><span class="header-section-number">1.1</span> Purpose of This Document</h2>
-<p>This architecture book defines the transition strategy for decoupling Hub from its current tightly coupled client-server implementation. It sets out the target integration model, the phased rollout approach, and the controls needed to migrate safely while keeping business operations stable.</p>
-</section>
-<section id="current-context" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="current-context"><span class="header-section-number">1.2</span> Current Context</h2>
-<p>Hub is a legacy platform with:</p>
+<section id="phased-migration-strategy" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="phased-migration-strategy"><span class="header-section-number">6.1</span> Phased Migration Strategy</h2>
+<p>The transition follows incremental phases to minimize business disruption and maintain confidence in production stability.</p>
+<section id="phase-0-foundations" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="phase-0-foundations"><span class="header-section-number">6.1.1</span> Phase 0: Foundations</h3>
 <ul>
-<li>Angular front end.</li>
-<li>C# back end that has grown into a highly coupled monolith.</li>
-<li>Entity Framework code-first data access model.</li>
-</ul>
-<p>The current architecture has become costly and high risk to change. Delivery lead times are increasing, integration complexity is rising, and broad code impact makes regression risk difficult to control.</p>
-<p>The business requires a staged migration path where legacy and target capabilities can run in parallel, remain synchronized, and preserve service continuity.</p>
-</section>
-<section id="architectural-decision-drivers" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="architectural-decision-drivers"><span class="header-section-number">1.3</span> Architectural Decision Drivers</h2>
-<p>Key drivers behind the architecture decision are:</p>
-<ul>
-<li>Reduce coupling between Hub internals and downstream consumers.</li>
-<li>Support independent consumer evolution with lower coordination overhead.</li>
-<li>Preserve existing domain rule enforcement during migration.</li>
-<li>Improve security posture for integration-facing interfaces.</li>
-<li>Enable incremental rollout with reversible steps.</li>
+<li>Confirm target integration architecture and governance standards.</li>
+<li>Establish identity, observability, and contract management baselines.</li>
+<li>Align teams on operational readiness and ownership model.</li>
 </ul>
 </section>
-<section id="options-considered" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="options-considered"><span class="header-section-number">1.4</span> Options Considered</h2>
-<section id="option-a-service-bus-with-rich-payload-contracts" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="option-a-service-bus-with-rich-payload-contracts"><span class="header-section-number">1.4.1</span> Option A: Service Bus with Rich Payload Contracts</h3>
-<p>Each business operation emits change payloads directly on a service bus.</p>
-<p>Benefits:</p>
+<section id="phase-1-pilot-domain-enablement" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="phase-1-pilot-domain-enablement"><span class="header-section-number">6.1.2</span> Phase 1: Pilot Domain Enablement</h3>
 <ul>
-<li>Familiar enterprise integration pattern.</li>
-<li>Fast consumer processing when payloads are complete.</li>
-</ul>
-<p>Challenges:</p>
-<ul>
-<li>High schema governance burden and version coordination across teams.</li>
-<li>Payload contracts can become complex and brittle over time.</li>
-<li>Cross-tenant operation and ownership can be difficult in practice.</li>
+<li>Select low-risk, high-learning business domain.</li>
+<li>Enable event publication and consumer read-through via GraphQL.</li>
+<li>Validate synchronization, traceability, and incident response runbooks.</li>
 </ul>
 </section>
-<section id="option-b-event-notification-consumer-data-pull" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="option-b-event-notification-consumer-data-pull"><span class="header-section-number">1.4.2</span> Option B: Event Notification + Consumer Data Pull</h3>
-<p>Hub publishes business events, and consumers retrieve required data projections via GraphQL.</p>
-<p>Benefits:</p>
+<section id="phase-2-controlled-expansion" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="phase-2-controlled-expansion"><span class="header-section-number">6.1.3</span> Phase 2: Controlled Expansion</h3>
 <ul>
-<li>Lower payload coupling and more flexible consumer data selection.</li>
-<li>Better fit for independent consumer evolution.</li>
-<li>Reduced need for centrally maintained, consumer-specific event shapes.</li>
-</ul>
-<p>Challenges:</p>
-<ul>
-<li>Requires robust query security and performance controls.</li>
-<li>Requires operational maturity for event handling and replay.</li>
+<li>Add additional domains in priority order.</li>
+<li>Introduce REST write-back capabilities for approved external consumers.</li>
+<li>Track drift, performance, and adoption KPIs against defined thresholds.</li>
 </ul>
 </section>
-<section id="option-c-rest-command-interface-for-write-back" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="option-c-rest-command-interface-for-write-back"><span class="header-section-number">1.4.3</span> Option C: REST Command Interface for Write-Back</h3>
-<p>External systems perform create, update, and delete operations via REST endpoints into Hub.</p>
-<p>Benefits:</p>
+<section id="phase-3-coexistence-optimization" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="phase-3-coexistence-optimization"><span class="header-section-number">6.1.4</span> Phase 3: Coexistence Optimization</h3>
 <ul>
-<li>Centralized validation and business rule enforcement.</li>
-<li>Clear command boundary for controlled write operations.</li>
+<li>Harden dual-run operations and reduce manual reconciliation.</li>
+<li>Retire obsolete point-to-point dependencies.</li>
+<li>Prepare domain-level cutover readiness sign-off.</li>
 </ul>
-<p>Challenges:</p>
+</section>
+<section id="phase-4-cutover-and-decommission" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="phase-4-cutover-and-decommission"><span class="header-section-number">6.1.5</span> Phase 4: Cutover and Decommission</h3>
 <ul>
-<li>Existing UI-focused REST interfaces must be modernized for broader integration usage.</li>
+<li>Transition eligible domains fully to the decoupled model.</li>
+<li>Decommission superseded legacy integration mechanisms.</li>
+<li>Complete post-cutover validation and operational handover.</li>
 </ul>
 </section>
 </section>
-<section id="recommended-architecture" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="recommended-architecture"><span class="header-section-number">1.5</span> Recommended Architecture</h2>
-<p>The preferred target model is a combined pattern:</p>
-<ul>
-<li>Event Bus for change notification.</li>
-<li>GraphQL for consumer-driven read projections.</li>
-<li>REST APIs for controlled write-back into Hub.</li>
-</ul>
-<p>This balances flexibility and governance by keeping write validation centralized while allowing consumers to retrieve fit-for-purpose data views.</p>
-</section>
-<section id="decision-summary-matrix" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="decision-summary-matrix"><span class="header-section-number">1.6</span> Decision Summary Matrix</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Coupling</th>
-<th>Consumer Flexibility</th>
-<th>Governance Overhead</th>
-<th>Migration Fit</th>
-<th>Overall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Service Bus with rich payloads</td>
-<td>Medium-High</td>
-<td>Medium</td>
-<td>High</td>
-<td>Medium</td>
-<td>Medium</td>
-</tr>
-<tr class="even">
-<td>Event notification + consumer pull</td>
-<td>Low</td>
-<td>High</td>
-<td>Medium</td>
-<td>High</td>
-<td>High</td>
-</tr>
-<tr class="odd">
-<td>REST command-only model</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-</tr>
-<tr class="even">
-<td>Combined Event + GraphQL + REST</td>
-<td>Low</td>
-<td>High</td>
-<td>Medium</td>
-<td>High</td>
-<td>Highest</td>
-</tr>
-</tbody>
-</table>
-<p>The combined model is selected because it provides the best trade-off between migration safety, consumer autonomy, and long-term maintainability.</p>
-</section>
-<section id="target-interaction-overview" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="target-interaction-overview"><span class="header-section-number">1.7</span> Target Interaction Overview</h2>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A[Hub Domain Change] --&gt; B[Event Published]
-    B --&gt; C[Consumer Receives Event]
-    C --&gt; D[GraphQL Query for Projection]
-    D --&gt; E[Consumer Projection Updated]
-    F[External Command] --&gt; G[REST API Write Back]
-    G --&gt; H[Hub Validates and Persists]
-    H --&gt; B
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p>The read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.</p>
-</section>
-<section id="transition-principle" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="transition-principle"><span class="header-section-number">1.8</span> Transition Principle</h2>
-<p>The migration will be incremental, domain by domain. Legacy and target pathways will coexist until each domain meets objective readiness criteria for cutover. Rollback capability, reconciliation, and observability are mandatory controls at every phase.</p>
-</section>
-<section id="phase-gates-at-a-glance" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="phase-gates-at-a-glance"><span class="header-section-number">1.9</span> Phase Gates at a Glance</h2>
-<p>Each migration wave should pass the same minimum gate set:</p>
-<ul>
-<li>Technical gate: contracts validated, telemetry active, security controls in place.</li>
-<li>Data gate: baseline loaded, reconciliation passed, no unresolved critical drift.</li>
-<li>Operational gate: dashboards, runbooks, alert routing, and rollback drills completed.</li>
-<li>Business gate: stakeholder sign-off on readiness and service continuity.</li>
-</ul>
-</section>
-<section id="how-to-use-this-book" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="how-to-use-this-book"><span class="header-section-number">1.10</span> How to Use This Book</h2>
-<p>Read the following chapters in sequence:</p>
+<section id="milestone-timeline-planning-baseline" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="milestone-timeline-planning-baseline"><span class="header-section-number">6.2</span> Milestone Timeline (Planning Baseline)</h2>
+<p>Use this as a planning template and refine dates during delivery governance.</p>
 <ol type="1">
-<li>Executive Summary &amp; Objectives: strategic goals and measurable outcomes.</li>
-<li>Current State Assessment: baseline architecture and pain points.</li>
-<li>Proposed Target Architecture: future-state design and interaction model.</li>
-<li>Detailed Design &amp; Implementation: contracts, controls, and implementation sequence.</li>
-<li>Transition &amp; Rollout Plan: phases, risks, and rollback strategy.</li>
-<li>Operations &amp; Maintenance: testing, SLOs, monitoring, and support model.</li>
+<li>Foundation complete: architecture controls and telemetry in place.</li>
+<li>Pilot go-live: first domain synchronized in production.</li>
+<li>Multi-domain expansion: additional domains onboarded with stable KPIs.</li>
+<li>Write-back readiness: REST command flows validated for external integration.</li>
+<li>Domain cutover waves: progressive retirement of legacy pathways.</li>
+<li>Program closeout: transition objectives met and support model stabilized.</li>
 </ol>
-
-
 </section>
+<section id="risk-register-and-mitigation" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="risk-register-and-mitigation"><span class="header-section-number">6.3</span> Risk Register and Mitigation</h2>
+<section id="key-risks" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="key-risks"><span class="header-section-number">6.3.1</span> Key Risks</h3>
+<ul>
+<li>Data synchronization drift between legacy and new consumers.</li>
+<li>Contract change misalignment across producer and consumer teams.</li>
+<li>Skills and capacity constraints for operating dual-run architecture.</li>
+<li>Security gaps during staged exposure of integration endpoints.</li>
+<li>Performance bottlenecks in high-volume event/query scenarios.</li>
+</ul>
+</section>
+<section id="mitigation-measures" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="mitigation-measures"><span class="header-section-number">6.3.2</span> Mitigation Measures</h3>
+<ul>
+<li>Enforce contract versioning and compatibility review gates.</li>
+<li>Implement replay, reconciliation, and automated drift detection.</li>
+<li>Use phased onboarding and domain readiness criteria for each rollout wave.</li>
+<li>Conduct security threat modeling and pre-release control validation.</li>
+<li>Run load and soak testing before each expansion milestone.</li>
+</ul>
+</section>
+</section>
+<section id="rollback-and-contingency-procedures" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="rollback-and-contingency-procedures"><span class="header-section-number">6.4</span> Rollback and Contingency Procedures</h2>
+<p>Rollback procedures are defined per migration phase and domain.</p>
+<section id="operational-rollback-principles" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="operational-rollback-principles"><span class="header-section-number">6.4.1</span> Operational Rollback Principles</h3>
+<ul>
+<li>Preserve legacy execution path until new path stability is demonstrated.</li>
+<li>Support feature toggles to disable new integration paths quickly.</li>
+<li>Maintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.</li>
+</ul>
+</section>
+<section id="rollback-steps-per-domain" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="rollback-steps-per-domain"><span class="header-section-number">6.4.2</span> Rollback Steps (Per Domain)</h3>
+<ol type="1">
+<li>Pause new event-driven processing for affected domain.</li>
+<li>Redirect writes to validated legacy pathway.</li>
+<li>Execute reconciliation checks to identify and resolve drift.</li>
+<li>Restore service baselines and communicate status.</li>
+<li>Conduct post-incident review and update controls before reattempt.</li>
+</ol>
+</section>
+</section>
+<section id="governance-and-communication" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="governance-and-communication"><span class="header-section-number">6.5</span> Governance and Communication</h2>
+<ul>
+<li>Weekly architecture and delivery governance forum.</li>
+<li>Release readiness checkpoints per phase.</li>
+<li>Business and operations stakeholder updates at each milestone.</li>
+<li>Decision log maintained for scope, risk, and sequencing changes.</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -822,10 +726,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../Book/Detailed Design &amp; Implementation.html" class="pagination-link" aria-label="Detailed Design &amp; Implementation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Detailed Design &amp; Implementation</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Book/Executive Summary &amp; Objectives.html" class="pagination-link" aria-label="Executive Summary &amp; Objectives">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Book/Operations &amp; Maintenance.html" class="pagination-link" aria-label="Operations &amp; Maintenance">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

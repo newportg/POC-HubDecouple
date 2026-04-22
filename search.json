@@ -4,49 +4,479 @@
     "href": "index.html",
     "title": "Hub Decoupled Architecture",
     "section": "",
-    "text": "1 Hub Decouple\nHub is a old client server application written in Angular and C#. The C# server is a blob which has organically grown over time. Hub accesses its database using EntityFrameworks and uses a ‘Code First’ pattern in which to create and manage the database structure.\nWe are now at a point where the old system is to large and costly to keep modification so it has been decided to migrate away from the current platform. During a staged migration the current and the new system will need to be kept in sync, and as operable as possible.",
+    "text": "1 Hub Decoupled Architecture",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decouple</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
     ]
   },
   {
-    "objectID": "index.html#service-bus",
-    "href": "index.html#service-bus",
+    "objectID": "index.html#purpose-of-this-document",
+    "href": "index.html#purpose-of-this-document",
     "title": "Hub Decoupled Architecture",
-    "section": "2.1 Service Bus",
-    "text": "2.1 Service Bus\nEvery time a operation takes place a message containing the changed data is placed on a service bus for, some client, to consume. The issue with this is that data schemas will need to be defined, and maintained, and there has to be some syncronisation between the consumers and publisher as to what the schema contains. Messages can become complex and difficult to maintain. Service Busses need to be managed, and don’t easily cross tenant boundries.",
+    "section": "1.1 Purpose of This Document",
+    "text": "1.1 Purpose of This Document\nThis architecture book defines the transition strategy for decoupling Hub from its current tightly coupled client-server implementation. It sets out the target integration model, the phased rollout approach, and the controls needed to migrate safely while keeping business operations stable.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decouple</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
     ]
   },
   {
-    "objectID": "index.html#event-bus",
-    "href": "index.html#event-bus",
+    "objectID": "index.html#current-context",
+    "href": "index.html#current-context",
     "title": "Hub Decoupled Architecture",
-    "section": "2.2 Event Bus",
-    "text": "2.2 Event Bus\nDont care…. The system publishes that an event has happend, then client systems requests information from a GraphQL system. GraphQL allows the client to select the information they are interested in and no more.",
+    "section": "1.2 Current Context",
+    "text": "1.2 Current Context\nHub is a legacy platform with:\n\nAngular front end.\nC# back end that has grown into a highly coupled monolith.\nEntity Framework code-first data access model.\n\nThe current architecture has become costly and high risk to change. Delivery lead times are increasing, integration complexity is rising, and broad code impact makes regression risk difficult to control.\nThe business requires a staged migration path where legacy and target capabilities can run in parallel, remain synchronized, and preserve service continuity.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decouple</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
     ]
   },
   {
-    "objectID": "index.html#restful-api",
-    "href": "index.html#restful-api",
+    "objectID": "index.html#architectural-decision-drivers",
+    "href": "index.html#architectural-decision-drivers",
     "title": "Hub Decoupled Architecture",
-    "section": "2.3 RESTful API",
-    "text": "2.3 RESTful API\nA REST API provides the Create/Update and Delete functionality to supply informaiton back into hub using its existing rules.\nN.B. The Current hub REST API is specific for the Angular GUI. It can be used for this purpose as it is going to be updated to use more modern security and authentication patterns.",
+    "section": "1.3 Architectural Decision Drivers",
+    "text": "1.3 Architectural Decision Drivers\nKey drivers behind the architecture decision are:\n\nReduce coupling between Hub internals and downstream consumers.\nSupport independent consumer evolution with lower coordination overhead.\nPreserve existing domain rule enforcement during migration.\nImprove security posture for integration-facing interfaces.\nEnable incremental rollout with reversible steps.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decouple</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
     ]
   },
   {
-    "objectID": "index.html#conclusion",
-    "href": "index.html#conclusion",
+    "objectID": "index.html#options-considered",
+    "href": "index.html#options-considered",
     "title": "Hub Decoupled Architecture",
-    "section": "2.4 Conclusion",
-    "text": "2.4 Conclusion\nThe Ideal solution would be a Event Bus / REST API solution.",
+    "section": "1.4 Options Considered",
+    "text": "1.4 Options Considered\n\n1.4.1 Option A: Service Bus with Rich Payload Contracts\nEach business operation emits change payloads directly on a service bus.\nBenefits:\n\nFamiliar enterprise integration pattern.\nFast consumer processing when payloads are complete.\n\nChallenges:\n\nHigh schema governance burden and version coordination across teams.\nPayload contracts can become complex and brittle over time.\nCross-tenant operation and ownership can be difficult in practice.\n\n\n\n1.4.2 Option B: Event Notification + Consumer Data Pull\nHub publishes business events, and consumers retrieve required data projections via GraphQL.\nBenefits:\n\nLower payload coupling and more flexible consumer data selection.\nBetter fit for independent consumer evolution.\nReduced need for centrally maintained, consumer-specific event shapes.\n\nChallenges:\n\nRequires robust query security and performance controls.\nRequires operational maturity for event handling and replay.\n\n\n\n1.4.3 Option C: REST Command Interface for Write-Back\nExternal systems perform create, update, and delete operations via REST endpoints into Hub.\nBenefits:\n\nCentralized validation and business rule enforcement.\nClear command boundary for controlled write operations.\n\nChallenges:\n\nExisting UI-focused REST interfaces must be modernized for broader integration usage.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decouple</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#recommended-architecture",
+    "href": "index.html#recommended-architecture",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.5 Recommended Architecture",
+    "text": "1.5 Recommended Architecture\nThe preferred target model is a combined pattern:\n\nEvent Bus for change notification.\nGraphQL for consumer-driven read projections.\nREST APIs for controlled write-back into Hub.\n\nThis balances flexibility and governance by keeping write validation centralized while allowing consumers to retrieve fit-for-purpose data views.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#decision-summary-matrix",
+    "href": "index.html#decision-summary-matrix",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.6 Decision Summary Matrix",
+    "text": "1.6 Decision Summary Matrix\n\n\n\n\n\n\n\n\n\n\n\nOption\nCoupling\nConsumer Flexibility\nGovernance Overhead\nMigration Fit\nOverall\n\n\n\n\nService Bus with rich payloads\nMedium-High\nMedium\nHigh\nMedium\nMedium\n\n\nEvent notification + consumer pull\nLow\nHigh\nMedium\nHigh\nHigh\n\n\nREST command-only model\nMedium\nMedium\nMedium\nMedium\nMedium\n\n\nCombined Event + GraphQL + REST\nLow\nHigh\nMedium\nHigh\nHighest\n\n\n\nThe combined model is selected because it provides the best trade-off between migration safety, consumer autonomy, and long-term maintainability.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#target-interaction-overview",
+    "href": "index.html#target-interaction-overview",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.7 Target Interaction Overview",
+    "text": "1.7 Target Interaction Overview\n\n\n\n\n\nflowchart LR\n    A[Hub Domain Change] --&gt; B[Event Published]\n    B --&gt; C[Consumer Receives Event]\n    C --&gt; D[GraphQL Query for Projection]\n    D --&gt; E[Consumer Projection Updated]\n    F[External Command] --&gt; G[REST API Write Back]\n    G --&gt; H[Hub Validates and Persists]\n    H --&gt; B\n\n\n\n\n\n\nThe read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#transition-principle",
+    "href": "index.html#transition-principle",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.8 Transition Principle",
+    "text": "1.8 Transition Principle\nThe migration will be incremental, domain by domain. Legacy and target pathways will coexist until each domain meets objective readiness criteria for cutover. Rollback capability, reconciliation, and observability are mandatory controls at every phase.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#phase-gates-at-a-glance",
+    "href": "index.html#phase-gates-at-a-glance",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.9 Phase Gates at a Glance",
+    "text": "1.9 Phase Gates at a Glance\nEach migration wave should pass the same minimum gate set:\n\nTechnical gate: contracts validated, telemetry active, security controls in place.\nData gate: baseline loaded, reconciliation passed, no unresolved critical drift.\nOperational gate: dashboards, runbooks, alert routing, and rollback drills completed.\nBusiness gate: stakeholder sign-off on readiness and service continuity.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use-this-book",
+    "href": "index.html#how-to-use-this-book",
+    "title": "Hub Decoupled Architecture",
+    "section": "1.10 How to Use This Book",
+    "text": "1.10 How to Use This Book\nRead the following chapters in sequence:\n\nExecutive Summary & Objectives: strategic goals and measurable outcomes.\nCurrent State Assessment: baseline architecture and pain points.\nProposed Target Architecture: future-state design and interaction model.\nDetailed Design & Implementation: contracts, controls, and implementation sequence.\nTransition & Rollout Plan: phases, risks, and rollback strategy.\nOperations & Maintenance: testing, SLOs, monitoring, and support model.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html",
+    "href": "Book/Executive Summary & Objectives.html",
+    "title": "2  Executive Summary & Objectives",
+    "section": "",
+    "text": "2.1 Project Overview\nHub is a legacy client-server platform built with an Angular front end and a C# back end that has grown into a tightly coupled monolith over time. The current architecture has become increasingly expensive and risky to modify, slowing delivery and increasing operational burden.\nThis initiative introduces a decoupled integration model that enables staged migration away from the current platform while preserving business continuity. The target approach combines:\nThe strategic outcome is a transition architecture that allows the current and future systems to run in parallel, remain synchronized, and evolve independently.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html#project-overview",
+    "href": "Book/Executive Summary & Objectives.html#project-overview",
+    "title": "2  Executive Summary & Objectives",
+    "section": "",
+    "text": "Event publication to notify downstream systems that business changes have occurred.\nConsumer-driven data retrieval (via GraphQL) so consumers can request only the data they need.\nRESTful APIs for controlled create, update, and delete operations back into Hub using existing business rules.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html#business-goals-technical-objectives",
+    "href": "Book/Executive Summary & Objectives.html#business-goals-technical-objectives",
+    "title": "2  Executive Summary & Objectives",
+    "section": "2.2 Business Goals & Technical Objectives",
+    "text": "2.2 Business Goals & Technical Objectives\nThe modernisation effort is designed to achieve the following outcomes.\n\n2.2.1 1. Reduce Cost and Change Friction\n\nLower the effort required to deliver enhancements by reducing direct coupling between publisher and consumer implementations.\nDecrease maintenance overhead caused by monolithic release coordination and schema-heavy integrations.\nEnable smaller, safer increments of change instead of broad platform-wide deployments.\n\n\n\n2.2.2 2. Improve Scalability and Integration Flexibility\n\nSupport additional consumers without requiring each one to adopt a rigid, centrally versioned payload model.\nAllow each consuming system to retrieve fit-for-purpose data projections through GraphQL.\nMaintain compatibility across tenant boundaries where direct shared bus management is difficult.\n\n\n\n2.2.3 3. Protect Business Continuity During Migration\n\nKeep legacy and target solutions operational during transition.\nPreserve data consistency between current and new platforms through event-driven synchronization patterns.\nMinimize downtime and business disruption while progressively moving capabilities to the new platform.\n\n\n\n2.2.4 4. Strengthen Security and Platform Readiness\n\nEvolve existing REST interfaces toward modern authentication and authorization patterns.\nRetain existing domain validation and business rules in Hub during the transition phase.\nEstablish a secure, auditable integration boundary that supports long-term platform governance.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html#scope-and-boundaries",
+    "href": "Book/Executive Summary & Objectives.html#scope-and-boundaries",
+    "title": "2  Executive Summary & Objectives",
+    "section": "2.3 Scope and Boundaries",
+    "text": "2.3 Scope and Boundaries\n\n2.3.1 In Scope\n\nDefinition of the event + REST integration model for staged decoupling.\nIntroduction of consumer pull patterns for downstream data consumption.\nModernisation of API security controls required for non-UI integration consumers.\nTransitional coexistence model covering synchronization, operability, and rollout.\n\n\n\n2.3.2 Out of Scope (This Phase)\n\nFull replacement of all Hub internal domain logic.\nImmediate decomposition of all monolithic components.\nOne-step migration of all consuming systems.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html#success-metrics-and-kpi-targets",
+    "href": "Book/Executive Summary & Objectives.html#success-metrics-and-kpi-targets",
+    "title": "2  Executive Summary & Objectives",
+    "section": "2.4 Success Metrics and KPI Targets",
+    "text": "2.4 Success Metrics and KPI Targets\nSuccess will be measured with explicit technical and operational indicators.\n\n2.4.1 Delivery and Change Efficiency\n\nReduced lead time for integration changes compared to the current baseline.\nFewer cross-team release dependencies required for downstream consumer updates.\nIncreased deployment frequency for integration-related changes without instability.\n\n\n\n2.4.2 Reliability and Data Integrity\n\nNo critical data loss incidents during synchronization between legacy and target systems.\nDefined SLO attainment for event propagation and REST processing.\nMeasurable reduction in synchronization defects and manual reconciliation effort.\n\n\n\n2.4.3 Operational Stability\n\nHigh availability maintained for existing business-critical workflows during migration.\nControlled rollback pathways demonstrated for key transition milestones.\nReduction in production incidents attributable to integration coupling.\n\n\n\n2.4.4 Security and Compliance\n\nAdoption of modern authentication mechanisms on integration-facing APIs.\nAuditability of integration operations and traceability of change events.\nZero unresolved high-severity security findings for the decoupled integration surface at go-live.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Executive Summary & Objectives.html#definition-of-success",
+    "href": "Book/Executive Summary & Objectives.html#definition-of-success",
+    "title": "2  Executive Summary & Objectives",
+    "section": "2.5 Definition of Success",
+    "text": "2.5 Definition of Success\nThis initiative is successful when Hub can continue serving business operations while new capabilities are delivered through a decoupled model, consumers can independently access required data, and the organisation can migrate incrementally with lower risk, lower change cost, and stronger operational control.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Executive Summary & Objectives</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Current State Assessment.html",
+    "href": "Book/Current State Assessment.html",
+    "title": "3  Current State Assessment",
+    "section": "",
+    "text": "3.1 Application Inventory\nThe current Hub platform is a traditional client-server solution with:\nPrimary capability areas currently delivered through the monolith include:",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Current State Assessment.html#application-inventory",
+    "href": "Book/Current State Assessment.html#application-inventory",
+    "title": "3  Current State Assessment",
+    "section": "",
+    "text": "Angular-based user interface focused on transactional operations.\nC# server application containing tightly coupled business logic and integration behavior.\nEntity Framework code-first data access against a relational persistence layer.\n\n\n\nCore business transaction processing.\nValidation and business rule enforcement.\nUI-oriented REST endpoints supporting the Angular client.\nInternal orchestration that couples domain operations and integration side effects.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Current State Assessment.html#current-system-architecture",
+    "href": "Book/Current State Assessment.html#current-system-architecture",
+    "title": "3  Current State Assessment",
+    "section": "3.2 Current System Architecture",
+    "text": "3.2 Current System Architecture\n\n3.2.1 Logical Structure\nThe current architecture follows a layered but highly interdependent model:\n\nPresentation layer: Angular front end.\nApplication/API layer: C# Web/API services primarily designed for UI use.\nDomain/business layer: Rules and workflows embedded in service methods.\nData layer: Entity Framework code-first models and migrations.\n\nAlthough these layers exist conceptually, practical coupling between layers has increased over time. Domain logic, integration concerns, and data access are frequently intermixed, resulting in broad impact when introducing changes.\n\n\n3.2.2 Integration Characteristics\nCurrent integration behavior is largely implementation-driven rather than contract-driven:\n\nAPIs were optimized for GUI interaction patterns, not broad external consumer reuse.\nData contracts are not consistently consumer-specific, requiring additional transformation outside Hub.\nChange propagation to other systems depends on tightly coordinated release activity.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Current State Assessment.html#technical-debt-and-pain-points",
+    "href": "Book/Current State Assessment.html#technical-debt-and-pain-points",
+    "title": "3  Current State Assessment",
+    "section": "3.3 Technical Debt and Pain Points",
+    "text": "3.3 Technical Debt and Pain Points\n\n3.3.1 Change Cost and Delivery Risk\n\nHigh regression risk when modifying shared monolithic components.\nLong lead times caused by cross-cutting code impact and heavy coordination.\nDifficult parallel work streams due to shared deployment units.\n\n\n\n3.3.2 Maintainability and Operability\n\nOrganic growth has produced complex and difficult-to-isolate code paths.\nRoot-cause analysis is slower because responsibilities are not cleanly separated.\nOperational troubleshooting often requires domain and infrastructure knowledge concentrated in a small set of team members.\n\n\n\n3.3.3 Integration and Scalability Constraints\n\nStrong publisher-consumer coupling increases the cost of onboarding new systems.\nRigid payload assumptions are hard to evolve across multiple consuming teams.\nCross-tenant integration and governance create additional overhead when managed through centrally controlled bus schemas.\n\n\n\n3.3.4 Security and Platform Readiness Gaps\n\nExisting REST surfaces are primarily GUI-focused and require modernization for broader integration use.\nAuthentication and authorization patterns need to align with current enterprise standards.\nAuditability and traceability need stronger consistency for multi-system transition operations.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Current State Assessment.html#why-change-is-required-now",
+    "href": "Book/Current State Assessment.html#why-change-is-required-now",
+    "title": "3  Current State Assessment",
+    "section": "3.4 Why Change Is Required Now",
+    "text": "3.4 Why Change Is Required Now\nThe current platform can continue to run business workloads, but it is no longer an efficient foundation for incremental evolution. The cost, risk, and speed profile of the monolithic model directly limits delivery and migration progress. A decoupled architecture is required to support staged transformation while maintaining operational continuity.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html",
+    "href": "Book/Proposed Target Architecture.html",
+    "title": "4  Proposed Target Architecture",
+    "section": "",
+    "text": "4.1 Modernisation Approach\nThe recommended strategy is a staged decoupling model rather than a single-step replacement. The approach combines:\nThis model supports coexistence between legacy and target systems and allows each migration step to be independently validated before broader rollout.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html#modernisation-approach",
+    "href": "Book/Proposed Target Architecture.html#modernisation-approach",
+    "title": "4  Proposed Target Architecture",
+    "section": "",
+    "text": "Incremental rearchitecture of integration boundaries while preserving core legacy operations.\nEvent-driven change notification to downstream consumers.\nConsumer-driven data retrieval through GraphQL queries.\nControlled write operations through REST APIs that continue to enforce Hub business rules.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html#design-principles",
+    "href": "Book/Proposed Target Architecture.html#design-principles",
+    "title": "4  Proposed Target Architecture",
+    "section": "4.2 Design Principles",
+    "text": "4.2 Design Principles\n\n4.2.1 1. Loose Coupling by Default\nPublish business events that describe what happened, not complete consumer-specific payloads. Consumers choose their required data shape through query capabilities.\n\n\n4.2.2 2. Contract Clarity at Integration Boundaries\nUse explicit API and event contracts, versioned where required, with backward compatibility windows to reduce forced coordination across teams.\n\n\n4.2.3 3. Single Responsibility Across Components\nSeparate responsibilities so each component has a clear role:\n\nEvent publication for change signaling.\nQuery surface for consumer-specific reads.\nCommand/API surface for validated writes.\n\n\n\n4.2.4 4. Security and Governance Built In\nApply modern authentication, authorization, and audit controls at every external integration boundary.\n\n\n4.2.5 5. Operability and Observability First\nDesign all cross-system operations to be traceable, measurable, and supportable through standard telemetry and correlation practices.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html#target-component-model",
+    "href": "Book/Proposed Target Architecture.html#target-component-model",
+    "title": "4  Proposed Target Architecture",
+    "section": "4.3 Target Component Model",
+    "text": "4.3 Target Component Model\n\n4.3.1 Hub Core (Legacy Domain)\nContinues to host authoritative business rules and transactional consistency during the transition period.\n\n\n4.3.2 Event Publisher\nEmits domain-relevant events after successful state changes. Events provide metadata and references needed for consumers to fetch additional details.\n\n\n4.3.3 Query Layer (GraphQL)\nProvides consumer-driven data access so each downstream system can request only required fields and relationships.\n\n\n4.3.4 Command Layer (REST)\nAccepts create, update, and delete operations with validation routed through Hub domain rules. This preserves consistency while new systems integrate.\n\n\n4.3.5 Consumer Services\nSubscribe to events and pull required data projections. Consumer release cadence remains independent from publisher internals where contracts are respected.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html#component-interactions",
+    "href": "Book/Proposed Target Architecture.html#component-interactions",
+    "title": "4  Proposed Target Architecture",
+    "section": "4.4 Component Interactions",
+    "text": "4.4 Component Interactions\n\n4.4.1 Read-After-Event Pattern\n\nA domain change occurs in Hub.\nHub publishes an event with identity and context metadata.\nConsumer receives the event and requests required data through GraphQL.\nConsumer applies local processing and persists its own state.\n\n\n\n4.4.2 Controlled Write-Back Pattern\n\nExternal system issues create, update, or delete requests via REST.\nHub validates and applies business rules.\nHub commits state changes.\nHub publishes resulting events for interested consumers.\n\nThis creates a predictable cycle where writes are centralized for rule enforcement and reads are decentralized for flexibility.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Proposed Target Architecture.html#architecture-decision-summary",
+    "href": "Book/Proposed Target Architecture.html#architecture-decision-summary",
+    "title": "4  Proposed Target Architecture",
+    "section": "4.5 Architecture Decision Summary",
+    "text": "4.5 Architecture Decision Summary\nThe preferred architecture is an Event Bus + REST API model with consumer-driven query access. It reduces schema lock-in, supports staged migration, and enables coexistence of current and future platforms with lower operational and delivery risk.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html",
+    "href": "Book/Detailed Design & Implementation.html",
+    "title": "5  Detailed Design & Implementation",
+    "section": "",
+    "text": "5.1 Data Design and Migration Strategy",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#data-design-and-migration-strategy",
+    "href": "Book/Detailed Design & Implementation.html#data-design-and-migration-strategy",
+    "title": "5  Detailed Design & Implementation",
+    "section": "",
+    "text": "5.1.1 Source of Truth and Ownership\nDuring transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.\n\n\n5.1.2 Data Movement Patterns\n\nEvent notification communicates that a change occurred.\nGraphQL retrieval provides consumer-specific field selection for synchronization.\nREST commands provide controlled write-back into Hub for approved use cases.\n\nReference flow per domain transaction:\n\nDomain write is committed in Hub.\nEvent is published with identifiers and correlation metadata.\nConsumer receives event and requests a targeted GraphQL projection.\nConsumer stores its projection and records event processing checkpoint.\nReconciliation jobs periodically compare authoritative and projection state.\n\n\n\n5.1.3 Data Integrity Controls\n\nIdempotent event consumption using event identifiers and deduplication checkpoints.\nCorrelation IDs propagated across event, query, and command flows.\nReplay/reconciliation capability for failed or delayed synchronization.\nValidation-on-write in Hub to ensure domain invariants remain enforced.\n\n\n\n5.1.4 Migration Approach\n\nBaseline load: seed consumer stores from current state snapshots.\nIncremental sync: apply event-driven updates post-baseline.\nReconciliation windows: scheduled consistency checks and automated drift reporting.\nCutover readiness: objective criteria for each domain before switching system ownership.\n\nSuggested cutover readiness checklist per domain:\n\n\n\n\n\n\n\nCriterion\nTarget\n\n\n\n\nBaseline load completion\n100% of in-scope entities loaded\n\n\nEvent processing reliability\n&gt;= 99.9% successful handling over agreed observation window\n\n\nData drift\n0 critical drift defects and agreed non-critical threshold\n\n\nOperational readiness\nRunbooks, alerts, and on-call ownership signed off\n\n\nRollback readiness\nRollback drill completed successfully",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#api-and-interface-specifications",
+    "href": "Book/Detailed Design & Implementation.html#api-and-interface-specifications",
+    "title": "5  Detailed Design & Implementation",
+    "section": "5.2 API and Interface Specifications",
+    "text": "5.2 API and Interface Specifications\n\n5.2.1 Event Contracts\nEvent envelope should include:\n\nEvent ID, event type, version, and timestamp.\nAggregate/entity identifier.\nTenant/context metadata.\nCorrelation and causation identifiers.\n\nEvent payload should remain compact and stable, providing enough information for consumers to fetch enriched data as required.\nExample event envelope:\n{\n    \"eventId\": \"7f3e5f6b-95b8-4f90-9d30-0f54af0b2a17\",\n    \"eventType\": \"Hub.CustomerUpdated.v1\",\n    \"occurredAtUtc\": \"2026-04-22T09:15:00Z\",\n    \"tenantId\": \"tenant-a\",\n    \"aggregateType\": \"Customer\",\n    \"aggregateId\": \"C12345\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"causationId\": \"9b6f5c5a-5f3a-4511-b2c9-c3c7d1c47ab8\",\n    \"payload\": {\n        \"changedFields\": [\"email\", \"status\"],\n        \"version\": 18\n    }\n}\n\n\n5.2.2 GraphQL Query Surface\nDesign goals:\n\nConsumer-selected fields to avoid over-fetching.\nQuery authorization by role and tenant scope.\nSchema evolution with backward-compatible deprecations.\nPagination and filtering for high-volume domains.\n\nExample consumer query:\nquery CustomerSyncProjection($id: ID!) {\n    customer(id: $id) {\n        id\n        status\n        email\n        updatedAtUtc\n        billingProfile {\n            tier\n            isActive\n        }\n    }\n}\n\n\n5.2.3 REST Command Surface\nDesign goals:\n\nExplicit resource and command semantics for create/update/delete operations.\nStandardized error contract and validation response model.\nIdempotency support where retry behavior is expected.\nContract versioning strategy with deprecation windows.\n\nExample command request:\nPATCH /api/customers/C12345\nAuthorization: Bearer &lt;token&gt;\nIdempotency-Key: 536f0ef5-b95e-4a2f-8d8b-f4f10d7aa2d6\nContent-Type: application/json\n\n{\n    \"status\": \"Active\",\n    \"email\": \"new.email@example.com\"\n}\nStandard error payload shape:\n{\n    \"code\": \"ValidationFailed\",\n    \"message\": \"Request contains invalid fields.\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"errors\": [\n        {\n            \"field\": \"email\",\n            \"reason\": \"InvalidFormat\"\n        }\n    ]\n}",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#security-and-compliance-controls",
+    "href": "Book/Detailed Design & Implementation.html#security-and-compliance-controls",
+    "title": "5  Detailed Design & Implementation",
+    "section": "5.3 Security and Compliance Controls",
+    "text": "5.3 Security and Compliance Controls\n\n5.3.1 Identity and Access\n\nModern authentication for all integration clients.\nRole- and scope-based authorization for query and command endpoints.\nPrinciple of least privilege for service identities.\n\n\n\n5.3.2 Data Protection\n\nEncryption in transit for all APIs and event transport channels.\nEncryption at rest for persisted operational and projection data.\nControlled handling of sensitive data in logs and telemetry.\n\n\n\n5.3.3 Audit and Traceability\n\nImmutable audit trail for command operations.\nEvent lineage traceability from producer through consumers.\nEnd-to-end request tracing with correlation IDs.\n\n\n\n5.3.4 Compliance Readiness\n\nRetention and deletion controls aligned with policy requirements.\nData minimization in event payloads and API responses.\nSecurity review gates before production rollout milestones.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#implementation-sequence",
+    "href": "Book/Detailed Design & Implementation.html#implementation-sequence",
+    "title": "5  Detailed Design & Implementation",
+    "section": "5.4 Implementation Sequence",
+    "text": "5.4 Implementation Sequence\n\nEstablish cross-cutting foundations (identity, telemetry, correlation, contract governance).\nIntroduce event publication for selected low-risk domains.\nDeliver GraphQL read models for consumer pull integration.\nExpose modernized REST command endpoints for controlled write-back.\nExpand domain coverage iteratively with domain-specific cutover criteria.\nDecommission legacy integration pathways as replacement coverage reaches target thresholds.\n\nDelivery governance at each step should include:\n\nArchitecture sign-off for contract and compatibility implications.\nSecurity sign-off for identity, authorization, and data handling controls.\nOperations sign-off for monitoring, alerting, and rollback coverage.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#acceptance-criteria",
+    "href": "Book/Detailed Design & Implementation.html#acceptance-criteria",
+    "title": "5  Detailed Design & Implementation",
+    "section": "5.5 Acceptance Criteria",
+    "text": "5.5 Acceptance Criteria\nThe implementation is considered complete when all of the following are true:\n\nCritical domain events are published with required metadata and schema validation.\nConsumer sync projections are demonstrably current within agreed freshness SLO.\nCommand API contracts pass functional, security, and backward-compatibility tests.\nReconciliation jobs report no unresolved critical drift defects.\nProduction runbooks, dashboards, and alert routes are validated in drills.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Detailed Design & Implementation.html#non-functional-expectations",
+    "href": "Book/Detailed Design & Implementation.html#non-functional-expectations",
+    "title": "5  Detailed Design & Implementation",
+    "section": "5.6 Non-Functional Expectations",
+    "text": "5.6 Non-Functional Expectations\n\nReliability: graceful degradation and retry-safe integration patterns.\nPerformance: bounded latency for event-to-consumer synchronization.\nScalability: horizontal scale for query and event consumer workloads.\nSupportability: operational dashboards and alerts aligned to SLOs.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html",
+    "href": "Book/Transition & Rollout Plan.html",
+    "title": "6  Transition & Rollout Plan",
+    "section": "",
+    "text": "6.1 Phased Migration Strategy\nThe transition follows incremental phases to minimize business disruption and maintain confidence in production stability.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
+    "href": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
+    "title": "6  Transition & Rollout Plan",
+    "section": "",
+    "text": "6.1.1 Phase 0: Foundations\n\nConfirm target integration architecture and governance standards.\nEstablish identity, observability, and contract management baselines.\nAlign teams on operational readiness and ownership model.\n\n\n\n6.1.2 Phase 1: Pilot Domain Enablement\n\nSelect low-risk, high-learning business domain.\nEnable event publication and consumer read-through via GraphQL.\nValidate synchronization, traceability, and incident response runbooks.\n\n\n\n6.1.3 Phase 2: Controlled Expansion\n\nAdd additional domains in priority order.\nIntroduce REST write-back capabilities for approved external consumers.\nTrack drift, performance, and adoption KPIs against defined thresholds.\n\n\n\n6.1.4 Phase 3: Coexistence Optimization\n\nHarden dual-run operations and reduce manual reconciliation.\nRetire obsolete point-to-point dependencies.\nPrepare domain-level cutover readiness sign-off.\n\n\n\n6.1.5 Phase 4: Cutover and Decommission\n\nTransition eligible domains fully to the decoupled model.\nDecommission superseded legacy integration mechanisms.\nComplete post-cutover validation and operational handover.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
+    "href": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
+    "title": "6  Transition & Rollout Plan",
+    "section": "6.2 Milestone Timeline (Planning Baseline)",
+    "text": "6.2 Milestone Timeline (Planning Baseline)\nUse this as a planning template and refine dates during delivery governance.\n\nFoundation complete: architecture controls and telemetry in place.\nPilot go-live: first domain synchronized in production.\nMulti-domain expansion: additional domains onboarded with stable KPIs.\nWrite-back readiness: REST command flows validated for external integration.\nDomain cutover waves: progressive retirement of legacy pathways.\nProgram closeout: transition objectives met and support model stabilized.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
+    "href": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
+    "title": "6  Transition & Rollout Plan",
+    "section": "6.3 Risk Register and Mitigation",
+    "text": "6.3 Risk Register and Mitigation\n\n6.3.1 Key Risks\n\nData synchronization drift between legacy and new consumers.\nContract change misalignment across producer and consumer teams.\nSkills and capacity constraints for operating dual-run architecture.\nSecurity gaps during staged exposure of integration endpoints.\nPerformance bottlenecks in high-volume event/query scenarios.\n\n\n\n6.3.2 Mitigation Measures\n\nEnforce contract versioning and compatibility review gates.\nImplement replay, reconciliation, and automated drift detection.\nUse phased onboarding and domain readiness criteria for each rollout wave.\nConduct security threat modeling and pre-release control validation.\nRun load and soak testing before each expansion milestone.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
+    "href": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
+    "title": "6  Transition & Rollout Plan",
+    "section": "6.4 Rollback and Contingency Procedures",
+    "text": "6.4 Rollback and Contingency Procedures\nRollback procedures are defined per migration phase and domain.\n\n6.4.1 Operational Rollback Principles\n\nPreserve legacy execution path until new path stability is demonstrated.\nSupport feature toggles to disable new integration paths quickly.\nMaintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.\n\n\n\n6.4.2 Rollback Steps (Per Domain)\n\nPause new event-driven processing for affected domain.\nRedirect writes to validated legacy pathway.\nExecute reconciliation checks to identify and resolve drift.\nRestore service baselines and communicate status.\nConduct post-incident review and update controls before reattempt.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Transition & Rollout Plan.html#governance-and-communication",
+    "href": "Book/Transition & Rollout Plan.html#governance-and-communication",
+    "title": "6  Transition & Rollout Plan",
+    "section": "6.5 Governance and Communication",
+    "text": "6.5 Governance and Communication\n\nWeekly architecture and delivery governance forum.\nRelease readiness checkpoints per phase.\nBusiness and operations stakeholder updates at each milestone.\nDecision log maintained for scope, risk, and sequencing changes.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html",
+    "href": "Book/Operations & Maintenance.html",
+    "title": "7  Operations & Maintenance",
+    "section": "",
+    "text": "7.1 Testing Strategy\nTesting must validate both functional correctness and transition safety in a coexistence architecture.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#testing-strategy",
+    "href": "Book/Operations & Maintenance.html#testing-strategy",
+    "title": "7  Operations & Maintenance",
+    "section": "",
+    "text": "7.1.1 Functional Testing\n\nVerify command APIs enforce business rules and return consistent error models.\nValidate event publication for relevant domain changes.\nConfirm consumer query behavior returns correct data shapes and authorization outcomes.\n\n\n\n7.1.2 Integration and Contract Testing\n\nContract tests for event envelopes and API schemas.\nBackward-compatibility tests for versioned contracts.\nEnd-to-end flow tests covering write -&gt; event -&gt; query -&gt; consumer update.\n\n\n\n7.1.3 Performance and Resilience Testing\n\nLoad tests for peak event throughput and query concurrency.\nSoak tests to identify memory, connection, or retry degradation over time.\nFailure-injection tests for transient downstream outages and retry behavior.\n\n\n\n7.1.4 Regression and Release Validation\n\nAutomated regression suites executed for each release candidate.\nRelease gates tied to critical scenario pass rates and non-functional thresholds.\nPost-deployment verification checklist for production readiness.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
+    "href": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
+    "title": "7  Operations & Maintenance",
+    "section": "7.2 Monitoring, Alerting, and SLOs",
+    "text": "7.2 Monitoring, Alerting, and SLOs\n\n7.2.1 Telemetry Model\nCapture telemetry for:\n\nAPI latency, error rate, throughput, and saturation indicators.\nEvent publication success rate and consumer lag.\nData reconciliation status and drift counts.\nSecurity events and authorization failures.\n\n\n\n7.2.2 Suggested SLO Categories\n\nAvailability SLO for command and query endpoints.\nLatency SLO for core API operations.\nFreshness SLO for event-to-consumer synchronization.\nReliability SLO for successful event processing and retries.\n\n\n\n7.2.3 Operational Dashboards and Alerts\n\nRole-specific dashboards for support, engineering, and platform teams.\nActionable alerts mapped to runbook procedures.\nCorrelation-aware tracing to accelerate incident triage.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#incident-and-problem-management",
+    "href": "Book/Operations & Maintenance.html#incident-and-problem-management",
+    "title": "7  Operations & Maintenance",
+    "section": "7.3 Incident and Problem Management",
+    "text": "7.3 Incident and Problem Management\n\nStandard severity model and escalation pathway for integration incidents.\nRunbooks for common failure modes (consumer lag, contract mismatch, authorization failures).\nProblem management process to remove recurring defect classes.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#change-management",
+    "href": "Book/Operations & Maintenance.html#change-management",
+    "title": "7  Operations & Maintenance",
+    "section": "7.4 Change Management",
+    "text": "7.4 Change Management\n\n7.4.1 Release Governance\n\nPlanned release calendar with architecture sign-off for contract changes.\nChange advisory checkpoints for high-impact modifications.\nVersion lifecycle policy with clear deprecation communication.\n\n\n\n7.4.2 Documentation Lifecycle\nMaintain and regularly update:\n\nArchitecture decision records.\nAPI and event contract documentation.\nOperational runbooks and support playbooks.\nTroubleshooting guides and known issue references.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#training-and-enablement",
+    "href": "Book/Operations & Maintenance.html#training-and-enablement",
+    "title": "7  Operations & Maintenance",
+    "section": "7.5 Training and Enablement",
+    "text": "7.5 Training and Enablement\n\n7.5.1 Audience-Specific Training\n\nEngineering teams: event design, contract evolution, and secure API implementation.\nOperations teams: monitoring dashboards, alert response, and rollback execution.\nProduct and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.\n\n\n\n7.5.2 Adoption Support\n\nStructured onboarding for new consuming teams.\nOffice-hours model during active migration phases.\nPost-go-live knowledge transfer and continuous improvement reviews.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Operations & Maintenance.html#continuous-improvement",
+    "href": "Book/Operations & Maintenance.html#continuous-improvement",
+    "title": "7  Operations & Maintenance",
+    "section": "7.6 Continuous Improvement",
+    "text": "7.6 Continuous Improvement\n\nQuarterly SLO and KPI review against business outcomes.\nRecurring architecture health assessments.\nPrioritized backlog for reliability, performance, and operability enhancements.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   }
 ]
