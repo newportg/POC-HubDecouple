@@ -72,6 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -365,14 +368,25 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="target-interaction-overview" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="target-interaction-overview"><span class="header-section-number">1.7</span> Target Interaction Overview</h2>
-<pre class="mermaid"><code>flowchart LR
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
     A[Hub Domain Change] --&gt; B[Event Published]
     B --&gt; C[Consumer Receives Event]
     C --&gt; D[GraphQL Query for Projection]
     D --&gt; E[Consumer Projection Updated]
     F[External Command] --&gt; G[REST API Write Back]
     G --&gt; H[Hub Validates and Persists]
-    H --&gt; B</code></pre>
+    H --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>The read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.</p>
 </section>
 <section id="transition-principle" class="level2" data-number="1.8">

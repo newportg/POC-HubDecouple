@@ -74,7 +74,7 @@
     "href": "index.html#target-interaction-overview",
     "title": "Hub Decoupled Architecture",
     "section": "1.7 Target Interaction Overview",
-    "text": "1.7 Target Interaction Overview\nflowchart LR\n    A[Hub Domain Change] --&gt; B[Event Published]\n    B --&gt; C[Consumer Receives Event]\n    C --&gt; D[GraphQL Query for Projection]\n    D --&gt; E[Consumer Projection Updated]\n    F[External Command] --&gt; G[REST API Write Back]\n    G --&gt; H[Hub Validates and Persists]\n    H --&gt; B\nThe read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.",
+    "text": "1.7 Target Interaction Overview\n\n\n\n\n\nflowchart LR\n    A[Hub Domain Change] --&gt; B[Event Published]\n    B --&gt; C[Consumer Receives Event]\n    C --&gt; D[GraphQL Query for Projection]\n    D --&gt; E[Consumer Projection Updated]\n    F[External Command] --&gt; G[REST API Write Back]\n    G --&gt; H[Hub Validates and Persists]\n    H --&gt; B\n\n\n\n\n\n\nThe read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Hub Decoupled Architecture</span>"
     ]
