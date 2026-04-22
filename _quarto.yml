@@ -12,6 +12,13 @@ book:
     search: true
   chapters:
     - index.md
+    - Book/Executive Summary & Objectives.qmd
+    - Book/Current State Assessment.qmd
+    - Book/Proposed Target Architecture.qmd
+    - Book/Detailed Design & Implementation.qmd
+    - Book/Transition & Rollout Plan.qmd
+    - Book/Operations & Maintenance.qmd
+
 #    - Book/architectural-constraints/index.qmd
 #    - Book/system-scope-and-context/index.qmd
 #    - part: Book/building-block-view/building-block-view/index.qmd

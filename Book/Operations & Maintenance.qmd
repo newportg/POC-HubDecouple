@@ -1,0 +1,97 @@
+# Operations & Maintenance
+
+## Testing Strategy
+
+Testing must validate both functional correctness and transition safety in a coexistence architecture.
+
+### Functional Testing
+
+* Verify command APIs enforce business rules and return consistent error models.
+* Validate event publication for relevant domain changes.
+* Confirm consumer query behavior returns correct data shapes and authorization outcomes.
+
+### Integration and Contract Testing
+
+* Contract tests for event envelopes and API schemas.
+* Backward-compatibility tests for versioned contracts.
+* End-to-end flow tests covering write -> event -> query -> consumer update.
+
+### Performance and Resilience Testing
+
+* Load tests for peak event throughput and query concurrency.
+* Soak tests to identify memory, connection, or retry degradation over time.
+* Failure-injection tests for transient downstream outages and retry behavior.
+
+### Regression and Release Validation
+
+* Automated regression suites executed for each release candidate.
+* Release gates tied to critical scenario pass rates and non-functional thresholds.
+* Post-deployment verification checklist for production readiness.
+
+## Monitoring, Alerting, and SLOs
+
+### Telemetry Model
+
+Capture telemetry for:
+
+* API latency, error rate, throughput, and saturation indicators.
+* Event publication success rate and consumer lag.
+* Data reconciliation status and drift counts.
+* Security events and authorization failures.
+
+### Suggested SLO Categories
+
+* Availability SLO for command and query endpoints.
+* Latency SLO for core API operations.
+* Freshness SLO for event-to-consumer synchronization.
+* Reliability SLO for successful event processing and retries.
+
+### Operational Dashboards and Alerts
+
+* Role-specific dashboards for support, engineering, and platform teams.
+* Actionable alerts mapped to runbook procedures.
+* Correlation-aware tracing to accelerate incident triage.
+
+## Incident and Problem Management
+
+* Standard severity model and escalation pathway for integration incidents.
+* Runbooks for common failure modes (consumer lag, contract mismatch, authorization failures).
+* Problem management process to remove recurring defect classes.
+
+## Change Management
+
+### Release Governance
+
+* Planned release calendar with architecture sign-off for contract changes.
+* Change advisory checkpoints for high-impact modifications.
+* Version lifecycle policy with clear deprecation communication.
+
+### Documentation Lifecycle
+
+Maintain and regularly update:
+
+* Architecture decision records.
+* API and event contract documentation.
+* Operational runbooks and support playbooks.
+* Troubleshooting guides and known issue references.
+
+## Training and Enablement
+
+### Audience-Specific Training
+
+* Engineering teams: event design, contract evolution, and secure API implementation.
+* Operations teams: monitoring dashboards, alert response, and rollback execution.
+* Product and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.
+
+### Adoption Support
+
+* Structured onboarding for new consuming teams.
+* Office-hours model during active migration phases.
+* Post-go-live knowledge transfer and continuous improvement reviews.
+
+## Continuous Improvement
+
+* Quarterly SLO and KPI review against business outcomes.
+* Recurring architecture health assessments.
+* Prioritized backlog for reliability, performance, and operability enhancements.
+ 

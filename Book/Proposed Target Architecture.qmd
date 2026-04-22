@@ -1,0 +1,82 @@
+# Proposed Target Architecture
+
+## Modernisation Approach
+
+The recommended strategy is a staged decoupling model rather than a single-step replacement. The approach combines:
+
+* Incremental rearchitecture of integration boundaries while preserving core legacy operations.
+* Event-driven change notification to downstream consumers.
+* Consumer-driven data retrieval through GraphQL queries.
+* Controlled write operations through REST APIs that continue to enforce Hub business rules.
+
+This model supports coexistence between legacy and target systems and allows each migration step to be independently validated before broader rollout.
+
+## Design Principles
+
+### 1. Loose Coupling by Default
+
+Publish business events that describe what happened, not complete consumer-specific payloads. Consumers choose their required data shape through query capabilities.
+
+### 2. Contract Clarity at Integration Boundaries
+
+Use explicit API and event contracts, versioned where required, with backward compatibility windows to reduce forced coordination across teams.
+
+### 3. Single Responsibility Across Components
+
+Separate responsibilities so each component has a clear role:
+
+* Event publication for change signaling.
+* Query surface for consumer-specific reads.
+* Command/API surface for validated writes.
+
+### 4. Security and Governance Built In
+
+Apply modern authentication, authorization, and audit controls at every external integration boundary.
+
+### 5. Operability and Observability First
+
+Design all cross-system operations to be traceable, measurable, and supportable through standard telemetry and correlation practices.
+
+## Target Component Model
+
+### Hub Core (Legacy Domain)
+
+Continues to host authoritative business rules and transactional consistency during the transition period.
+
+### Event Publisher
+
+Emits domain-relevant events after successful state changes. Events provide metadata and references needed for consumers to fetch additional details.
+
+### Query Layer (GraphQL)
+
+Provides consumer-driven data access so each downstream system can request only required fields and relationships.
+
+### Command Layer (REST)
+
+Accepts create, update, and delete operations with validation routed through Hub domain rules. This preserves consistency while new systems integrate.
+
+### Consumer Services
+
+Subscribe to events and pull required data projections. Consumer release cadence remains independent from publisher internals where contracts are respected.
+
+## Component Interactions
+
+### Read-After-Event Pattern
+
+1. A domain change occurs in Hub.
+2. Hub publishes an event with identity and context metadata.
+3. Consumer receives the event and requests required data through GraphQL.
+4. Consumer applies local processing and persists its own state.
+
+### Controlled Write-Back Pattern
+
+1. External system issues create, update, or delete requests via REST.
+2. Hub validates and applies business rules.
+3. Hub commits state changes.
+4. Hub publishes resulting events for interested consumers.
+
+This creates a predictable cycle where writes are centralized for rule enforcement and reads are decentralized for flexibility.
+
+## Architecture Decision Summary
+
+The preferred architecture is an Event Bus + REST API model with consumer-driven query access. It reduces schema lock-in, supports staged migration, and enables coexistence of current and future platforms with lower operational and delivery risk.

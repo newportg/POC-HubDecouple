@@ -1,0 +1,67 @@
+# Current State Assessment
+
+## Application Inventory
+
+The current Hub platform is a traditional client-server solution with:
+
+* Angular-based user interface focused on transactional operations.
+* C# server application containing tightly coupled business logic and integration behavior.
+* Entity Framework code-first data access against a relational persistence layer.
+
+Primary capability areas currently delivered through the monolith include:
+
+* Core business transaction processing.
+* Validation and business rule enforcement.
+* UI-oriented REST endpoints supporting the Angular client.
+* Internal orchestration that couples domain operations and integration side effects.
+
+## Current System Architecture
+
+### Logical Structure
+
+The current architecture follows a layered but highly interdependent model:
+
+* Presentation layer: Angular front end.
+* Application/API layer: C# Web/API services primarily designed for UI use.
+* Domain/business layer: Rules and workflows embedded in service methods.
+* Data layer: Entity Framework code-first models and migrations.
+
+Although these layers exist conceptually, practical coupling between layers has increased over time. Domain logic, integration concerns, and data access are frequently intermixed, resulting in broad impact when introducing changes.
+
+### Integration Characteristics
+
+Current integration behavior is largely implementation-driven rather than contract-driven:
+
+* APIs were optimized for GUI interaction patterns, not broad external consumer reuse.
+* Data contracts are not consistently consumer-specific, requiring additional transformation outside Hub.
+* Change propagation to other systems depends on tightly coordinated release activity.
+
+## Technical Debt and Pain Points
+
+### Change Cost and Delivery Risk
+
+* High regression risk when modifying shared monolithic components.
+* Long lead times caused by cross-cutting code impact and heavy coordination.
+* Difficult parallel work streams due to shared deployment units.
+
+### Maintainability and Operability
+
+* Organic growth has produced complex and difficult-to-isolate code paths.
+* Root-cause analysis is slower because responsibilities are not cleanly separated.
+* Operational troubleshooting often requires domain and infrastructure knowledge concentrated in a small set of team members.
+
+### Integration and Scalability Constraints
+
+* Strong publisher-consumer coupling increases the cost of onboarding new systems.
+* Rigid payload assumptions are hard to evolve across multiple consuming teams.
+* Cross-tenant integration and governance create additional overhead when managed through centrally controlled bus schemas.
+
+### Security and Platform Readiness Gaps
+
+* Existing REST surfaces are primarily GUI-focused and require modernization for broader integration use.
+* Authentication and authorization patterns need to align with current enterprise standards.
+* Auditability and traceability need stronger consistency for multi-system transition operations.
+
+## Why Change Is Required Now
+
+The current platform can continue to run business workloads, but it is no longer an efficient foundation for incremental evolution. The cost, risk, and speed profile of the monolithic model directly limits delivery and migration progress. A decoupled architecture is required to support staged transformation while maintaining operational continuity.

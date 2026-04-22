@@ -1,0 +1,88 @@
+# Executive Summary & Objectives
+
+## Project Overview
+
+Hub is a legacy client-server platform built with an Angular front end and a C# back end that has grown into a tightly coupled monolith over time. The current architecture has become increasingly expensive and risky to modify, slowing delivery and increasing operational burden.
+
+This initiative introduces a decoupled integration model that enables staged migration away from the current platform while preserving business continuity. The target approach combines:
+
+* Event publication to notify downstream systems that business changes have occurred.
+* Consumer-driven data retrieval (via GraphQL) so consumers can request only the data they need.
+* RESTful APIs for controlled create, update, and delete operations back into Hub using existing business rules.
+
+The strategic outcome is a transition architecture that allows the current and future systems to run in parallel, remain synchronized, and evolve independently.
+
+## Business Goals & Technical Objectives
+
+The modernisation effort is designed to achieve the following outcomes.
+
+### 1. Reduce Cost and Change Friction
+
+* Lower the effort required to deliver enhancements by reducing direct coupling between publisher and consumer implementations.
+* Decrease maintenance overhead caused by monolithic release coordination and schema-heavy integrations.
+* Enable smaller, safer increments of change instead of broad platform-wide deployments.
+
+### 2. Improve Scalability and Integration Flexibility
+
+* Support additional consumers without requiring each one to adopt a rigid, centrally versioned payload model.
+* Allow each consuming system to retrieve fit-for-purpose data projections through GraphQL.
+* Maintain compatibility across tenant boundaries where direct shared bus management is difficult.
+
+### 3. Protect Business Continuity During Migration
+
+* Keep legacy and target solutions operational during transition.
+* Preserve data consistency between current and new platforms through event-driven synchronization patterns.
+* Minimize downtime and business disruption while progressively moving capabilities to the new platform.
+
+### 4. Strengthen Security and Platform Readiness
+
+* Evolve existing REST interfaces toward modern authentication and authorization patterns.
+* Retain existing domain validation and business rules in Hub during the transition phase.
+* Establish a secure, auditable integration boundary that supports long-term platform governance.
+
+## Scope and Boundaries
+
+### In Scope
+
+* Definition of the event + REST integration model for staged decoupling.
+* Introduction of consumer pull patterns for downstream data consumption.
+* Modernisation of API security controls required for non-UI integration consumers.
+* Transitional coexistence model covering synchronization, operability, and rollout.
+
+### Out of Scope (This Phase)
+
+* Full replacement of all Hub internal domain logic.
+* Immediate decomposition of all monolithic components.
+* One-step migration of all consuming systems.
+
+## Success Metrics and KPI Targets
+
+Success will be measured with explicit technical and operational indicators.
+
+### Delivery and Change Efficiency
+
+* Reduced lead time for integration changes compared to the current baseline.
+* Fewer cross-team release dependencies required for downstream consumer updates.
+* Increased deployment frequency for integration-related changes without instability.
+
+### Reliability and Data Integrity
+
+* No critical data loss incidents during synchronization between legacy and target systems.
+* Defined SLO attainment for event propagation and REST processing.
+* Measurable reduction in synchronization defects and manual reconciliation effort.
+
+### Operational Stability
+
+* High availability maintained for existing business-critical workflows during migration.
+* Controlled rollback pathways demonstrated for key transition milestones.
+* Reduction in production incidents attributable to integration coupling.
+
+### Security and Compliance
+
+* Adoption of modern authentication mechanisms on integration-facing APIs.
+* Auditability of integration operations and traceability of change events.
+* Zero unresolved high-severity security findings for the decoupled integration surface at go-live.
+
+## Definition of Success
+
+This initiative is successful when Hub can continue serving business operations while new capabilities are delivered through a decoupled model, consumers can independently access required data, and the organisation can migrate incrementally with lower risk, lower change cost, and stronger operational control.
