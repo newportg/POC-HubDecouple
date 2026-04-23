@@ -8,7 +8,7 @@ book:
   date: "21/04/2026"
   sidebar: 
     background: "#F5F5F5"
-    logo: covereGB.png
+    logo: coverGB.png
     search: true
   chapters:
     - index.qmd
