@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Detailed Design &amp; Implementation – Hub Decoupled Architecture</title>
+<title>Detailed Design &amp; Implementation – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Book/Transition &amp; Rollout Plan.html" rel="next">
+<link href="../Book/Hub/Core Platform Capabilities.html" rel="next">
 <link href="../Book/Proposed Target Architecture.html" rel="prev">
 <link href="../coverG.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Detailed Design &amp; Implementation.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Detailed Design &amp; Implementation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,12 +172,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Detailed Design &amp; Implementation</span></span></a>
+  <a href="../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
@@ -200,29 +211,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data-design-and-migration-strategy" id="toc-data-design-and-migration-strategy" class="nav-link active" data-scroll-target="#data-design-and-migration-strategy"><span class="header-section-number">5.1</span> Data Design and Migration Strategy</a>
+  <li><a href="#data-design-and-migration-strategy" id="toc-data-design-and-migration-strategy" class="nav-link active" data-scroll-target="#data-design-and-migration-strategy">Data Design and Migration Strategy</a>
   <ul class="collapse">
-  <li><a href="#source-of-truth-and-ownership" id="toc-source-of-truth-and-ownership" class="nav-link" data-scroll-target="#source-of-truth-and-ownership"><span class="header-section-number">5.1.1</span> Source of Truth and Ownership</a></li>
-  <li><a href="#data-movement-patterns" id="toc-data-movement-patterns" class="nav-link" data-scroll-target="#data-movement-patterns"><span class="header-section-number">5.1.2</span> Data Movement Patterns</a></li>
-  <li><a href="#data-integrity-controls" id="toc-data-integrity-controls" class="nav-link" data-scroll-target="#data-integrity-controls"><span class="header-section-number">5.1.3</span> Data Integrity Controls</a></li>
-  <li><a href="#migration-approach" id="toc-migration-approach" class="nav-link" data-scroll-target="#migration-approach"><span class="header-section-number">5.1.4</span> Migration Approach</a></li>
+  <li><a href="#source-of-truth-and-ownership" id="toc-source-of-truth-and-ownership" class="nav-link" data-scroll-target="#source-of-truth-and-ownership">Source of Truth and Ownership</a></li>
+  <li><a href="#data-movement-patterns" id="toc-data-movement-patterns" class="nav-link" data-scroll-target="#data-movement-patterns">Data Movement Patterns</a></li>
+  <li><a href="#data-integrity-controls" id="toc-data-integrity-controls" class="nav-link" data-scroll-target="#data-integrity-controls">Data Integrity Controls</a></li>
+  <li><a href="#migration-approach" id="toc-migration-approach" class="nav-link" data-scroll-target="#migration-approach">Migration Approach</a></li>
   </ul></li>
-  <li><a href="#api-and-interface-specifications" id="toc-api-and-interface-specifications" class="nav-link" data-scroll-target="#api-and-interface-specifications"><span class="header-section-number">5.2</span> API and Interface Specifications</a>
+  <li><a href="#api-and-interface-specifications" id="toc-api-and-interface-specifications" class="nav-link" data-scroll-target="#api-and-interface-specifications">API and Interface Specifications</a>
   <ul class="collapse">
-  <li><a href="#event-contracts" id="toc-event-contracts" class="nav-link" data-scroll-target="#event-contracts"><span class="header-section-number">5.2.1</span> Event Contracts</a></li>
-  <li><a href="#graphql-query-surface" id="toc-graphql-query-surface" class="nav-link" data-scroll-target="#graphql-query-surface"><span class="header-section-number">5.2.2</span> GraphQL Query Surface</a></li>
-  <li><a href="#rest-command-surface" id="toc-rest-command-surface" class="nav-link" data-scroll-target="#rest-command-surface"><span class="header-section-number">5.2.3</span> REST Command Surface</a></li>
+  <li><a href="#event-contracts" id="toc-event-contracts" class="nav-link" data-scroll-target="#event-contracts">Event Contracts</a></li>
+  <li><a href="#graphql-query-surface" id="toc-graphql-query-surface" class="nav-link" data-scroll-target="#graphql-query-surface">GraphQL Query Surface</a></li>
+  <li><a href="#rest-command-surface" id="toc-rest-command-surface" class="nav-link" data-scroll-target="#rest-command-surface">REST Command Surface</a></li>
   </ul></li>
-  <li><a href="#security-and-compliance-controls" id="toc-security-and-compliance-controls" class="nav-link" data-scroll-target="#security-and-compliance-controls"><span class="header-section-number">5.3</span> Security and Compliance Controls</a>
+  <li><a href="#security-and-compliance-controls" id="toc-security-and-compliance-controls" class="nav-link" data-scroll-target="#security-and-compliance-controls">Security and Compliance Controls</a>
   <ul class="collapse">
-  <li><a href="#identity-and-access" id="toc-identity-and-access" class="nav-link" data-scroll-target="#identity-and-access"><span class="header-section-number">5.3.1</span> Identity and Access</a></li>
-  <li><a href="#data-protection" id="toc-data-protection" class="nav-link" data-scroll-target="#data-protection"><span class="header-section-number">5.3.2</span> Data Protection</a></li>
-  <li><a href="#audit-and-traceability" id="toc-audit-and-traceability" class="nav-link" data-scroll-target="#audit-and-traceability"><span class="header-section-number">5.3.3</span> Audit and Traceability</a></li>
-  <li><a href="#compliance-readiness" id="toc-compliance-readiness" class="nav-link" data-scroll-target="#compliance-readiness"><span class="header-section-number">5.3.4</span> Compliance Readiness</a></li>
+  <li><a href="#identity-and-access" id="toc-identity-and-access" class="nav-link" data-scroll-target="#identity-and-access">Identity and Access</a></li>
+  <li><a href="#data-protection" id="toc-data-protection" class="nav-link" data-scroll-target="#data-protection">Data Protection</a></li>
+  <li><a href="#audit-and-traceability" id="toc-audit-and-traceability" class="nav-link" data-scroll-target="#audit-and-traceability">Audit and Traceability</a></li>
+  <li><a href="#compliance-readiness" id="toc-compliance-readiness" class="nav-link" data-scroll-target="#compliance-readiness">Compliance Readiness</a></li>
   </ul></li>
-  <li><a href="#implementation-sequence" id="toc-implementation-sequence" class="nav-link" data-scroll-target="#implementation-sequence"><span class="header-section-number">5.4</span> Implementation Sequence</a></li>
-  <li><a href="#acceptance-criteria" id="toc-acceptance-criteria" class="nav-link" data-scroll-target="#acceptance-criteria"><span class="header-section-number">5.5</span> Acceptance Criteria</a></li>
-  <li><a href="#non-functional-expectations" id="toc-non-functional-expectations" class="nav-link" data-scroll-target="#non-functional-expectations"><span class="header-section-number">5.6</span> Non-Functional Expectations</a></li>
+  <li><a href="#implementation-sequence" id="toc-implementation-sequence" class="nav-link" data-scroll-target="#implementation-sequence">Implementation Sequence</a></li>
+  <li><a href="#acceptance-criteria" id="toc-acceptance-criteria" class="nav-link" data-scroll-target="#acceptance-criteria">Acceptance Criteria</a></li>
+  <li><a href="#non-functional-expectations" id="toc-non-functional-expectations" class="nav-link" data-scroll-target="#non-functional-expectations">Non-Functional Expectations</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Detailed Design &amp; Implementation</span></h1>
+<h1 class="title">Detailed Design &amp; Implementation</h1>
 </div>
 
 
@@ -248,14 +259,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="data-design-and-migration-strategy" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="data-design-and-migration-strategy"><span class="header-section-number">5.1</span> Data Design and Migration Strategy</h2>
-<section id="source-of-truth-and-ownership" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="source-of-truth-and-ownership"><span class="header-section-number">5.1.1</span> Source of Truth and Ownership</h3>
+<section id="data-design-and-migration-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="data-design-and-migration-strategy">Data Design and Migration Strategy</h2>
+<section id="source-of-truth-and-ownership" class="level3">
+<h3 class="anchored" data-anchor-id="source-of-truth-and-ownership">Source of Truth and Ownership</h3>
 <p>During transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.</p>
 </section>
-<section id="data-movement-patterns" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="data-movement-patterns"><span class="header-section-number">5.1.2</span> Data Movement Patterns</h3>
+<section id="data-movement-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="data-movement-patterns">Data Movement Patterns</h3>
 <ul>
 <li>Event notification communicates that a change occurred.</li>
 <li>GraphQL retrieval provides consumer-specific field selection for synchronization.</li>
@@ -270,8 +281,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Reconciliation jobs periodically compare authoritative and projection state.</li>
 </ol>
 </section>
-<section id="data-integrity-controls" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="data-integrity-controls"><span class="header-section-number">5.1.3</span> Data Integrity Controls</h3>
+<section id="data-integrity-controls" class="level3">
+<h3 class="anchored" data-anchor-id="data-integrity-controls">Data Integrity Controls</h3>
 <ul>
 <li>Idempotent event consumption using event identifiers and deduplication checkpoints.</li>
 <li>Correlation IDs propagated across event, query, and command flows.</li>
@@ -279,8 +290,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Validation-on-write in Hub to ensure domain invariants remain enforced.</li>
 </ul>
 </section>
-<section id="migration-approach" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="migration-approach"><span class="header-section-number">5.1.4</span> Migration Approach</h3>
+<section id="migration-approach" class="level3">
+<h3 class="anchored" data-anchor-id="migration-approach">Migration Approach</h3>
 <ul>
 <li>Baseline load: seed consumer stores from current state snapshots.</li>
 <li>Incremental sync: apply event-driven updates post-baseline.</li>
@@ -324,10 +335,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </section>
 </section>
-<section id="api-and-interface-specifications" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="api-and-interface-specifications"><span class="header-section-number">5.2</span> API and Interface Specifications</h2>
-<section id="event-contracts" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="event-contracts"><span class="header-section-number">5.2.1</span> Event Contracts</h3>
+<section id="api-and-interface-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="api-and-interface-specifications">API and Interface Specifications</h2>
+<section id="event-contracts" class="level3">
+<h3 class="anchored" data-anchor-id="event-contracts">Event Contracts</h3>
 <p>Event envelope should include:</p>
 <ul>
 <li>Event ID, event type, version, and timestamp.</li>
@@ -352,8 +363,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="graphql-query-surface" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="graphql-query-surface"><span class="header-section-number">5.2.2</span> GraphQL Query Surface</h3>
+<section id="graphql-query-surface" class="level3">
+<h3 class="anchored" data-anchor-id="graphql-query-surface">GraphQL Query Surface</h3>
 <p>Design goals:</p>
 <ul>
 <li>Consumer-selected fields to avoid over-fetching.</li>
@@ -375,8 +386,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="rest-command-surface" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="rest-command-surface"><span class="header-section-number">5.2.3</span> REST Command Surface</h3>
+<section id="rest-command-surface" class="level3">
+<h3 class="anchored" data-anchor-id="rest-command-surface">REST Command Surface</h3>
 <p>Design goals:</p>
 <ul>
 <li>Explicit resource and command semantics for create/update/delete operations.</li>
@@ -408,34 +419,34 @@ Content-Type: application/json
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="security-and-compliance-controls" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="security-and-compliance-controls"><span class="header-section-number">5.3</span> Security and Compliance Controls</h2>
-<section id="identity-and-access" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="identity-and-access"><span class="header-section-number">5.3.1</span> Identity and Access</h3>
+<section id="security-and-compliance-controls" class="level2">
+<h2 class="anchored" data-anchor-id="security-and-compliance-controls">Security and Compliance Controls</h2>
+<section id="identity-and-access" class="level3">
+<h3 class="anchored" data-anchor-id="identity-and-access">Identity and Access</h3>
 <ul>
 <li>Modern authentication for all integration clients.</li>
 <li>Role- and scope-based authorization for query and command endpoints.</li>
 <li>Principle of least privilege for service identities.</li>
 </ul>
 </section>
-<section id="data-protection" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="data-protection"><span class="header-section-number">5.3.2</span> Data Protection</h3>
+<section id="data-protection" class="level3">
+<h3 class="anchored" data-anchor-id="data-protection">Data Protection</h3>
 <ul>
 <li>Encryption in transit for all APIs and event transport channels.</li>
 <li>Encryption at rest for persisted operational and projection data.</li>
 <li>Controlled handling of sensitive data in logs and telemetry.</li>
 </ul>
 </section>
-<section id="audit-and-traceability" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="audit-and-traceability"><span class="header-section-number">5.3.3</span> Audit and Traceability</h3>
+<section id="audit-and-traceability" class="level3">
+<h3 class="anchored" data-anchor-id="audit-and-traceability">Audit and Traceability</h3>
 <ul>
 <li>Immutable audit trail for command operations.</li>
 <li>Event lineage traceability from producer through consumers.</li>
 <li>End-to-end request tracing with correlation IDs.</li>
 </ul>
 </section>
-<section id="compliance-readiness" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="compliance-readiness"><span class="header-section-number">5.3.4</span> Compliance Readiness</h3>
+<section id="compliance-readiness" class="level3">
+<h3 class="anchored" data-anchor-id="compliance-readiness">Compliance Readiness</h3>
 <ul>
 <li>Retention and deletion controls aligned with policy requirements.</li>
 <li>Data minimization in event payloads and API responses.</li>
@@ -443,8 +454,8 @@ Content-Type: application/json
 </ul>
 </section>
 </section>
-<section id="implementation-sequence" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="implementation-sequence"><span class="header-section-number">5.4</span> Implementation Sequence</h2>
+<section id="implementation-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-sequence">Implementation Sequence</h2>
 <ol type="1">
 <li>Establish cross-cutting foundations (identity, telemetry, correlation, contract governance).</li>
 <li>Introduce event publication for selected low-risk domains.</li>
@@ -460,8 +471,8 @@ Content-Type: application/json
 <li>Operations sign-off for monitoring, alerting, and rollback coverage.</li>
 </ul>
 </section>
-<section id="acceptance-criteria" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="acceptance-criteria"><span class="header-section-number">5.5</span> Acceptance Criteria</h2>
+<section id="acceptance-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="acceptance-criteria">Acceptance Criteria</h2>
 <p>The implementation is considered complete when all of the following are true:</p>
 <ul>
 <li>Critical domain events are published with required metadata and schema validation.</li>
@@ -471,8 +482,8 @@ Content-Type: application/json
 <li>Production runbooks, dashboards, and alert routes are validated in drills.</li>
 </ul>
 </section>
-<section id="non-functional-expectations" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="non-functional-expectations"><span class="header-section-number">5.6</span> Non-Functional Expectations</h2>
+<section id="non-functional-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="non-functional-expectations">Non-Functional Expectations</h2>
 <ul>
 <li>Reliability: graceful degradation and retry-safe integration patterns.</li>
 <li>Performance: bounded latency for event-to-consumer synchronization.</li>
@@ -891,8 +902,8 @@ Content-Type: application/json
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Book/Transition &amp; Rollout Plan.html" class="pagination-link" aria-label="Transition &amp; Rollout Plan">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Book/Hub/Core Platform Capabilities.html" class="pagination-link" aria-label="Core Platform Capabilities">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
