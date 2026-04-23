@@ -1,19 +1,24 @@
 # Core Platform Capabilities
 
 ## Property & Real Estate Management
+
 * Properties management (listings, details, attributes)
 * Buildings and building management
 * Estates and area management
 * Developments tracking
 * Resources management
 * Tenancies and leasing management
+
 ## Business Operations
+
 * Businesses and company management
 * Contacts management
 * Appointments scheduling
 * User management and authentication
 * Departments and organizational structure
+
 ## Document & Communication
+
 * Document templates and management
 * Attachments handling
 * Email management and SMTP integration
@@ -23,28 +28,36 @@
 * WOPI integration (Office Online integration)
 * Watermarks and document branding
 * HotDocs integration
+
 ## Transactional Features
+
 * Instructions management (property instructions/contracts)
 * Offers management
 * Referrals tracking
 * Requirements management (property requirements/searches)
 * Phases management
 * Tenancy management
+
 ## Marketing & Lead Management
+
 * Marketing lists management
 * Web enquiries and web form submissions
 * Referrals processing
 * Call-back lists
 * Consent and preferences management
 * Dotmailer CRM integration
+
 ## Data & Analytics
+
 * Dashboard creation and management
 * Grid management (customizable data grids)
 * Latest views tracking
 * User feed generation
 * Grids for reporting and data visualization
 * Metadata management
+
 ## External Integrations & Services
+
 * DocuSign integration (eSignature)
 * SAP integration
 * Thirdfort integration (KYC/AML compliance)
@@ -54,7 +67,9 @@
 * External address services
 * Exchange rate management
 * Elasticsearch integration (search)
+
 ## Background Processing (WebJobs)
+
 * Email distribution processing
 * Elasticsearch indexing and search updates
 * Feed Centre (data feed processing)
@@ -72,7 +87,9 @@
 * Soft opt-in processing
 * CDD validity checking
 * Azure Service Bus document handling
+
 ## System Features
+
 * Portal document visibility control
 * Character groups and categorical data
 * Business events tracking
@@ -86,7 +103,9 @@
 * Timezone management
 * Translations/localization
 * Web warmup endpoints
+
 ## Reporting & Analysis
+
 * Reports generation
 * Qube reporting integration
 * Publication events tracking

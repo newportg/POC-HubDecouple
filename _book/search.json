@@ -478,5 +478,27 @@
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html",
+    "href": "Book/Hub/Core Platform Capabilities.html",
+    "title": "5  Core Platform Capabilities",
+    "section": "",
+    "text": "5.1 Property & Real Estate Management\nThe system is built on .NET Framework 4.8 with SQL Server backend, featuring comprehensive REST API endpoints, Elasticsearch for search capabilities, and multiple Azure WebJobs for background processing and integrations.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "href": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "title": "5  Core Platform Capabilities",
+    "section": "",
+    "text": "Properties management (listings, details, attributes)\nBuildings and building management\nEstates and area management\nDevelopments tracking\nResources management\nTenancies and leasing management ## Business Operations\nBusinesses and company management\nContacts management\nAppointments scheduling\nUser management and authentication\nDepartments and organizational structure ## Document & Communication\nDocument templates and management\nAttachments handling\nEmail management and SMTP integration\nText messages (SMS) distribution\nNotifications system\nExternal message handling\nWOPI integration (Office Online integration)\nWatermarks and document branding\nHotDocs integration ## Transactional Features\nInstructions management (property instructions/contracts)\nOffers management\nReferrals tracking\nRequirements management (property requirements/searches)\nPhases management\nTenancy management ## Marketing & Lead Management\nMarketing lists management\nWeb enquiries and web form submissions\nReferrals processing\nCall-back lists\nConsent and preferences management\nDotmailer CRM integration ## Data & Analytics\nDashboard creation and management\nGrid management (customizable data grids)\nLatest views tracking\nUser feed generation\nGrids for reporting and data visualization\nMetadata management ## External Integrations & Services\nDocuSign integration (eSignature)\nSAP integration\nThirdfort integration (KYC/AML compliance)\nFixflo integration\nAzure Service Bus integration\nDotmailer email marketing\nExternal address services\nExchange rate management\nElasticsearch integration (search) ## Background Processing (WebJobs)\nEmail distribution processing\nElasticsearch indexing and search updates\nFeed Centre (data feed processing)\nNotifications processing\nText message queuing and delivery\nInstructions processing\nUser feed generation\nTenancy data updates (SAP integration)\nDocument processing (CDD/Compliance updates)\nMarketing list sync\nPortal document visibility management\nClaims recalculation\nLync/Teams contact info integration\nWebsite links feed generation\nSoft opt-in processing\nCDD validity checking\nAzure Service Bus document handling ## System Features\nPortal document visibility control\nCharacter groups and categorical data\nBusiness events tracking\nActivity logging\nCache management\nOutput caching for API performance\nConfiguration management\nQuestionnaires/form surveys\nFire safety documentation\nTyping Framework configuration\nTimezone management\nTranslations/localization\nWeb warmup endpoints ## Reporting & Analysis\nReports generation\nQube reporting integration\nPublication events tracking",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
   }
 ]
