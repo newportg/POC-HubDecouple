@@ -15,7 +15,9 @@ book:
     - Book/Executive Summary & Objectives.qmd
     - Book/Current State Assessment.qmd
     - Book/Proposed Target Architecture.qmd
-    - Book/Detailed Design & Implementation.qmd
+    - part: Book/Detailed Design & Implementation.qmd
+      chapters:
+        - Book/Hub/Core Platform Capabilities.qmd
     - Book/Transition & Rollout Plan.qmd
     - Book/Operations & Maintenance.qmd
 
