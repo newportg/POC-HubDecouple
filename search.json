@@ -172,111 +172,287 @@
   {
     "objectID": "Book/Current State Assessment.html",
     "href": "Book/Current State Assessment.html",
-    "title": "3  Current State Assessment",
+    "title": "Current State Assessment",
     "section": "",
-    "text": "3.1 Application Inventory\nThe current Hub platform is a traditional client-server solution with:\nPrimary capability areas currently delivered through the monolith include:",
+    "text": "Application Inventory\nThe current Hub platform is a traditional client-server solution with:\nPrimary capability areas currently delivered through the monolith include:",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+      "Current State Assessment"
     ]
   },
   {
     "objectID": "Book/Current State Assessment.html#application-inventory",
     "href": "Book/Current State Assessment.html#application-inventory",
-    "title": "3  Current State Assessment",
+    "title": "Current State Assessment",
     "section": "",
     "text": "Angular-based user interface focused on transactional operations.\nC# server application containing tightly coupled business logic and integration behavior.\nEntity Framework code-first data access against a relational persistence layer.\n\n\n\nCore business transaction processing.\nValidation and business rule enforcement.\nUI-oriented REST endpoints supporting the Angular client.\nInternal orchestration that couples domain operations and integration side effects.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+      "Current State Assessment"
     ]
   },
   {
     "objectID": "Book/Current State Assessment.html#current-system-architecture",
     "href": "Book/Current State Assessment.html#current-system-architecture",
-    "title": "3  Current State Assessment",
-    "section": "3.2 Current System Architecture",
-    "text": "3.2 Current System Architecture\n\n3.2.1 Logical Structure\nThe current architecture follows a layered but highly interdependent model:\n\nPresentation layer: Angular front end.\nApplication/API layer: C# Web/API services primarily designed for UI use.\nDomain/business layer: Rules and workflows embedded in service methods.\nData layer: Entity Framework code-first models and migrations.\n\nAlthough these layers exist conceptually, practical coupling between layers has increased over time. Domain logic, integration concerns, and data access are frequently intermixed, resulting in broad impact when introducing changes.\n\n\n3.2.2 Integration Characteristics\nCurrent integration behavior is largely implementation-driven rather than contract-driven:\n\nAPIs were optimized for GUI interaction patterns, not broad external consumer reuse.\nData contracts are not consistently consumer-specific, requiring additional transformation outside Hub.\nChange propagation to other systems depends on tightly coordinated release activity.",
+    "title": "Current State Assessment",
+    "section": "Current System Architecture",
+    "text": "Current System Architecture\n\nLogical Structure\nThe current architecture follows a layered but highly interdependent model:\n\nPresentation layer: Angular front end.\nApplication/API layer: C# Web/API services primarily designed for UI use.\nDomain/business layer: Rules and workflows embedded in service methods.\nData layer: Entity Framework code-first models and migrations.\n\nAlthough these layers exist conceptually, practical coupling between layers has increased over time. Domain logic, integration concerns, and data access are frequently intermixed, resulting in broad impact when introducing changes.\n\n\nIntegration Characteristics\nCurrent integration behavior is largely implementation-driven rather than contract-driven:\n\nAPIs were optimized for GUI interaction patterns, not broad external consumer reuse.\nData contracts are not consistently consumer-specific, requiring additional transformation outside Hub.\nChange propagation to other systems depends on tightly coordinated release activity.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+      "Current State Assessment"
     ]
   },
   {
     "objectID": "Book/Current State Assessment.html#technical-debt-and-pain-points",
     "href": "Book/Current State Assessment.html#technical-debt-and-pain-points",
-    "title": "3  Current State Assessment",
-    "section": "3.3 Technical Debt and Pain Points",
-    "text": "3.3 Technical Debt and Pain Points\n\n3.3.1 Change Cost and Delivery Risk\n\nHigh regression risk when modifying shared monolithic components.\nLong lead times caused by cross-cutting code impact and heavy coordination.\nDifficult parallel work streams due to shared deployment units.\n\n\n\n3.3.2 Maintainability and Operability\n\nOrganic growth has produced complex and difficult-to-isolate code paths.\nRoot-cause analysis is slower because responsibilities are not cleanly separated.\nOperational troubleshooting often requires domain and infrastructure knowledge concentrated in a small set of team members.\n\n\n\n3.3.3 Integration and Scalability Constraints\n\nStrong publisher-consumer coupling increases the cost of onboarding new systems.\nRigid payload assumptions are hard to evolve across multiple consuming teams.\nCross-tenant integration and governance create additional overhead when managed through centrally controlled bus schemas.\n\n\n\n3.3.4 Security and Platform Readiness Gaps\n\nExisting REST surfaces are primarily GUI-focused and require modernization for broader integration use.\nAuthentication and authorization patterns need to align with current enterprise standards.\nAuditability and traceability need stronger consistency for multi-system transition operations.",
+    "title": "Current State Assessment",
+    "section": "Technical Debt and Pain Points",
+    "text": "Technical Debt and Pain Points\n\nChange Cost and Delivery Risk\n\nHigh regression risk when modifying shared monolithic components.\nLong lead times caused by cross-cutting code impact and heavy coordination.\nDifficult parallel work streams due to shared deployment units.\n\n\n\nMaintainability and Operability\n\nOrganic growth has produced complex and difficult-to-isolate code paths.\nRoot-cause analysis is slower because responsibilities are not cleanly separated.\nOperational troubleshooting often requires domain and infrastructure knowledge concentrated in a small set of team members.\n\n\n\nIntegration and Scalability Constraints\n\nStrong publisher-consumer coupling increases the cost of onboarding new systems.\nRigid payload assumptions are hard to evolve across multiple consuming teams.\nCross-tenant integration and governance create additional overhead when managed through centrally controlled bus schemas.\n\n\n\nSecurity and Platform Readiness Gaps\n\nExisting REST surfaces are primarily GUI-focused and require modernization for broader integration use.\nAuthentication and authorization patterns need to align with current enterprise standards.\nAuditability and traceability need stronger consistency for multi-system transition operations.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+      "Current State Assessment"
     ]
   },
   {
     "objectID": "Book/Current State Assessment.html#why-change-is-required-now",
     "href": "Book/Current State Assessment.html#why-change-is-required-now",
-    "title": "3  Current State Assessment",
-    "section": "3.4 Why Change Is Required Now",
-    "text": "3.4 Why Change Is Required Now\nThe current platform can continue to run business workloads, but it is no longer an efficient foundation for incremental evolution. The cost, risk, and speed profile of the monolithic model directly limits delivery and migration progress. A decoupled architecture is required to support staged transformation while maintaining operational continuity.",
+    "title": "Current State Assessment",
+    "section": "Why Change Is Required Now",
+    "text": "Why Change Is Required Now\nThe current platform can continue to run business workloads, but it is no longer an efficient foundation for incremental evolution. The cost, risk, and speed profile of the monolithic model directly limits delivery and migration progress. A decoupled architecture is required to support staged transformation while maintaining operational continuity.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Current State Assessment</span>"
+      "Current State Assessment"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html",
+    "href": "Book/Hub/Core Platform Capabilities.html",
+    "title": "3  Core Platform Capabilities",
+    "section": "",
+    "text": "3.1 Property & Real Estate Management",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "href": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "title": "3  Core Platform Capabilities",
+    "section": "",
+    "text": "Properties management (listings, details, attributes)\nBuildings and building management\nEstates and area management\nDevelopments tracking\nResources management\nTenancies and leasing management",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#business-operations",
+    "href": "Book/Hub/Core Platform Capabilities.html#business-operations",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.2 Business Operations",
+    "text": "3.2 Business Operations\n\nBusinesses and company management\nContacts management\nAppointments scheduling\nUser management and authentication\nDepartments and organizational structure",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#document-communication",
+    "href": "Book/Hub/Core Platform Capabilities.html#document-communication",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.3 Document & Communication",
+    "text": "3.3 Document & Communication\n\nDocument templates and management\nAttachments handling\nEmail management and SMTP integration\nText messages (SMS) distribution\nNotifications system\nExternal message handling\nWOPI integration (Office Online integration)\nWatermarks and document branding\nHotDocs integration",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#transactional-features",
+    "href": "Book/Hub/Core Platform Capabilities.html#transactional-features",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.4 Transactional Features",
+    "text": "3.4 Transactional Features\n\nInstructions management (property instructions/contracts)\nOffers management\nReferrals tracking\nRequirements management (property requirements/searches)\nPhases management\nTenancy management",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
+    "href": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.5 Marketing & Lead Management",
+    "text": "3.5 Marketing & Lead Management\n\nMarketing lists management\nWeb enquiries and web form submissions\nReferrals processing\nCall-back lists\nConsent and preferences management\nDotmailer CRM integration",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#data-analytics",
+    "href": "Book/Hub/Core Platform Capabilities.html#data-analytics",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.6 Data & Analytics",
+    "text": "3.6 Data & Analytics\n\nDashboard creation and management\nGrid management (customizable data grids)\nLatest views tracking\nUser feed generation\nGrids for reporting and data visualization\nMetadata management",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
+    "href": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.7 External Integrations & Services",
+    "text": "3.7 External Integrations & Services\n\nDocuSign integration (eSignature)\nSAP integration\nThirdfort integration (KYC/AML compliance)\nFixflo integration\nAzure Service Bus integration\nDotmailer email marketing\nExternal address services\nExchange rate management\nElasticsearch integration (search)",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
+    "href": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.8 Background Processing (WebJobs)",
+    "text": "3.8 Background Processing (WebJobs)\n\nEmail distribution processing\nElasticsearch indexing and search updates\nFeed Centre (data feed processing)\nNotifications processing\nText message queuing and delivery\nInstructions processing\nUser feed generation\nTenancy data updates (SAP integration)\nDocument processing (CDD/Compliance updates)\nMarketing list sync\nPortal document visibility management\nClaims recalculation\nLync/Teams contact info integration\nWebsite links feed generation\nSoft opt-in processing\nCDD validity checking\nAzure Service Bus document handling",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#system-features",
+    "href": "Book/Hub/Core Platform Capabilities.html#system-features",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.9 System Features",
+    "text": "3.9 System Features\n\nPortal document visibility control\nCharacter groups and categorical data\nBusiness events tracking\nActivity logging\nCache management\nOutput caching for API performance\nConfiguration management\nQuestionnaires/form surveys\nFire safety documentation\nTyping Framework configuration\nTimezone management\nTranslations/localization\nWeb warmup endpoints",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
+    "href": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
+    "title": "3  Core Platform Capabilities",
+    "section": "3.10 Reporting & Analysis",
+    "text": "3.10 Reporting & Analysis\n\nReports generation\nQube reporting integration\nPublication events tracking\n\nThe system is built on .NET Framework 4.8 with SQL Server backend, featuring comprehensive REST API endpoints, Elasticsearch for search capabilities, and multiple Azure WebJobs for background processing and integrations.",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Major entities and relationships.html",
+    "href": "Book/Hub/Major entities and relationships.html",
+    "title": "4  Major entities and relationships",
+    "section": "",
+    "text": "4.1 Illustration (ER-style overview)\nflowchart LR  \nAsset --&gt;|1.._| Activity  \nAsset --&gt;|1.._| Tenancy  \nAsset --&gt;|is-a| Property  \nAsset --&gt;|is-a| Portfolio  \nPortfolio --&gt;|1..*| Property  \nProperty --&gt;|1| Address\nActivity --&gt;|0.._| Offer  \nRequirement --&gt;|0.._| Offer  \nOffer --&gt;|0..1| Property\nActivity --&gt;|0..* via Match| Requirement  \nMatch --&gt;|1| Activity  \nMatch --&gt;|1| Requirement\nTenancy --&gt;|0..1| Activity  \nTenancy --&gt;|0..1| Requirement  \nTenancy --&gt;|1| Asset  \nTenancy --&gt;|1..*| TenancyParty  \nTenancy --&gt;|0..1 head lease| Tenancy\nContact --&gt;|0.._| ContactAddress  \nCompany --&gt;|0.._| CompanyAddress  \nContact --&gt;|0..* via CompanyContact| Company  \nContact --&gt;|0..* via ContactRelationship| Relationship\nUser --&gt;|many| Activity  \nUser --&gt;|many| Requirement  \nUser --&gt;|many| Tenancy  \nUser --&gt;|1| Business  \nUser --&gt;|1| Department",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Major entities and relationships</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html",
+    "href": "Book/Hub/Business View.html",
+    "title": "5  Business Flow (end-to-end)",
+    "section": "",
+    "text": "5.1 What this means in plain terms:",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "href": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "title": "5  Business Flow (end-to-end)",
+    "section": "",
+    "text": "People and organizations are captured as Contacts and Companies.\nDemand is captured as Requirements.\nSupply is captured as Activities on an Asset (usually a Property).\nMatching links demand and supply.\nNegotiation is captured as Offers.\nA successful offer transitions into a Tenancy.\nThen ongoing management continues through tenancy lifecycle records.",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "href": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "title": "5  Business Flow (end-to-end)",
+    "section": "5.2 Core Domain Map (simplified)",
+    "text": "5.2 Core Domain Map (simplified)\n\n\n\n\n\nclassDiagram\n  class Asset\n  class Property\n  class Portfolio\n  class Activity\n  class Requirement\n  class Match\n  class Offer\n  class Tenancy\n  class Contact\n  class Company\n  class Address\n  class User\n  class Department\n  class Business\n\n  Asset &lt;|-- Property\n  Asset &lt;|-- Portfolio\n  Portfolio \"1\" --&gt; \"many\" Property\n  Property \"1\" --&gt; \"1\" Address\n\n  Asset \"1\" --&gt; \"many\" Activity\n  Asset \"1\" --&gt; \"many\" Tenancy\n\n  Activity \"1\" --&gt; \"many\" Offer\n  Requirement \"1\" --&gt; \"many\" Offer\n\n  Activity \"1\" --&gt; \"many\" Match\n  Requirement \"1\" --&gt; \"many\" Match\n\n  Tenancy \"many\" --&gt; \"1\" Asset\n  Tenancy \"many\" --&gt; \"0..1\" Activity\n  Tenancy \"many\" --&gt; \"0..1\" Requirement\n  Tenancy \"0..many\" --&gt; \"0..1\" Tenancy : head/sub-lease\n\n  Contact \"many\" --&gt; \"many\" Company : via CompanyContact\n  Contact \"many\" --&gt; \"many\" Address : via ContactAddress\n  Company \"many\" --&gt; \"many\" Address : via CompanyAddress\n\n  User \"many\" --&gt; \"1\" Department\n  User \"many\" --&gt; \"1\" Business\n\n\n\n\n\n\nHighest-value relationships to remember\n\nRequirement ↔︎ Activity is many-to-many (through Match).\nOffer can be tied to Requirement and/or Activity, and optionally Property.\nTenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.\nContact and Company are many-to-many via CompanyContact.\nAddress is shared via link entities (not hard-wired only to one type).",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Architectural Summary.html",
+    "href": "Book/Hub/Architectural Summary.html",
+    "title": "Hub Decoupled Architecture",
+    "section": "",
+    "text": "1. Bounded Contexts\n\nCRM Context\nOwns people and organizations: Contact, Company, relationship links, communication preferences, addresses, consent, and referral entry points.\nListings and Demand Context\nOwns supply and demand: Activity (marketed instruction/listing), Requirement (client demand), matching, and pipeline visibility.\nTransactions Context\nOwns negotiation and agreement state: Offer, deal progression fields, contractual milestones, and party roles around a deal.\nTenancy and Property Management Context\nOwns occupancy lifecycle: Tenancy, tenancy parties, lease hierarchy (head/sub), progression and management data.\nAsset and Geography Context\nOwns real estate structure: Asset base type, Property, Portfolio, Address, floors/areas, and asset-level metadata.\nOrganization and Security Context\nOwns operational structure and access projection: User, Department, Business, roles, security attributes, negotiation ownership.\nIntegration and Async Processing Context\nOwns background jobs and external systems: DocuSign, Dotmailer, SAP, Thirdfort, notifications, feeds, Elasticsearch updates, and sync/error handling.\n\n2. Major Aggregates Per Context 1. CRM\nContact aggregate, Company aggregate, Contact-Company association, Contact relationship graph, address associations. 1. Listings and Demand\nActivity aggregate, Requirement aggregate, Match aggregate linking them, negotiator/department ownership. 1. Transactions\nOffer aggregate with role-based parties (applicant, broker, lender, surveyor, etc.) and status progression. 1. Tenancy and PM\nTenancy aggregate with linked asset/activity/requirement, tenancy parties, reviews/breaks, lease lineage. 1. Asset and Geography\nAsset aggregate root with Property/Portfolio specializations and shared address model. 1. Organization and Security\nUser aggregate, department/business membership, role bindings, resource-security attributes. 1. Integration and Async\nWebJob handlers as process/application layer components that mutate domain aggregates and publish side effects.\n3. Relationship Backbone (most important) 1. Asset to Activity: one-to-many 1. Asset to Tenancy: one-to-many 1. Requirement to Activity: many-to-many via Match 1. Activity to Offer: one-to-many 1. Requirement to Offer: one-to-many 1. Tenancy to Asset: many-to-one 1. Contact to Company: many-to-many via association entity 1. Contact to Address and Company to Address: association-based (not direct single owner) 1. User to Department/Business: many-to-one from user perspective\n4. Typical Business Flow 1. Lead captured against Contact and optionally Company 1. Requirement created (demand) 1. Activity created on an Asset (supply) 1. Match links demand to supply 1. Offer tracks negotiation 1. Accepted/completed progression produces Tenancy 1. WebJobs synchronize, notify, enrich, and index\n5. Integration Points (high-value) 1. Document and signing workflows (DocuSign) 1. Marketing/communications sync (Dotmailer, notifications, SMS/email jobs) 1. External data/compliance updates (SAP, Thirdfort, Fixflo and others) 1. Search indexing and feed jobs (Elasticsearch and feed webjobs)\n6. Practical Implications for Change Design 1. Changes to party roles should be made in party subtypes, not by adding fixed role columns. 1. Cross-context changes usually pass through Activity, Requirement, Offer, and Tenancy in that order. 1. Async side effects belong in WebJobs/process handlers; core invariants should remain in domain/application logic. 1. Security and visibility are cross-cutting and should be treated as first-class when modifying aggregates.",
+    "crumbs": [
+      "Current State Assessment",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Architectural Summary.html</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html",
     "href": "Book/Proposed Target Architecture.html",
-    "title": "4  Proposed Target Architecture",
+    "title": "7  Proposed Target Architecture",
     "section": "",
-    "text": "4.1 Modernisation Approach\nThe recommended strategy is a staged decoupling model rather than a single-step replacement. The approach combines:\nThis model supports coexistence between legacy and target systems and allows each migration step to be independently validated before broader rollout.",
+    "text": "7.1 Modernisation Approach\nThe recommended strategy is a staged decoupling model rather than a single-step replacement. The approach combines:\nThis model supports coexistence between legacy and target systems and allows each migration step to be independently validated before broader rollout.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html#modernisation-approach",
     "href": "Book/Proposed Target Architecture.html#modernisation-approach",
-    "title": "4  Proposed Target Architecture",
+    "title": "7  Proposed Target Architecture",
     "section": "",
     "text": "Incremental rearchitecture of integration boundaries while preserving core legacy operations.\nEvent-driven change notification to downstream consumers.\nConsumer-driven data retrieval through GraphQL queries.\nControlled write operations through REST APIs that continue to enforce Hub business rules.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html#design-principles",
     "href": "Book/Proposed Target Architecture.html#design-principles",
-    "title": "4  Proposed Target Architecture",
-    "section": "4.2 Design Principles",
-    "text": "4.2 Design Principles\n\n4.2.1 1. Loose Coupling by Default\nPublish business events that describe what happened, not complete consumer-specific payloads. Consumers choose their required data shape through query capabilities.\n\n\n4.2.2 2. Contract Clarity at Integration Boundaries\nUse explicit API and event contracts, versioned where required, with backward compatibility windows to reduce forced coordination across teams.\n\n\n4.2.3 3. Single Responsibility Across Components\nSeparate responsibilities so each component has a clear role:\n\nEvent publication for change signaling.\nQuery surface for consumer-specific reads.\nCommand/API surface for validated writes.\n\n\n\n4.2.4 4. Security and Governance Built In\nApply modern authentication, authorization, and audit controls at every external integration boundary.\n\n\n4.2.5 5. Operability and Observability First\nDesign all cross-system operations to be traceable, measurable, and supportable through standard telemetry and correlation practices.",
+    "title": "7  Proposed Target Architecture",
+    "section": "7.2 Design Principles",
+    "text": "7.2 Design Principles\n\n7.2.1 1. Loose Coupling by Default\nPublish business events that describe what happened, not complete consumer-specific payloads. Consumers choose their required data shape through query capabilities.\n\n\n7.2.2 2. Contract Clarity at Integration Boundaries\nUse explicit API and event contracts, versioned where required, with backward compatibility windows to reduce forced coordination across teams.\n\n\n7.2.3 3. Single Responsibility Across Components\nSeparate responsibilities so each component has a clear role:\n\nEvent publication for change signaling.\nQuery surface for consumer-specific reads.\nCommand/API surface for validated writes.\n\n\n\n7.2.4 4. Security and Governance Built In\nApply modern authentication, authorization, and audit controls at every external integration boundary.\n\n\n7.2.5 5. Operability and Observability First\nDesign all cross-system operations to be traceable, measurable, and supportable through standard telemetry and correlation practices.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html#target-component-model",
     "href": "Book/Proposed Target Architecture.html#target-component-model",
-    "title": "4  Proposed Target Architecture",
-    "section": "4.3 Target Component Model",
-    "text": "4.3 Target Component Model\n\n4.3.1 Hub Core (Legacy Domain)\nContinues to host authoritative business rules and transactional consistency during the transition period.\n\n\n4.3.2 Event Publisher\nEmits domain-relevant events after successful state changes. Events provide metadata and references needed for consumers to fetch additional details.\n\n\n4.3.3 Query Layer (GraphQL)\nProvides consumer-driven data access so each downstream system can request only required fields and relationships.\n\n\n4.3.4 Command Layer (REST)\nAccepts create, update, and delete operations with validation routed through Hub domain rules. This preserves consistency while new systems integrate.\n\n\n4.3.5 Consumer Services\nSubscribe to events and pull required data projections. Consumer release cadence remains independent from publisher internals where contracts are respected.",
+    "title": "7  Proposed Target Architecture",
+    "section": "7.3 Target Component Model",
+    "text": "7.3 Target Component Model\n\n7.3.1 Hub Core (Legacy Domain)\nContinues to host authoritative business rules and transactional consistency during the transition period.\n\n\n7.3.2 Event Publisher\nEmits domain-relevant events after successful state changes. Events provide metadata and references needed for consumers to fetch additional details.\n\n\n7.3.3 Query Layer (GraphQL)\nProvides consumer-driven data access so each downstream system can request only required fields and relationships.\n\n\n7.3.4 Command Layer (REST)\nAccepts create, update, and delete operations with validation routed through Hub domain rules. This preserves consistency while new systems integrate.\n\n\n7.3.5 Consumer Services\nSubscribe to events and pull required data projections. Consumer release cadence remains independent from publisher internals where contracts are respected.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html#component-interactions",
     "href": "Book/Proposed Target Architecture.html#component-interactions",
-    "title": "4  Proposed Target Architecture",
-    "section": "4.4 Component Interactions",
-    "text": "4.4 Component Interactions\n\n4.4.1 Read-After-Event Pattern\n\nA domain change occurs in Hub.\nHub publishes an event with identity and context metadata.\nConsumer receives the event and requests required data through GraphQL.\nConsumer applies local processing and persists its own state.\n\n\n\n4.4.2 Controlled Write-Back Pattern\n\nExternal system issues create, update, or delete requests via REST.\nHub validates and applies business rules.\nHub commits state changes.\nHub publishes resulting events for interested consumers.\n\nThis creates a predictable cycle where writes are centralized for rule enforcement and reads are decentralized for flexibility.",
+    "title": "7  Proposed Target Architecture",
+    "section": "7.4 Component Interactions",
+    "text": "7.4 Component Interactions\n\n7.4.1 Read-After-Event Pattern\n\nA domain change occurs in Hub.\nHub publishes an event with identity and context metadata.\nConsumer receives the event and requests required data through GraphQL.\nConsumer applies local processing and persists its own state.\n\n\n\n7.4.2 Controlled Write-Back Pattern\n\nExternal system issues create, update, or delete requests via REST.\nHub validates and applies business rules.\nHub commits state changes.\nHub publishes resulting events for interested consumers.\n\nThis creates a predictable cycle where writes are centralized for rule enforcement and reads are decentralized for flexibility.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
     "objectID": "Book/Proposed Target Architecture.html#architecture-decision-summary",
     "href": "Book/Proposed Target Architecture.html#architecture-decision-summary",
-    "title": "4  Proposed Target Architecture",
-    "section": "4.5 Architecture Decision Summary",
-    "text": "4.5 Architecture Decision Summary\nThe preferred architecture is an Event Bus + REST API model with consumer-driven query access. It reduces schema lock-in, supports staged migration, and enables coexistence of current and future platforms with lower operational and delivery risk.",
+    "title": "7  Proposed Target Architecture",
+    "section": "7.5 Architecture Decision Summary",
+    "text": "7.5 Architecture Decision Summary\nThe preferred architecture is an Event Bus + REST API model with consumer-driven query access. It reduces schema lock-in, supports staged migration, and enables coexistence of current and future platforms with lower operational and delivery risk.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Proposed Target Architecture</span>"
     ]
   },
   {
@@ -350,298 +526,265 @@
     ]
   },
   {
-    "objectID": "Book/Hub/Core Platform Capabilities.html",
-    "href": "Book/Hub/Core Platform Capabilities.html",
-    "title": "5  Core Platform Capabilities",
+    "objectID": "Book/Hub/API Authentication.html",
+    "href": "Book/Hub/API Authentication.html",
+    "title": "8  API Authentication",
     "section": "",
-    "text": "5.1 Property & Real Estate Management",
+    "text": "8.0.1 Flow 1 — Human SSO (Entra bearer token, domain-joined device)\nThe current NTLM authentication protocol is ‘end of life’ in early 2027, so we need to update the API authentication layer to a more modern protocol. The company uses AD Entra.\nsequenceDiagram\n    participant Browser\n    participant IIS\n    participant EntraMiddleware as EntraTokenValidationMiddleware\n    participant AuthHandler as AppAuthorizationMessageHandler\n    participant Resolver as AdIdentityResolver\n    participant Domain as PrincipalUserQuery (MediatR)\n\n    Browser-&gt;&gt;IIS: GET /api/... (no explicit login)&lt;br/&gt;MSAL silently acquires token via PRT/Seamless SSO\n    Note over Browser,IIS: Authorization: Bearer eyJ...\n    IIS-&gt;&gt;EntraMiddleware: OWIN pipeline\n    EntraMiddleware-&gt;&gt;EntraMiddleware: Validate JWT signature via OIDC discovery keys\n    EntraMiddleware-&gt;&gt;EntraMiddleware: Stamp ClaimsPrincipal with kf_auth_source=Bearer\n    EntraMiddleware-&gt;&gt;EntraMiddleware: Set Thread.CurrentPrincipal + HttpContext.Current.User\n    EntraMiddleware-&gt;&gt;AuthHandler: next.Invoke()\n    AuthHandler-&gt;&gt;Resolver: ResolveAccountName(request)\n    Resolver-&gt;&gt;Resolver: Detect kf_auth_source=Bearer claim\n    Resolver-&gt;&gt;Resolver: Extract preferred_username → upn → email\n    Resolver-&gt;&gt;Resolver: MapToAccountName() → internal AD login\n    Resolver--&gt;&gt;AuthHandler: \"SA1\\DOEJO\"\n    AuthHandler-&gt;&gt;Domain: PrincipalUserQuery { ActiveDirectoryAccount=\"SA1\\DOEJO\" }\n    Domain--&gt;&gt;AuthHandler: PrincipalUser\n    AuthHandler--&gt;&gt;Browser: 200 OK",
     "crumbs": [
       "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
     ]
   },
   {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
-    "href": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
-    "title": "5  Core Platform Capabilities",
+    "objectID": "Book/Hub/API Authentication.html#current-state-in-your-api",
+    "href": "Book/Hub/API Authentication.html#current-state-in-your-api",
+    "title": "8  API Authentication",
+    "section": "8.1 Current state in your API",
+    "text": "8.1 Current state in your API\n\nWindows auth is enabled in config: Web.config:630\nAnonymous users are denied: Web.config:631\nUser identity is read from IIS Windows principal name in the auth handler: AppAuthorizationMessageHandler.cs\nSignalR does the same pattern: SignalrAuthorizationAttribute.cs",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#target-approach-recommended",
+    "href": "Book/Hub/API Authentication.html#target-approach-recommended",
+    "title": "8  API Authentication",
+    "section": "8.2 Target approach (recommended)",
+    "text": "8.2 Target approach (recommended)\n\nUse Microsoft Entra ID backed by AD accounts (hybrid or cloud-only).\nFrontend gets OAuth/OIDC tokens silently with SSO.\nAPI validates bearer JWT tokens.\nAPI maps token claims to your existing user model and continues to use PrincipalUser.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#how-users-still-avoid-login-prompts",
+    "href": "Book/Hub/API Authentication.html#how-users-still-avoid-login-prompts",
+    "title": "8  API Authentication",
+    "section": "8.3 How users still avoid login prompts",
+    "text": "8.3 How users still avoid login prompts\n\nDomain-joined or Entra-joined devices with Seamless SSO/PRT can get tokens silently.\nBrowser sessions use SSO cookies/PRT and usually do not show login pages.\nNon-compliant devices can still be handled with Conditional Access rules.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#what-to-change-in-this-solution",
+    "href": "Book/Hub/API Authentication.html#what-to-change-in-this-solution",
+    "title": "8  API Authentication",
+    "section": "8.4 What to change in this solution",
+    "text": "8.4 What to change in this solution\nPhase 1: Add token auth without breaking NTLM 1. Add OWIN JWT bearer middleware in startup. 1. Keep current handler, but make identity source pluggable: * If bearer token exists, read from claims like preferred_username or upn. * Else fallback to existing HttpContext.Current.User.Identity.Name. 1. Keep existing webhook/system-account paths as-is in the handler.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#phase-2-switch-primary-auth-to-ad-token-sso",
+    "href": "Book/Hub/API Authentication.html#phase-2-switch-primary-auth-to-ad-token-sso",
+    "title": "8  API Authentication",
+    "section": "8.5 Phase 2: Switch primary auth to AD token SSO",
+    "text": "8.5 Phase 2: Switch primary auth to AD token SSO\n\nChange API config from Windows auth requirement to token validation path.\nUpdate frontend to use MSAL and call API with bearer tokens.\nUpdate SignalR auth to validate token/claims (or use negotiated auth compatible with your SignalR version).",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#phase-3-retire-ntlm",
+    "href": "Book/Hub/API Authentication.html#phase-3-retire-ntlm",
+    "title": "8  API Authentication",
+    "section": "8.6 Phase 3: retire NTLM",
+    "text": "8.6 Phase 3: retire NTLM\n\nDisable IIS Windows authentication for the API.\nEnable anonymous requests at IIS layer.\nRely on JWT middleware and API authorization.\nRemove NTLM-specific code paths when stable.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#minimal-code-design-change",
+    "href": "Book/Hub/API Authentication.html#minimal-code-design-change",
+    "title": "8  API Authentication",
+    "section": "8.7 Minimal code design change",
+    "text": "8.7 Minimal code design change\n\nIntroduce an identity resolver abstraction:\n\nResolveAccountNameFromTokenOrWindowsPrincipal()\n\nUse that in:\n\nAppAuthorizationMessageHandler.cs\nSignalrAuthorizationAttribute.cs\n\nKeep your existing PrincipalUserQuery flow unchanged so permissions/business logic remain stable.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#claims-mapping-guidance",
+    "href": "Book/Hub/API Authentication.html#claims-mapping-guidance",
+    "title": "8  API Authentication",
+    "section": "8.8 Claims mapping guidance",
+    "text": "8.8 Claims mapping guidance\n\nPrefer claim order:\n\npreferred_username\nupn\nemail\n\nIf your database stores SAM format like DOMAIN, add a mapping step from UPN to SAM where needed.\nStore Entra object id as a stable alternate key for future-proofing.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#risk-points-to-plan-for",
+    "href": "Book/Hub/API Authentication.html#risk-points-to-plan-for",
+    "title": "8  API Authentication",
+    "section": "8.9 Risk points to plan for",
+    "text": "8.9 Risk points to plan for\n\nLegacy browsers and old WebView clients may not perform silent SSO cleanly.\nService-to-service and webhook flows must remain certificate or app-token based.\nSignalR auth flow may need special handling depending on transport and token forwarding.\nCross-domain frontend/API requires strict CORS + token audience checks.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Authentication.html#suggested-rollout-pattern",
+    "href": "Book/Hub/API Authentication.html#suggested-rollout-pattern",
+    "title": "8  API Authentication",
+    "section": "8.10 Suggested rollout pattern",
+    "text": "8.10 Suggested rollout pattern\n\nDual-auth window: support NTLM and bearer for a short period.\nPilot one department.\nMonitor unauthorized responses and claim-mapping misses.\nComplete cutover and disable NTLM.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>API Authentication</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/API Auth Implementation.html",
+    "href": "Book/Hub/API Auth Implementation.html",
+    "title": "9  API Auth Implementation",
     "section": "",
-    "text": "Properties management (listings, details, attributes)\nBuildings and building management\nEstates and area management\nDevelopments tracking\nResources management\nTenancies and leasing management",
+    "text": "Here is a safe dual-auth rollout you can execute in this repository.\nImplementation Plan\n\nAdd AD token validation in OWIN while keeping NTLM active.\nUpdate identity extraction to prefer bearer-token claims and fallback to existing Windows identity.\nAdd feature flags so you can switch behavior without redeploying code.\nUpdate SignalR auth path to use the same identity resolver.\nPilot and cut over, then disable NTLM.\n\nFiles To Change First\n\nStartup.cs\nAdd bearer-token middleware before WebApi middleware.\nAppAuthorizationMessageHandler.cs\nReplace hard dependency on HttpContext Windows identity with a resolver that checks token claims first.\nSignalrAuthorizationAttribute.cs\nUse the same resolver to read identity from SignalR token/cookies.\nWeb.config:630 Add new auth flags and Entra settings; later switch auth mode after cutover.\n\nConfig You Should Add\nIn appSettings:\n\nApi.Settings.Auth.Mode = Dual | TokenOnly | WindowsOnly\nApi.Settings.Auth.Entra.TenantId\nApi.Settings.Auth.Entra.Audience\nApi.Settings.Auth.Entra.ValidIssuers\nApi.Settings.Auth.Claims.UsernamePriority = preferred_username;upn;email\nApi.Settings.Auth.EnableWindowsFallback = true initially\n\nIdentity Resolution Logic\nCreate one resolver service and use it from both API handler and SignalR:\n\nIf bearer token exists and is valid:\n\nRead username claim by priority: preferred_username, then upn, then email.\nOptionally map UPN to DOMAINif your PrincipalUserQuery expects that.\n\nElse if Windows principal exists:\n\nUse existing HttpContext.Current.User.Identity.Name behavior.\n\nElse:\n\nReturn 401/403 as now.\n\n\nThen keep current PrincipalUserQuery path unchanged so authorization/business rules remain stable.\nMiddleware Order (important)\nIn Startup:\n\nUse token auth middleware first.\nThen UseWebApi.\nKeep your existing delegating handlers.\nThis ensures claims principal is available before AppAuthorizationMessageHandler runs.\n\nSignalR Path\nFor SignalR:\n\nAccept access token in query/header (depending on client transport support).\nResolve identity using same claim priority.\nKeep impersonation query parameter behavior unchanged.\n\nRollout Strategy\n\nStage 1 (Dual mode):\n\n\nWindows auth remains on.\nBearer accepted.\nLog identity source (Token vs Windows).\n\n\nStage 2 (Pilot users/departments):\n\nForce selected front-end clients to send bearer tokens.\nMonitor 401/403 and user-mapping misses.\n\nStage 3 (Token-only):\n\nSwitch Api.Settings.Auth.Mode to TokenOnly.\nEnable anonymous at IIS and disable Windows auth at host level.\n\nStage 4 (Cleanup):\n\nRemove NTLM-only branches after 2-4 weeks stable.\n\n\nValidation Checklist\n\nExisting desktop domain user opens app and gets in with no login prompt.\nToken user maps to same PrincipalUser as old NTLM path.\nImpersonation header still works.\nWebhooks/system URLs continue to use system account path.\nSignalR hub authorization still succeeds.\nExternal app and certificate-protected endpoints still pass.\n\nRisk Controls\n\nKeep EnableWindowsFallback true until mapping is proven.\nAdd audit logs for username source and mapped principal id.\nAdd feature flag kill switch to revert to WindowsOnly quickly.",
     "crumbs": [
       "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#business-operations",
-    "href": "Book/Hub/Core Platform Capabilities.html#business-operations",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.2 Business Operations",
-    "text": "5.2 Business Operations\n\nBusinesses and company management\nContacts management\nAppointments scheduling\nUser management and authentication\nDepartments and organizational structure",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#document-communication",
-    "href": "Book/Hub/Core Platform Capabilities.html#document-communication",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.3 Document & Communication",
-    "text": "5.3 Document & Communication\n\nDocument templates and management\nAttachments handling\nEmail management and SMTP integration\nText messages (SMS) distribution\nNotifications system\nExternal message handling\nWOPI integration (Office Online integration)\nWatermarks and document branding\nHotDocs integration",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#transactional-features",
-    "href": "Book/Hub/Core Platform Capabilities.html#transactional-features",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.4 Transactional Features",
-    "text": "5.4 Transactional Features\n\nInstructions management (property instructions/contracts)\nOffers management\nReferrals tracking\nRequirements management (property requirements/searches)\nPhases management\nTenancy management",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
-    "href": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.5 Marketing & Lead Management",
-    "text": "5.5 Marketing & Lead Management\n\nMarketing lists management\nWeb enquiries and web form submissions\nReferrals processing\nCall-back lists\nConsent and preferences management\nDotmailer CRM integration",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#data-analytics",
-    "href": "Book/Hub/Core Platform Capabilities.html#data-analytics",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.6 Data & Analytics",
-    "text": "5.6 Data & Analytics\n\nDashboard creation and management\nGrid management (customizable data grids)\nLatest views tracking\nUser feed generation\nGrids for reporting and data visualization\nMetadata management",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
-    "href": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.7 External Integrations & Services",
-    "text": "5.7 External Integrations & Services\n\nDocuSign integration (eSignature)\nSAP integration\nThirdfort integration (KYC/AML compliance)\nFixflo integration\nAzure Service Bus integration\nDotmailer email marketing\nExternal address services\nExchange rate management\nElasticsearch integration (search)",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
-    "href": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.8 Background Processing (WebJobs)",
-    "text": "5.8 Background Processing (WebJobs)\n\nEmail distribution processing\nElasticsearch indexing and search updates\nFeed Centre (data feed processing)\nNotifications processing\nText message queuing and delivery\nInstructions processing\nUser feed generation\nTenancy data updates (SAP integration)\nDocument processing (CDD/Compliance updates)\nMarketing list sync\nPortal document visibility management\nClaims recalculation\nLync/Teams contact info integration\nWebsite links feed generation\nSoft opt-in processing\nCDD validity checking\nAzure Service Bus document handling",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#system-features",
-    "href": "Book/Hub/Core Platform Capabilities.html#system-features",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.9 System Features",
-    "text": "5.9 System Features\n\nPortal document visibility control\nCharacter groups and categorical data\nBusiness events tracking\nActivity logging\nCache management\nOutput caching for API performance\nConfiguration management\nQuestionnaires/form surveys\nFire safety documentation\nTyping Framework configuration\nTimezone management\nTranslations/localization\nWeb warmup endpoints",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
-    "href": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
-    "title": "5  Core Platform Capabilities",
-    "section": "5.10 Reporting & Analysis",
-    "text": "5.10 Reporting & Analysis\n\nReports generation\nQube reporting integration\nPublication events tracking\n\nThe system is built on .NET Framework 4.8 with SQL Server backend, featuring comprehensive REST API endpoints, Elasticsearch for search capabilities, and multiple Azure WebJobs for background processing and integrations.",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Major entities and relationships.html",
-    "href": "Book/Hub/Major entities and relationships.html",
-    "title": "6  Major entities and relationships",
-    "section": "",
-    "text": "6.1 Illustration (ER-style overview)\nflowchart LR  \nAsset --&gt;|1.._| Activity  \nAsset --&gt;|1.._| Tenancy  \nAsset --&gt;|is-a| Property  \nAsset --&gt;|is-a| Portfolio  \nPortfolio --&gt;|1..*| Property  \nProperty --&gt;|1| Address\nActivity --&gt;|0.._| Offer  \nRequirement --&gt;|0.._| Offer  \nOffer --&gt;|0..1| Property\nActivity --&gt;|0..* via Match| Requirement  \nMatch --&gt;|1| Activity  \nMatch --&gt;|1| Requirement\nTenancy --&gt;|0..1| Activity  \nTenancy --&gt;|0..1| Requirement  \nTenancy --&gt;|1| Asset  \nTenancy --&gt;|1..*| TenancyParty  \nTenancy --&gt;|0..1 head lease| Tenancy\nContact --&gt;|0.._| ContactAddress  \nCompany --&gt;|0.._| CompanyAddress  \nContact --&gt;|0..* via CompanyContact| Company  \nContact --&gt;|0..* via ContactRelationship| Relationship\nUser --&gt;|many| Activity  \nUser --&gt;|many| Requirement  \nUser --&gt;|many| Tenancy  \nUser --&gt;|1| Business  \nUser --&gt;|1| Department",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Major entities and relationships</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Business View.html",
-    "href": "Book/Hub/Business View.html",
-    "title": "7  Business Flow (end-to-end)",
-    "section": "",
-    "text": "7.1 What this means in plain terms:",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
-    "href": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
-    "title": "7  Business Flow (end-to-end)",
-    "section": "",
-    "text": "People and organizations are captured as Contacts and Companies.\nDemand is captured as Requirements.\nSupply is captured as Activities on an Asset (usually a Property).\nMatching links demand and supply.\nNegotiation is captured as Offers.\nA successful offer transitions into a Tenancy.\nThen ongoing management continues through tenancy lifecycle records.",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
-    ]
-  },
-  {
-    "objectID": "Book/Hub/Business View.html#core-domain-map-simplified",
-    "href": "Book/Hub/Business View.html#core-domain-map-simplified",
-    "title": "7  Business Flow (end-to-end)",
-    "section": "7.2 Core Domain Map (simplified)",
-    "text": "7.2 Core Domain Map (simplified)\n\n\n\n\n\nclassDiagram\n  class Asset\n  class Property\n  class Portfolio\n  class Activity\n  class Requirement\n  class Match\n  class Offer\n  class Tenancy\n  class Contact\n  class Company\n  class Address\n  class User\n  class Department\n  class Business\n\n  Asset &lt;|-- Property\n  Asset &lt;|-- Portfolio\n  Portfolio \"1\" --&gt; \"many\" Property\n  Property \"1\" --&gt; \"1\" Address\n\n  Asset \"1\" --&gt; \"many\" Activity\n  Asset \"1\" --&gt; \"many\" Tenancy\n\n  Activity \"1\" --&gt; \"many\" Offer\n  Requirement \"1\" --&gt; \"many\" Offer\n\n  Activity \"1\" --&gt; \"many\" Match\n  Requirement \"1\" --&gt; \"many\" Match\n\n  Tenancy \"many\" --&gt; \"1\" Asset\n  Tenancy \"many\" --&gt; \"0..1\" Activity\n  Tenancy \"many\" --&gt; \"0..1\" Requirement\n  Tenancy \"0..many\" --&gt; \"0..1\" Tenancy : head/sub-lease\n\n  Contact \"many\" --&gt; \"many\" Company : via CompanyContact\n  Contact \"many\" --&gt; \"many\" Address : via ContactAddress\n  Company \"many\" --&gt; \"many\" Address : via CompanyAddress\n\n  User \"many\" --&gt; \"1\" Department\n  User \"many\" --&gt; \"1\" Business\n\n\n\n\n\n\nHighest-value relationships to remember\n\nRequirement ↔︎ Activity is many-to-many (through Match).\nOffer can be tied to Requirement and/or Activity, and optionally Property.\nTenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.\nContact and Company are many-to-many via CompanyContact.\nAddress is shared via link entities (not hard-wired only to one type).",
-    "crumbs": [
-      "Detailed Design & Implementation",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>API Auth Implementation</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html",
     "href": "Book/Transition & Rollout Plan.html",
-    "title": "8  Transition & Rollout Plan",
+    "title": "10  Transition & Rollout Plan",
     "section": "",
-    "text": "8.1 Phased Migration Strategy\nThe transition follows incremental phases to minimize business disruption and maintain confidence in production stability.",
+    "text": "10.1 Phased Migration Strategy\nThe transition follows incremental phases to minimize business disruption and maintain confidence in production stability.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
     "href": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
-    "title": "8  Transition & Rollout Plan",
+    "title": "10  Transition & Rollout Plan",
     "section": "",
-    "text": "8.1.1 Phase 0: Foundations\n\nConfirm target integration architecture and governance standards.\nEstablish identity, observability, and contract management baselines.\nAlign teams on operational readiness and ownership model.\n\n\n\n8.1.2 Phase 1: Pilot Domain Enablement\n\nSelect low-risk, high-learning business domain.\nEnable event publication and consumer read-through via GraphQL.\nValidate synchronization, traceability, and incident response runbooks.\n\n\n\n8.1.3 Phase 2: Controlled Expansion\n\nAdd additional domains in priority order.\nIntroduce REST write-back capabilities for approved external consumers.\nTrack drift, performance, and adoption KPIs against defined thresholds.\n\n\n\n8.1.4 Phase 3: Coexistence Optimization\n\nHarden dual-run operations and reduce manual reconciliation.\nRetire obsolete point-to-point dependencies.\nPrepare domain-level cutover readiness sign-off.\n\n\n\n8.1.5 Phase 4: Cutover and Decommission\n\nTransition eligible domains fully to the decoupled model.\nDecommission superseded legacy integration mechanisms.\nComplete post-cutover validation and operational handover.",
+    "text": "10.1.1 Phase 0: Foundations\n\nConfirm target integration architecture and governance standards.\nEstablish identity, observability, and contract management baselines.\nAlign teams on operational readiness and ownership model.\n\n\n\n10.1.2 Phase 1: Pilot Domain Enablement\n\nSelect low-risk, high-learning business domain.\nEnable event publication and consumer read-through via GraphQL.\nValidate synchronization, traceability, and incident response runbooks.\n\n\n\n10.1.3 Phase 2: Controlled Expansion\n\nAdd additional domains in priority order.\nIntroduce REST write-back capabilities for approved external consumers.\nTrack drift, performance, and adoption KPIs against defined thresholds.\n\n\n\n10.1.4 Phase 3: Coexistence Optimization\n\nHarden dual-run operations and reduce manual reconciliation.\nRetire obsolete point-to-point dependencies.\nPrepare domain-level cutover readiness sign-off.\n\n\n\n10.1.5 Phase 4: Cutover and Decommission\n\nTransition eligible domains fully to the decoupled model.\nDecommission superseded legacy integration mechanisms.\nComplete post-cutover validation and operational handover.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
     "href": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
-    "title": "8  Transition & Rollout Plan",
-    "section": "8.2 Milestone Timeline (Planning Baseline)",
-    "text": "8.2 Milestone Timeline (Planning Baseline)\nUse this as a planning template and refine dates during delivery governance.\n\nFoundation complete: architecture controls and telemetry in place.\nPilot go-live: first domain synchronized in production.\nMulti-domain expansion: additional domains onboarded with stable KPIs.\nWrite-back readiness: REST command flows validated for external integration.\nDomain cutover waves: progressive retirement of legacy pathways.\nProgram closeout: transition objectives met and support model stabilized.",
+    "title": "10  Transition & Rollout Plan",
+    "section": "10.2 Milestone Timeline (Planning Baseline)",
+    "text": "10.2 Milestone Timeline (Planning Baseline)\nUse this as a planning template and refine dates during delivery governance.\n\nFoundation complete: architecture controls and telemetry in place.\nPilot go-live: first domain synchronized in production.\nMulti-domain expansion: additional domains onboarded with stable KPIs.\nWrite-back readiness: REST command flows validated for external integration.\nDomain cutover waves: progressive retirement of legacy pathways.\nProgram closeout: transition objectives met and support model stabilized.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
     "href": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
-    "title": "8  Transition & Rollout Plan",
-    "section": "8.3 Risk Register and Mitigation",
-    "text": "8.3 Risk Register and Mitigation\n\n8.3.1 Key Risks\n\nData synchronization drift between legacy and new consumers.\nContract change misalignment across producer and consumer teams.\nSkills and capacity constraints for operating dual-run architecture.\nSecurity gaps during staged exposure of integration endpoints.\nPerformance bottlenecks in high-volume event/query scenarios.\n\n\n\n8.3.2 Mitigation Measures\n\nEnforce contract versioning and compatibility review gates.\nImplement replay, reconciliation, and automated drift detection.\nUse phased onboarding and domain readiness criteria for each rollout wave.\nConduct security threat modeling and pre-release control validation.\nRun load and soak testing before each expansion milestone.",
+    "title": "10  Transition & Rollout Plan",
+    "section": "10.3 Risk Register and Mitigation",
+    "text": "10.3 Risk Register and Mitigation\n\n10.3.1 Key Risks\n\nData synchronization drift between legacy and new consumers.\nContract change misalignment across producer and consumer teams.\nSkills and capacity constraints for operating dual-run architecture.\nSecurity gaps during staged exposure of integration endpoints.\nPerformance bottlenecks in high-volume event/query scenarios.\n\n\n\n10.3.2 Mitigation Measures\n\nEnforce contract versioning and compatibility review gates.\nImplement replay, reconciliation, and automated drift detection.\nUse phased onboarding and domain readiness criteria for each rollout wave.\nConduct security threat modeling and pre-release control validation.\nRun load and soak testing before each expansion milestone.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
     "href": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
-    "title": "8  Transition & Rollout Plan",
-    "section": "8.4 Rollback and Contingency Procedures",
-    "text": "8.4 Rollback and Contingency Procedures\nRollback procedures are defined per migration phase and domain.\n\n8.4.1 Operational Rollback Principles\n\nPreserve legacy execution path until new path stability is demonstrated.\nSupport feature toggles to disable new integration paths quickly.\nMaintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.\n\n\n\n8.4.2 Rollback Steps (Per Domain)\n\nPause new event-driven processing for affected domain.\nRedirect writes to validated legacy pathway.\nExecute reconciliation checks to identify and resolve drift.\nRestore service baselines and communicate status.\nConduct post-incident review and update controls before reattempt.",
+    "title": "10  Transition & Rollout Plan",
+    "section": "10.4 Rollback and Contingency Procedures",
+    "text": "10.4 Rollback and Contingency Procedures\nRollback procedures are defined per migration phase and domain.\n\n10.4.1 Operational Rollback Principles\n\nPreserve legacy execution path until new path stability is demonstrated.\nSupport feature toggles to disable new integration paths quickly.\nMaintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.\n\n\n\n10.4.2 Rollback Steps (Per Domain)\n\nPause new event-driven processing for affected domain.\nRedirect writes to validated legacy pathway.\nExecute reconciliation checks to identify and resolve drift.\nRestore service baselines and communicate status.\nConduct post-incident review and update controls before reattempt.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#governance-and-communication",
     "href": "Book/Transition & Rollout Plan.html#governance-and-communication",
-    "title": "8  Transition & Rollout Plan",
-    "section": "8.5 Governance and Communication",
-    "text": "8.5 Governance and Communication\n\nWeekly architecture and delivery governance forum.\nRelease readiness checkpoints per phase.\nBusiness and operations stakeholder updates at each milestone.\nDecision log maintained for scope, risk, and sequencing changes.",
+    "title": "10  Transition & Rollout Plan",
+    "section": "10.5 Governance and Communication",
+    "text": "10.5 Governance and Communication\n\nWeekly architecture and delivery governance forum.\nRelease readiness checkpoints per phase.\nBusiness and operations stakeholder updates at each milestone.\nDecision log maintained for scope, risk, and sequencing changes.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html",
     "href": "Book/Operations & Maintenance.html",
-    "title": "9  Operations & Maintenance",
+    "title": "11  Operations & Maintenance",
     "section": "",
-    "text": "9.1 Testing Strategy\nTesting must validate both functional correctness and transition safety in a coexistence architecture.",
+    "text": "11.1 Testing Strategy\nTesting must validate both functional correctness and transition safety in a coexistence architecture.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#testing-strategy",
     "href": "Book/Operations & Maintenance.html#testing-strategy",
-    "title": "9  Operations & Maintenance",
+    "title": "11  Operations & Maintenance",
     "section": "",
-    "text": "9.1.1 Functional Testing\n\nVerify command APIs enforce business rules and return consistent error models.\nValidate event publication for relevant domain changes.\nConfirm consumer query behavior returns correct data shapes and authorization outcomes.\n\n\n\n9.1.2 Integration and Contract Testing\n\nContract tests for event envelopes and API schemas.\nBackward-compatibility tests for versioned contracts.\nEnd-to-end flow tests covering write -&gt; event -&gt; query -&gt; consumer update.\n\n\n\n9.1.3 Performance and Resilience Testing\n\nLoad tests for peak event throughput and query concurrency.\nSoak tests to identify memory, connection, or retry degradation over time.\nFailure-injection tests for transient downstream outages and retry behavior.\n\n\n\n9.1.4 Regression and Release Validation\n\nAutomated regression suites executed for each release candidate.\nRelease gates tied to critical scenario pass rates and non-functional thresholds.\nPost-deployment verification checklist for production readiness.",
+    "text": "11.1.1 Functional Testing\n\nVerify command APIs enforce business rules and return consistent error models.\nValidate event publication for relevant domain changes.\nConfirm consumer query behavior returns correct data shapes and authorization outcomes.\n\n\n\n11.1.2 Integration and Contract Testing\n\nContract tests for event envelopes and API schemas.\nBackward-compatibility tests for versioned contracts.\nEnd-to-end flow tests covering write -&gt; event -&gt; query -&gt; consumer update.\n\n\n\n11.1.3 Performance and Resilience Testing\n\nLoad tests for peak event throughput and query concurrency.\nSoak tests to identify memory, connection, or retry degradation over time.\nFailure-injection tests for transient downstream outages and retry behavior.\n\n\n\n11.1.4 Regression and Release Validation\n\nAutomated regression suites executed for each release candidate.\nRelease gates tied to critical scenario pass rates and non-functional thresholds.\nPost-deployment verification checklist for production readiness.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
     "href": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
-    "title": "9  Operations & Maintenance",
-    "section": "9.2 Monitoring, Alerting, and SLOs",
-    "text": "9.2 Monitoring, Alerting, and SLOs\n\n9.2.1 Telemetry Model\nCapture telemetry for:\n\nAPI latency, error rate, throughput, and saturation indicators.\nEvent publication success rate and consumer lag.\nData reconciliation status and drift counts.\nSecurity events and authorization failures.\n\n\n\n9.2.2 Suggested SLO Categories\n\nAvailability SLO for command and query endpoints.\nLatency SLO for core API operations.\nFreshness SLO for event-to-consumer synchronization.\nReliability SLO for successful event processing and retries.\n\n\n\n9.2.3 Operational Dashboards and Alerts\n\nRole-specific dashboards for support, engineering, and platform teams.\nActionable alerts mapped to runbook procedures.\nCorrelation-aware tracing to accelerate incident triage.",
+    "title": "11  Operations & Maintenance",
+    "section": "11.2 Monitoring, Alerting, and SLOs",
+    "text": "11.2 Monitoring, Alerting, and SLOs\n\n11.2.1 Telemetry Model\nCapture telemetry for:\n\nAPI latency, error rate, throughput, and saturation indicators.\nEvent publication success rate and consumer lag.\nData reconciliation status and drift counts.\nSecurity events and authorization failures.\n\n\n\n11.2.2 Suggested SLO Categories\n\nAvailability SLO for command and query endpoints.\nLatency SLO for core API operations.\nFreshness SLO for event-to-consumer synchronization.\nReliability SLO for successful event processing and retries.\n\n\n\n11.2.3 Operational Dashboards and Alerts\n\nRole-specific dashboards for support, engineering, and platform teams.\nActionable alerts mapped to runbook procedures.\nCorrelation-aware tracing to accelerate incident triage.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#incident-and-problem-management",
     "href": "Book/Operations & Maintenance.html#incident-and-problem-management",
-    "title": "9  Operations & Maintenance",
-    "section": "9.3 Incident and Problem Management",
-    "text": "9.3 Incident and Problem Management\n\nStandard severity model and escalation pathway for integration incidents.\nRunbooks for common failure modes (consumer lag, contract mismatch, authorization failures).\nProblem management process to remove recurring defect classes.",
+    "title": "11  Operations & Maintenance",
+    "section": "11.3 Incident and Problem Management",
+    "text": "11.3 Incident and Problem Management\n\nStandard severity model and escalation pathway for integration incidents.\nRunbooks for common failure modes (consumer lag, contract mismatch, authorization failures).\nProblem management process to remove recurring defect classes.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#change-management",
     "href": "Book/Operations & Maintenance.html#change-management",
-    "title": "9  Operations & Maintenance",
-    "section": "9.4 Change Management",
-    "text": "9.4 Change Management\n\n9.4.1 Release Governance\n\nPlanned release calendar with architecture sign-off for contract changes.\nChange advisory checkpoints for high-impact modifications.\nVersion lifecycle policy with clear deprecation communication.\n\n\n\n9.4.2 Documentation Lifecycle\nMaintain and regularly update:\n\nArchitecture decision records.\nAPI and event contract documentation.\nOperational runbooks and support playbooks.\nTroubleshooting guides and known issue references.",
+    "title": "11  Operations & Maintenance",
+    "section": "11.4 Change Management",
+    "text": "11.4 Change Management\n\n11.4.1 Release Governance\n\nPlanned release calendar with architecture sign-off for contract changes.\nChange advisory checkpoints for high-impact modifications.\nVersion lifecycle policy with clear deprecation communication.\n\n\n\n11.4.2 Documentation Lifecycle\nMaintain and regularly update:\n\nArchitecture decision records.\nAPI and event contract documentation.\nOperational runbooks and support playbooks.\nTroubleshooting guides and known issue references.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#training-and-enablement",
     "href": "Book/Operations & Maintenance.html#training-and-enablement",
-    "title": "9  Operations & Maintenance",
-    "section": "9.5 Training and Enablement",
-    "text": "9.5 Training and Enablement\n\n9.5.1 Audience-Specific Training\n\nEngineering teams: event design, contract evolution, and secure API implementation.\nOperations teams: monitoring dashboards, alert response, and rollback execution.\nProduct and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.\n\n\n\n9.5.2 Adoption Support\n\nStructured onboarding for new consuming teams.\nOffice-hours model during active migration phases.\nPost-go-live knowledge transfer and continuous improvement reviews.",
+    "title": "11  Operations & Maintenance",
+    "section": "11.5 Training and Enablement",
+    "text": "11.5 Training and Enablement\n\n11.5.1 Audience-Specific Training\n\nEngineering teams: event design, contract evolution, and secure API implementation.\nOperations teams: monitoring dashboards, alert response, and rollback execution.\nProduct and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.\n\n\n\n11.5.2 Adoption Support\n\nStructured onboarding for new consuming teams.\nOffice-hours model during active migration phases.\nPost-go-live knowledge transfer and continuous improvement reviews.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#continuous-improvement",
     "href": "Book/Operations & Maintenance.html#continuous-improvement",
-    "title": "9  Operations & Maintenance",
-    "section": "9.6 Continuous Improvement",
-    "text": "9.6 Continuous Improvement\n\nQuarterly SLO and KPI review against business outcomes.\nRecurring architecture health assessments.\nPrioritized backlog for reliability, performance, and operability enhancements.",
+    "title": "11  Operations & Maintenance",
+    "section": "11.6 Continuous Improvement",
+    "text": "11.6 Continuous Improvement\n\nQuarterly SLO and KPI review against business outcomes.\nRecurring architecture health assessments.\nPrioritized backlog for reliability, performance, and operability enhancements.",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   }
 ]

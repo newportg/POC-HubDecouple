@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Transition &amp; Rollout Plan – Hub Decoupled Architecture</title>
+<title>10&nbsp; Transition &amp; Rollout Plan – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../Book/Operations &amp; Maintenance.html" rel="next">
-<link href="../Book/Hub/Business View.html" rel="prev">
+<link href="../Book/Hub/API Auth Implementation.html" rel="prev">
 <link href="../coverG.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Transition &amp; Rollout Plan.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Transition &amp; Rollout Plan.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,22 +125,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+            <a href="../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Current State Assessment</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -149,19 +137,54 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Major entities and relationships.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/Architectural Summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Architectural Summary.html</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span></a>
   </div>
 </li>
       </ul>
@@ -169,13 +192,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
   </div>
 </li>
     </ul>
@@ -188,26 +211,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#phased-migration-strategy" id="toc-phased-migration-strategy" class="nav-link active" data-scroll-target="#phased-migration-strategy"><span class="header-section-number">8.1</span> Phased Migration Strategy</a>
+  <li><a href="#phased-migration-strategy" id="toc-phased-migration-strategy" class="nav-link active" data-scroll-target="#phased-migration-strategy"><span class="header-section-number">10.1</span> Phased Migration Strategy</a>
   <ul class="collapse">
-  <li><a href="#phase-0-foundations" id="toc-phase-0-foundations" class="nav-link" data-scroll-target="#phase-0-foundations"><span class="header-section-number">8.1.1</span> Phase 0: Foundations</a></li>
-  <li><a href="#phase-1-pilot-domain-enablement" id="toc-phase-1-pilot-domain-enablement" class="nav-link" data-scroll-target="#phase-1-pilot-domain-enablement"><span class="header-section-number">8.1.2</span> Phase 1: Pilot Domain Enablement</a></li>
-  <li><a href="#phase-2-controlled-expansion" id="toc-phase-2-controlled-expansion" class="nav-link" data-scroll-target="#phase-2-controlled-expansion"><span class="header-section-number">8.1.3</span> Phase 2: Controlled Expansion</a></li>
-  <li><a href="#phase-3-coexistence-optimization" id="toc-phase-3-coexistence-optimization" class="nav-link" data-scroll-target="#phase-3-coexistence-optimization"><span class="header-section-number">8.1.4</span> Phase 3: Coexistence Optimization</a></li>
-  <li><a href="#phase-4-cutover-and-decommission" id="toc-phase-4-cutover-and-decommission" class="nav-link" data-scroll-target="#phase-4-cutover-and-decommission"><span class="header-section-number">8.1.5</span> Phase 4: Cutover and Decommission</a></li>
+  <li><a href="#phase-0-foundations" id="toc-phase-0-foundations" class="nav-link" data-scroll-target="#phase-0-foundations"><span class="header-section-number">10.1.1</span> Phase 0: Foundations</a></li>
+  <li><a href="#phase-1-pilot-domain-enablement" id="toc-phase-1-pilot-domain-enablement" class="nav-link" data-scroll-target="#phase-1-pilot-domain-enablement"><span class="header-section-number">10.1.2</span> Phase 1: Pilot Domain Enablement</a></li>
+  <li><a href="#phase-2-controlled-expansion" id="toc-phase-2-controlled-expansion" class="nav-link" data-scroll-target="#phase-2-controlled-expansion"><span class="header-section-number">10.1.3</span> Phase 2: Controlled Expansion</a></li>
+  <li><a href="#phase-3-coexistence-optimization" id="toc-phase-3-coexistence-optimization" class="nav-link" data-scroll-target="#phase-3-coexistence-optimization"><span class="header-section-number">10.1.4</span> Phase 3: Coexistence Optimization</a></li>
+  <li><a href="#phase-4-cutover-and-decommission" id="toc-phase-4-cutover-and-decommission" class="nav-link" data-scroll-target="#phase-4-cutover-and-decommission"><span class="header-section-number">10.1.5</span> Phase 4: Cutover and Decommission</a></li>
   </ul></li>
-  <li><a href="#milestone-timeline-planning-baseline" id="toc-milestone-timeline-planning-baseline" class="nav-link" data-scroll-target="#milestone-timeline-planning-baseline"><span class="header-section-number">8.2</span> Milestone Timeline (Planning Baseline)</a></li>
-  <li><a href="#risk-register-and-mitigation" id="toc-risk-register-and-mitigation" class="nav-link" data-scroll-target="#risk-register-and-mitigation"><span class="header-section-number">8.3</span> Risk Register and Mitigation</a>
+  <li><a href="#milestone-timeline-planning-baseline" id="toc-milestone-timeline-planning-baseline" class="nav-link" data-scroll-target="#milestone-timeline-planning-baseline"><span class="header-section-number">10.2</span> Milestone Timeline (Planning Baseline)</a></li>
+  <li><a href="#risk-register-and-mitigation" id="toc-risk-register-and-mitigation" class="nav-link" data-scroll-target="#risk-register-and-mitigation"><span class="header-section-number">10.3</span> Risk Register and Mitigation</a>
   <ul class="collapse">
-  <li><a href="#key-risks" id="toc-key-risks" class="nav-link" data-scroll-target="#key-risks"><span class="header-section-number">8.3.1</span> Key Risks</a></li>
-  <li><a href="#mitigation-measures" id="toc-mitigation-measures" class="nav-link" data-scroll-target="#mitigation-measures"><span class="header-section-number">8.3.2</span> Mitigation Measures</a></li>
+  <li><a href="#key-risks" id="toc-key-risks" class="nav-link" data-scroll-target="#key-risks"><span class="header-section-number">10.3.1</span> Key Risks</a></li>
+  <li><a href="#mitigation-measures" id="toc-mitigation-measures" class="nav-link" data-scroll-target="#mitigation-measures"><span class="header-section-number">10.3.2</span> Mitigation Measures</a></li>
   </ul></li>
-  <li><a href="#rollback-and-contingency-procedures" id="toc-rollback-and-contingency-procedures" class="nav-link" data-scroll-target="#rollback-and-contingency-procedures"><span class="header-section-number">8.4</span> Rollback and Contingency Procedures</a>
+  <li><a href="#rollback-and-contingency-procedures" id="toc-rollback-and-contingency-procedures" class="nav-link" data-scroll-target="#rollback-and-contingency-procedures"><span class="header-section-number">10.4</span> Rollback and Contingency Procedures</a>
   <ul class="collapse">
-  <li><a href="#operational-rollback-principles" id="toc-operational-rollback-principles" class="nav-link" data-scroll-target="#operational-rollback-principles"><span class="header-section-number">8.4.1</span> Operational Rollback Principles</a></li>
-  <li><a href="#rollback-steps-per-domain" id="toc-rollback-steps-per-domain" class="nav-link" data-scroll-target="#rollback-steps-per-domain"><span class="header-section-number">8.4.2</span> Rollback Steps (Per Domain)</a></li>
+  <li><a href="#operational-rollback-principles" id="toc-operational-rollback-principles" class="nav-link" data-scroll-target="#operational-rollback-principles"><span class="header-section-number">10.4.1</span> Operational Rollback Principles</a></li>
+  <li><a href="#rollback-steps-per-domain" id="toc-rollback-steps-per-domain" class="nav-link" data-scroll-target="#rollback-steps-per-domain"><span class="header-section-number">10.4.2</span> Rollback Steps (Per Domain)</a></li>
   </ul></li>
-  <li><a href="#governance-and-communication" id="toc-governance-and-communication" class="nav-link" data-scroll-target="#governance-and-communication"><span class="header-section-number">8.5</span> Governance and Communication</a></li>
+  <li><a href="#governance-and-communication" id="toc-governance-and-communication" class="nav-link" data-scroll-target="#governance-and-communication"><span class="header-section-number">10.5</span> Governance and Communication</a></li>
   </ul>
 </nav>
     </div>
@@ -216,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></h1>
 </div>
 
 
@@ -233,43 +256,43 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="phased-migration-strategy" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="phased-migration-strategy"><span class="header-section-number">8.1</span> Phased Migration Strategy</h2>
+<section id="phased-migration-strategy" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="phased-migration-strategy"><span class="header-section-number">10.1</span> Phased Migration Strategy</h2>
 <p>The transition follows incremental phases to minimize business disruption and maintain confidence in production stability.</p>
-<section id="phase-0-foundations" class="level3" data-number="8.1.1">
-<h3 data-number="8.1.1" class="anchored" data-anchor-id="phase-0-foundations"><span class="header-section-number">8.1.1</span> Phase 0: Foundations</h3>
+<section id="phase-0-foundations" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="phase-0-foundations"><span class="header-section-number">10.1.1</span> Phase 0: Foundations</h3>
 <ul>
 <li>Confirm target integration architecture and governance standards.</li>
 <li>Establish identity, observability, and contract management baselines.</li>
 <li>Align teams on operational readiness and ownership model.</li>
 </ul>
 </section>
-<section id="phase-1-pilot-domain-enablement" class="level3" data-number="8.1.2">
-<h3 data-number="8.1.2" class="anchored" data-anchor-id="phase-1-pilot-domain-enablement"><span class="header-section-number">8.1.2</span> Phase 1: Pilot Domain Enablement</h3>
+<section id="phase-1-pilot-domain-enablement" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="phase-1-pilot-domain-enablement"><span class="header-section-number">10.1.2</span> Phase 1: Pilot Domain Enablement</h3>
 <ul>
 <li>Select low-risk, high-learning business domain.</li>
 <li>Enable event publication and consumer read-through via GraphQL.</li>
 <li>Validate synchronization, traceability, and incident response runbooks.</li>
 </ul>
 </section>
-<section id="phase-2-controlled-expansion" class="level3" data-number="8.1.3">
-<h3 data-number="8.1.3" class="anchored" data-anchor-id="phase-2-controlled-expansion"><span class="header-section-number">8.1.3</span> Phase 2: Controlled Expansion</h3>
+<section id="phase-2-controlled-expansion" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="phase-2-controlled-expansion"><span class="header-section-number">10.1.3</span> Phase 2: Controlled Expansion</h3>
 <ul>
 <li>Add additional domains in priority order.</li>
 <li>Introduce REST write-back capabilities for approved external consumers.</li>
 <li>Track drift, performance, and adoption KPIs against defined thresholds.</li>
 </ul>
 </section>
-<section id="phase-3-coexistence-optimization" class="level3" data-number="8.1.4">
-<h3 data-number="8.1.4" class="anchored" data-anchor-id="phase-3-coexistence-optimization"><span class="header-section-number">8.1.4</span> Phase 3: Coexistence Optimization</h3>
+<section id="phase-3-coexistence-optimization" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="phase-3-coexistence-optimization"><span class="header-section-number">10.1.4</span> Phase 3: Coexistence Optimization</h3>
 <ul>
 <li>Harden dual-run operations and reduce manual reconciliation.</li>
 <li>Retire obsolete point-to-point dependencies.</li>
 <li>Prepare domain-level cutover readiness sign-off.</li>
 </ul>
 </section>
-<section id="phase-4-cutover-and-decommission" class="level3" data-number="8.1.5">
-<h3 data-number="8.1.5" class="anchored" data-anchor-id="phase-4-cutover-and-decommission"><span class="header-section-number">8.1.5</span> Phase 4: Cutover and Decommission</h3>
+<section id="phase-4-cutover-and-decommission" class="level3" data-number="10.1.5">
+<h3 data-number="10.1.5" class="anchored" data-anchor-id="phase-4-cutover-and-decommission"><span class="header-section-number">10.1.5</span> Phase 4: Cutover and Decommission</h3>
 <ul>
 <li>Transition eligible domains fully to the decoupled model.</li>
 <li>Decommission superseded legacy integration mechanisms.</li>
@@ -277,8 +300,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="milestone-timeline-planning-baseline" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="milestone-timeline-planning-baseline"><span class="header-section-number">8.2</span> Milestone Timeline (Planning Baseline)</h2>
+<section id="milestone-timeline-planning-baseline" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="milestone-timeline-planning-baseline"><span class="header-section-number">10.2</span> Milestone Timeline (Planning Baseline)</h2>
 <p>Use this as a planning template and refine dates during delivery governance.</p>
 <ol type="1">
 <li>Foundation complete: architecture controls and telemetry in place.</li>
@@ -289,10 +312,10 @@ ul.task-list li input[type="checkbox"] {
 <li>Program closeout: transition objectives met and support model stabilized.</li>
 </ol>
 </section>
-<section id="risk-register-and-mitigation" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="risk-register-and-mitigation"><span class="header-section-number">8.3</span> Risk Register and Mitigation</h2>
-<section id="key-risks" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="key-risks"><span class="header-section-number">8.3.1</span> Key Risks</h3>
+<section id="risk-register-and-mitigation" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="risk-register-and-mitigation"><span class="header-section-number">10.3</span> Risk Register and Mitigation</h2>
+<section id="key-risks" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="key-risks"><span class="header-section-number">10.3.1</span> Key Risks</h3>
 <ul>
 <li>Data synchronization drift between legacy and new consumers.</li>
 <li>Contract change misalignment across producer and consumer teams.</li>
@@ -301,8 +324,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Performance bottlenecks in high-volume event/query scenarios.</li>
 </ul>
 </section>
-<section id="mitigation-measures" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="mitigation-measures"><span class="header-section-number">8.3.2</span> Mitigation Measures</h3>
+<section id="mitigation-measures" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="mitigation-measures"><span class="header-section-number">10.3.2</span> Mitigation Measures</h3>
 <ul>
 <li>Enforce contract versioning and compatibility review gates.</li>
 <li>Implement replay, reconciliation, and automated drift detection.</li>
@@ -312,19 +335,19 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="rollback-and-contingency-procedures" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="rollback-and-contingency-procedures"><span class="header-section-number">8.4</span> Rollback and Contingency Procedures</h2>
+<section id="rollback-and-contingency-procedures" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="rollback-and-contingency-procedures"><span class="header-section-number">10.4</span> Rollback and Contingency Procedures</h2>
 <p>Rollback procedures are defined per migration phase and domain.</p>
-<section id="operational-rollback-principles" class="level3" data-number="8.4.1">
-<h3 data-number="8.4.1" class="anchored" data-anchor-id="operational-rollback-principles"><span class="header-section-number">8.4.1</span> Operational Rollback Principles</h3>
+<section id="operational-rollback-principles" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="operational-rollback-principles"><span class="header-section-number">10.4.1</span> Operational Rollback Principles</h3>
 <ul>
 <li>Preserve legacy execution path until new path stability is demonstrated.</li>
 <li>Support feature toggles to disable new integration paths quickly.</li>
 <li>Maintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.</li>
 </ul>
 </section>
-<section id="rollback-steps-per-domain" class="level3" data-number="8.4.2">
-<h3 data-number="8.4.2" class="anchored" data-anchor-id="rollback-steps-per-domain"><span class="header-section-number">8.4.2</span> Rollback Steps (Per Domain)</h3>
+<section id="rollback-steps-per-domain" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="rollback-steps-per-domain"><span class="header-section-number">10.4.2</span> Rollback Steps (Per Domain)</h3>
 <ol type="1">
 <li>Pause new event-driven processing for affected domain.</li>
 <li>Redirect writes to validated legacy pathway.</li>
@@ -334,8 +357,8 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </section>
 </section>
-<section id="governance-and-communication" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="governance-and-communication"><span class="header-section-number">8.5</span> Governance and Communication</h2>
+<section id="governance-and-communication" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="governance-and-communication"><span class="header-section-number">10.5</span> Governance and Communication</h2>
 <ul>
 <li>Weekly architecture and delivery governance forum.</li>
 <li>Release readiness checkpoints per phase.</li>
@@ -749,13 +772,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../Book/Hub/Business View.html" class="pagination-link" aria-label="Business Flow (end-to-end)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span>
+      <a href="../Book/Hub/API Auth Implementation.html" class="pagination-link" aria-label="API Auth Implementation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../Book/Operations &amp; Maintenance.html" class="pagination-link" aria-label="Operations &amp; Maintenance">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
