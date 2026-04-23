@@ -1,0 +1,60 @@
+# Major entities and relationships
+
+1. Asset and Property hierarchy
+   *   Asset is the core abstract real-estate entity and parent for concrete assets.
+   *   Property and Portfolio derive from Asset.
+   *   An Asset has many Activities and many Tenancies.
+   *   A Property has one Address and can have many Offers.
+   *   A Portfolio has many Properties.
+1. Activity (marketing/listing lifecycle) and Requirement (client demand)
+   *   Activity belongs to one Asset and has many Offers.
+   *   Requirement has many Offers.
+   *   Activity and Requirement are linked many-to-many via Match.
+   *   Both Activity and Requirement can each have many Tenancies.
+   *   Both have negotiators, departments, notes, attachments, and parties.
+1. Offer and Tenancy (transaction progression)
+   *   Offer can reference Activity, Requirement, and Property.
+   *   Tenancy references one Asset and may reference Activity and Requirement.
+   *   Tenancy has many TenancyParty records (tenant/landlord/agent roles).
+   *   Tenancy has self-references (HeadLease and SubLeases, plus OriginalTenancy lineage).
+1. Contact, Company, Relationship, and Address
+   *   Contact and Company are linked via CompanyContact (many-to-many with attributes like job title).
+   *   Contact has many ContactAddress records; Company has many CompanyAddress records.
+   *   Contact-to-contact associations are represented by ContactRelationship, which points to a Relationship record (typed links).
+   *   Referral is contact-led and can be associated to Activity, Requirement, and Instruction.
+1. User, Business, Department (operating structure)
+   *   User belongs to one Business and one Department (plus additional departments/teams/roles).
+   *   Activity, Requirement, Tenancy, Instruction, etc. reference users as negotiators/owners.
+
+## Illustration (ER-style overview)
+
+```{mermaid}
+flowchart LR  
+Asset -->|1.._| Activity  
+Asset -->|1.._| Tenancy  
+Asset -->|is-a| Property  
+Asset -->|is-a| Portfolio  
+Portfolio -->|1..*| Property  
+Property -->|1| Address
+Activity -->|0.._| Offer  
+Requirement -->|0.._| Offer  
+Offer -->|0..1| Property
+Activity -->|0..* via Match| Requirement  
+Match -->|1| Activity  
+Match -->|1| Requirement
+Tenancy -->|0..1| Activity  
+Tenancy -->|0..1| Requirement  
+Tenancy -->|1| Asset  
+Tenancy -->|1..*| TenancyParty  
+Tenancy -->|0..1 head lease| Tenancy
+Contact -->|0.._| ContactAddress  
+Company -->|0.._| CompanyAddress  
+Contact -->|0..* via CompanyContact| Company  
+Contact -->|0..* via ContactRelationship| Relationship
+User -->|many| Activity  
+User -->|many| Requirement  
+User -->|many| Tenancy  
+User -->|1| Business  
+User -->|1| Department
+```
+

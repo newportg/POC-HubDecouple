@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Core Platform Capabilities – Hub Decoupled Architecture</title>
+<title>7&nbsp; Business Flow (end-to-end) – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Book/Hub/Major entities and relationships.html" rel="next">
-<link href="../../Book/Detailed Design &amp; Implementation.html" rel="prev">
+<link href="../../Book/Transition &amp; Rollout Plan.html" rel="next">
+<link href="../../Book/Hub/Major entities and relationships.html" rel="prev">
 <link href="../../coverG.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -71,6 +71,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -84,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Business View.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
@@ -160,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
   </div>
 </li>
@@ -188,25 +191,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#property-real-estate-management" id="toc-property-real-estate-management" class="nav-link active" data-scroll-target="#property-real-estate-management"><span class="header-section-number">5.1</span> Property &amp; Real Estate Management</a></li>
-  <li><a href="#business-operations" id="toc-business-operations" class="nav-link" data-scroll-target="#business-operations"><span class="header-section-number">5.2</span> Business Operations</a></li>
-  <li><a href="#document-communication" id="toc-document-communication" class="nav-link" data-scroll-target="#document-communication"><span class="header-section-number">5.3</span> Document &amp; Communication</a></li>
-  <li><a href="#transactional-features" id="toc-transactional-features" class="nav-link" data-scroll-target="#transactional-features"><span class="header-section-number">5.4</span> Transactional Features</a></li>
-  <li><a href="#marketing-lead-management" id="toc-marketing-lead-management" class="nav-link" data-scroll-target="#marketing-lead-management"><span class="header-section-number">5.5</span> Marketing &amp; Lead Management</a></li>
-  <li><a href="#data-analytics" id="toc-data-analytics" class="nav-link" data-scroll-target="#data-analytics"><span class="header-section-number">5.6</span> Data &amp; Analytics</a></li>
-  <li><a href="#external-integrations-services" id="toc-external-integrations-services" class="nav-link" data-scroll-target="#external-integrations-services"><span class="header-section-number">5.7</span> External Integrations &amp; Services</a></li>
-  <li><a href="#background-processing-webjobs" id="toc-background-processing-webjobs" class="nav-link" data-scroll-target="#background-processing-webjobs"><span class="header-section-number">5.8</span> Background Processing (WebJobs)</a></li>
-  <li><a href="#system-features" id="toc-system-features" class="nav-link" data-scroll-target="#system-features"><span class="header-section-number">5.9</span> System Features</a></li>
-  <li><a href="#reporting-analysis" id="toc-reporting-analysis" class="nav-link" data-scroll-target="#reporting-analysis"><span class="header-section-number">5.10</span> Reporting &amp; Analysis</a></li>
+  <li><a href="#what-this-means-in-plain-terms" id="toc-what-this-means-in-plain-terms" class="nav-link active" data-scroll-target="#what-this-means-in-plain-terms"><span class="header-section-number">7.1</span> What this means in plain terms:</a></li>
+  <li><a href="#core-domain-map-simplified" id="toc-core-domain-map-simplified" class="nav-link" data-scroll-target="#core-domain-map-simplified"><span class="header-section-number">7.2</span> Core Domain Map (simplified)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Business View.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></h1>
 </div>
 
 
@@ -223,136 +218,105 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="property-real-estate-management" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="property-real-estate-management"><span class="header-section-number">5.1</span> Property &amp; Real Estate Management</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Lead[Lead / Enquiry] --&gt; C[Contact]
+  C --&gt; CC[CompanyContact]
+  Co[Company] --&gt; CC
+
+  C --&gt; R[Requirement]
+  Co --&gt; R
+
+  A[Activity on Asset] --&gt; M[Match]
+  R --&gt; M
+
+  M --&gt; O[Offer]
+  O --&gt; T[Tenancy]
+  T --&gt; PM[Property Management / Ongoing Ops]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="what-this-means-in-plain-terms" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="what-this-means-in-plain-terms"><span class="header-section-number">7.1</span> What this means in plain terms:</h2>
 <ul>
-<li>Properties management (listings, details, attributes)</li>
-<li>Buildings and building management</li>
-<li>Estates and area management</li>
-<li>Developments tracking</li>
-<li>Resources management</li>
-<li>Tenancies and leasing management</li>
+<li>People and organizations are captured as Contacts and Companies.</li>
+<li>Demand is captured as Requirements.</li>
+<li>Supply is captured as Activities on an Asset (usually a Property).</li>
+<li>Matching links demand and supply.</li>
+<li>Negotiation is captured as Offers.</li>
+<li>A successful offer transitions into a Tenancy.</li>
+<li>Then ongoing management continues through tenancy lifecycle records.</li>
 </ul>
 </section>
-<section id="business-operations" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="business-operations"><span class="header-section-number">5.2</span> Business Operations</h2>
+<section id="core-domain-map-simplified" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="core-domain-map-simplified"><span class="header-section-number">7.2</span> Core Domain Map (simplified)</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+  class Asset
+  class Property
+  class Portfolio
+  class Activity
+  class Requirement
+  class Match
+  class Offer
+  class Tenancy
+  class Contact
+  class Company
+  class Address
+  class User
+  class Department
+  class Business
+
+  Asset &lt;|-- Property
+  Asset &lt;|-- Portfolio
+  Portfolio "1" --&gt; "many" Property
+  Property "1" --&gt; "1" Address
+
+  Asset "1" --&gt; "many" Activity
+  Asset "1" --&gt; "many" Tenancy
+
+  Activity "1" --&gt; "many" Offer
+  Requirement "1" --&gt; "many" Offer
+
+  Activity "1" --&gt; "many" Match
+  Requirement "1" --&gt; "many" Match
+
+  Tenancy "many" --&gt; "1" Asset
+  Tenancy "many" --&gt; "0..1" Activity
+  Tenancy "many" --&gt; "0..1" Requirement
+  Tenancy "0..many" --&gt; "0..1" Tenancy : head/sub-lease
+
+  Contact "many" --&gt; "many" Company : via CompanyContact
+  Contact "many" --&gt; "many" Address : via ContactAddress
+  Company "many" --&gt; "many" Address : via CompanyAddress
+
+  User "many" --&gt; "1" Department
+  User "many" --&gt; "1" Business
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Highest-value relationships to remember</p>
 <ul>
-<li>Businesses and company management</li>
-<li>Contacts management</li>
-<li>Appointments scheduling</li>
-<li>User management and authentication</li>
-<li>Departments and organizational structure</li>
+<li>Requirement ↔︎ Activity is many-to-many (through Match).</li>
+<li>Offer can be tied to Requirement and/or Activity, and optionally Property.</li>
+<li>Tenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.</li>
+<li>Contact and Company are many-to-many via CompanyContact.</li>
+<li>Address is shared via link entities (not hard-wired only to one type).</li>
 </ul>
-</section>
-<section id="document-communication" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="document-communication"><span class="header-section-number">5.3</span> Document &amp; Communication</h2>
-<ul>
-<li>Document templates and management</li>
-<li>Attachments handling</li>
-<li>Email management and SMTP integration</li>
-<li>Text messages (SMS) distribution</li>
-<li>Notifications system</li>
-<li>External message handling</li>
-<li>WOPI integration (Office Online integration)</li>
-<li>Watermarks and document branding</li>
-<li>HotDocs integration</li>
-</ul>
-</section>
-<section id="transactional-features" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="transactional-features"><span class="header-section-number">5.4</span> Transactional Features</h2>
-<ul>
-<li>Instructions management (property instructions/contracts)</li>
-<li>Offers management</li>
-<li>Referrals tracking</li>
-<li>Requirements management (property requirements/searches)</li>
-<li>Phases management</li>
-<li>Tenancy management</li>
-</ul>
-</section>
-<section id="marketing-lead-management" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="marketing-lead-management"><span class="header-section-number">5.5</span> Marketing &amp; Lead Management</h2>
-<ul>
-<li>Marketing lists management</li>
-<li>Web enquiries and web form submissions</li>
-<li>Referrals processing</li>
-<li>Call-back lists</li>
-<li>Consent and preferences management</li>
-<li>Dotmailer CRM integration</li>
-</ul>
-</section>
-<section id="data-analytics" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="data-analytics"><span class="header-section-number">5.6</span> Data &amp; Analytics</h2>
-<ul>
-<li>Dashboard creation and management</li>
-<li>Grid management (customizable data grids)</li>
-<li>Latest views tracking</li>
-<li>User feed generation</li>
-<li>Grids for reporting and data visualization</li>
-<li>Metadata management</li>
-</ul>
-</section>
-<section id="external-integrations-services" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="external-integrations-services"><span class="header-section-number">5.7</span> External Integrations &amp; Services</h2>
-<ul>
-<li>DocuSign integration (eSignature)</li>
-<li>SAP integration</li>
-<li>Thirdfort integration (KYC/AML compliance)</li>
-<li>Fixflo integration</li>
-<li>Azure Service Bus integration</li>
-<li>Dotmailer email marketing</li>
-<li>External address services</li>
-<li>Exchange rate management</li>
-<li>Elasticsearch integration (search)</li>
-</ul>
-</section>
-<section id="background-processing-webjobs" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="background-processing-webjobs"><span class="header-section-number">5.8</span> Background Processing (WebJobs)</h2>
-<ul>
-<li>Email distribution processing</li>
-<li>Elasticsearch indexing and search updates</li>
-<li>Feed Centre (data feed processing)</li>
-<li>Notifications processing</li>
-<li>Text message queuing and delivery</li>
-<li>Instructions processing</li>
-<li>User feed generation</li>
-<li>Tenancy data updates (SAP integration)</li>
-<li>Document processing (CDD/Compliance updates)</li>
-<li>Marketing list sync</li>
-<li>Portal document visibility management</li>
-<li>Claims recalculation</li>
-<li>Lync/Teams contact info integration</li>
-<li>Website links feed generation</li>
-<li>Soft opt-in processing</li>
-<li>CDD validity checking</li>
-<li>Azure Service Bus document handling</li>
-</ul>
-</section>
-<section id="system-features" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="system-features"><span class="header-section-number">5.9</span> System Features</h2>
-<ul>
-<li>Portal document visibility control</li>
-<li>Character groups and categorical data</li>
-<li>Business events tracking</li>
-<li>Activity logging</li>
-<li>Cache management</li>
-<li>Output caching for API performance</li>
-<li>Configuration management</li>
-<li>Questionnaires/form surveys</li>
-<li>Fire safety documentation</li>
-<li>Typing Framework configuration</li>
-<li>Timezone management</li>
-<li>Translations/localization</li>
-<li>Web warmup endpoints</li>
-</ul>
-</section>
-<section id="reporting-analysis" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="reporting-analysis"><span class="header-section-number">5.10</span> Reporting &amp; Analysis</h2>
-<ul>
-<li>Reports generation</li>
-<li>Qube reporting integration</li>
-<li>Publication events tracking</li>
-</ul>
-<p>The system is built on .NET Framework 4.8 with SQL Server backend, featuring comprehensive REST API endpoints, Elasticsearch for search capabilities, and multiple Azure WebJobs for background processing and integrations.</p>
 
 
 </section>
@@ -760,13 +724,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Book/Detailed Design &amp; Implementation.html" class="pagination-link" aria-label="Detailed Design &amp; Implementation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Detailed Design &amp; Implementation</span>
+      <a href="../../Book/Hub/Major entities and relationships.html" class="pagination-link" aria-label="Major entities and relationships">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Book/Hub/Major entities and relationships.html" class="pagination-link" aria-label="Major entities and relationships">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Book/Transition &amp; Rollout Plan.html" class="pagination-link" aria-label="Transition &amp; Rollout Plan">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

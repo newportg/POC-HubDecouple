@@ -1,0 +1,84 @@
+# Business Flow (end-to-end)
+
+```{mermaid}
+flowchart LR
+  Lead[Lead / Enquiry] --> C[Contact]
+  C --> CC[CompanyContact]
+  Co[Company] --> CC
+
+  C --> R[Requirement]
+  Co --> R
+
+  A[Activity on Asset] --> M[Match]
+  R --> M
+
+  M --> O[Offer]
+  O --> T[Tenancy]
+  T --> PM[Property Management / Ongoing Ops]
+```
+
+## What this means in plain terms:
+
+* People and organizations are captured as Contacts and Companies.
+* Demand is captured as Requirements.
+* Supply is captured as Activities on an Asset (usually a Property).
+* Matching links demand and supply.
+* Negotiation is captured as Offers.
+* A successful offer transitions into a Tenancy.
+* Then ongoing management continues through tenancy lifecycle records.
+
+## Core Domain Map (simplified)
+
+
+```{mermaid}
+
+classDiagram
+  class Asset
+  class Property
+  class Portfolio
+  class Activity
+  class Requirement
+  class Match
+  class Offer
+  class Tenancy
+  class Contact
+  class Company
+  class Address
+  class User
+  class Department
+  class Business
+
+  Asset <|-- Property
+  Asset <|-- Portfolio
+  Portfolio "1" --> "many" Property
+  Property "1" --> "1" Address
+
+  Asset "1" --> "many" Activity
+  Asset "1" --> "many" Tenancy
+
+  Activity "1" --> "many" Offer
+  Requirement "1" --> "many" Offer
+
+  Activity "1" --> "many" Match
+  Requirement "1" --> "many" Match
+
+  Tenancy "many" --> "1" Asset
+  Tenancy "many" --> "0..1" Activity
+  Tenancy "many" --> "0..1" Requirement
+  Tenancy "0..many" --> "0..1" Tenancy : head/sub-lease
+
+  Contact "many" --> "many" Company : via CompanyContact
+  Contact "many" --> "many" Address : via ContactAddress
+  Company "many" --> "many" Address : via CompanyAddress
+
+  User "many" --> "1" Department
+  User "many" --> "1" Business
+```  
+
+Highest-value relationships to remember
+
+* Requirement ↔ Activity is many-to-many (through Match).
+* Offer can be tied to Requirement and/or Activity, and optionally Property.
+* Tenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.
+* Contact and Company are many-to-many via CompanyContact.
+* Address is shared via link entities (not hard-wired only to one type).

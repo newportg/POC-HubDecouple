@@ -18,6 +18,8 @@ book:
     - part: Book/Detailed Design & Implementation.qmd
       chapters:
         - Book/Hub/Core Platform Capabilities.qmd
+        - Book/Hub/Major entities and relationships.qmd
+        - Book/Hub/Business View.qmd
     - Book/Transition & Rollout Plan.qmd
     - Book/Operations & Maintenance.qmd
 

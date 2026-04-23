@@ -599,5 +599,49 @@
       "Detailed Design & Implementation",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
     ]
+  },
+  {
+    "objectID": "Book/Hub/Major entities and relationships.html",
+    "href": "Book/Hub/Major entities and relationships.html",
+    "title": "6  Major entities and relationships",
+    "section": "",
+    "text": "6.1 Illustration (ER-style overview)\nflowchart LR  \nAsset --&gt;|1.._| Activity  \nAsset --&gt;|1.._| Tenancy  \nAsset --&gt;|is-a| Property  \nAsset --&gt;|is-a| Portfolio  \nPortfolio --&gt;|1..*| Property  \nProperty --&gt;|1| Address\nActivity --&gt;|0.._| Offer  \nRequirement --&gt;|0.._| Offer  \nOffer --&gt;|0..1| Property\nActivity --&gt;|0..* via Match| Requirement  \nMatch --&gt;|1| Activity  \nMatch --&gt;|1| Requirement\nTenancy --&gt;|0..1| Activity  \nTenancy --&gt;|0..1| Requirement  \nTenancy --&gt;|1| Asset  \nTenancy --&gt;|1..*| TenancyParty  \nTenancy --&gt;|0..1 head lease| Tenancy\nContact --&gt;|0.._| ContactAddress  \nCompany --&gt;|0.._| CompanyAddress  \nContact --&gt;|0..* via CompanyContact| Company  \nContact --&gt;|0..* via ContactRelationship| Relationship\nUser --&gt;|many| Activity  \nUser --&gt;|many| Requirement  \nUser --&gt;|many| Tenancy  \nUser --&gt;|1| Business  \nUser --&gt;|1| Department",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Major entities and relationships</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html",
+    "href": "Book/Hub/Business View.html",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "",
+    "text": "7.1 What this means in plain terms:",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "href": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "",
+    "text": "People and organizations are captured as Contacts and Companies.\nDemand is captured as Requirements.\nSupply is captured as Activities on an Asset (usually a Property).\nMatching links demand and supply.\nNegotiation is captured as Offers.\nA successful offer transitions into a Tenancy.\nThen ongoing management continues through tenancy lifecycle records.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "href": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "7.2 Core Domain Map (simplified)",
+    "text": "7.2 Core Domain Map (simplified)\n\n\n\n\n\nclassDiagram\n  class Asset\n  class Property\n  class Portfolio\n  class Activity\n  class Requirement\n  class Match\n  class Offer\n  class Tenancy\n  class Contact\n  class Company\n  class Address\n  class User\n  class Department\n  class Business\n\n  Asset &lt;|-- Property\n  Asset &lt;|-- Portfolio\n  Portfolio \"1\" --&gt; \"many\" Property\n  Property \"1\" --&gt; \"1\" Address\n\n  Asset \"1\" --&gt; \"many\" Activity\n  Asset \"1\" --&gt; \"many\" Tenancy\n\n  Activity \"1\" --&gt; \"many\" Offer\n  Requirement \"1\" --&gt; \"many\" Offer\n\n  Activity \"1\" --&gt; \"many\" Match\n  Requirement \"1\" --&gt; \"many\" Match\n\n  Tenancy \"many\" --&gt; \"1\" Asset\n  Tenancy \"many\" --&gt; \"0..1\" Activity\n  Tenancy \"many\" --&gt; \"0..1\" Requirement\n  Tenancy \"0..many\" --&gt; \"0..1\" Tenancy : head/sub-lease\n\n  Contact \"many\" --&gt; \"many\" Company : via CompanyContact\n  Contact \"many\" --&gt; \"many\" Address : via ContactAddress\n  Company \"many\" --&gt; \"many\" Address : via CompanyAddress\n\n  User \"many\" --&gt; \"1\" Department\n  User \"many\" --&gt; \"1\" Business\n\n\n\n\n\n\nHighest-value relationships to remember\n\nRequirement ↔︎ Activity is many-to-many (through Match).\nOffer can be tied to Requirement and/or Activity, and optionally Property.\nTenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.\nContact and Company are many-to-many via CompanyContact.\nAddress is shared via link entities (not hard-wired only to one type).",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
   }
 ]
