@@ -282,201 +282,366 @@
   {
     "objectID": "Book/Detailed Design & Implementation.html",
     "href": "Book/Detailed Design & Implementation.html",
-    "title": "5  Detailed Design & Implementation",
+    "title": "Detailed Design & Implementation",
     "section": "",
-    "text": "5.1 Data Design and Migration Strategy",
+    "text": "Data Design and Migration Strategy",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#data-design-and-migration-strategy",
     "href": "Book/Detailed Design & Implementation.html#data-design-and-migration-strategy",
-    "title": "5  Detailed Design & Implementation",
+    "title": "Detailed Design & Implementation",
     "section": "",
-    "text": "5.1.1 Source of Truth and Ownership\nDuring transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.\n\n\n5.1.2 Data Movement Patterns\n\nEvent notification communicates that a change occurred.\nGraphQL retrieval provides consumer-specific field selection for synchronization.\nREST commands provide controlled write-back into Hub for approved use cases.\n\nReference flow per domain transaction:\n\nDomain write is committed in Hub.\nEvent is published with identifiers and correlation metadata.\nConsumer receives event and requests a targeted GraphQL projection.\nConsumer stores its projection and records event processing checkpoint.\nReconciliation jobs periodically compare authoritative and projection state.\n\n\n\n5.1.3 Data Integrity Controls\n\nIdempotent event consumption using event identifiers and deduplication checkpoints.\nCorrelation IDs propagated across event, query, and command flows.\nReplay/reconciliation capability for failed or delayed synchronization.\nValidation-on-write in Hub to ensure domain invariants remain enforced.\n\n\n\n5.1.4 Migration Approach\n\nBaseline load: seed consumer stores from current state snapshots.\nIncremental sync: apply event-driven updates post-baseline.\nReconciliation windows: scheduled consistency checks and automated drift reporting.\nCutover readiness: objective criteria for each domain before switching system ownership.\n\nSuggested cutover readiness checklist per domain:\n\n\n\n\n\n\n\nCriterion\nTarget\n\n\n\n\nBaseline load completion\n100% of in-scope entities loaded\n\n\nEvent processing reliability\n&gt;= 99.9% successful handling over agreed observation window\n\n\nData drift\n0 critical drift defects and agreed non-critical threshold\n\n\nOperational readiness\nRunbooks, alerts, and on-call ownership signed off\n\n\nRollback readiness\nRollback drill completed successfully",
+    "text": "Source of Truth and Ownership\nDuring transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.\n\n\nData Movement Patterns\n\nEvent notification communicates that a change occurred.\nGraphQL retrieval provides consumer-specific field selection for synchronization.\nREST commands provide controlled write-back into Hub for approved use cases.\n\nReference flow per domain transaction:\n\nDomain write is committed in Hub.\nEvent is published with identifiers and correlation metadata.\nConsumer receives event and requests a targeted GraphQL projection.\nConsumer stores its projection and records event processing checkpoint.\nReconciliation jobs periodically compare authoritative and projection state.\n\n\n\nData Integrity Controls\n\nIdempotent event consumption using event identifiers and deduplication checkpoints.\nCorrelation IDs propagated across event, query, and command flows.\nReplay/reconciliation capability for failed or delayed synchronization.\nValidation-on-write in Hub to ensure domain invariants remain enforced.\n\n\n\nMigration Approach\n\nBaseline load: seed consumer stores from current state snapshots.\nIncremental sync: apply event-driven updates post-baseline.\nReconciliation windows: scheduled consistency checks and automated drift reporting.\nCutover readiness: objective criteria for each domain before switching system ownership.\n\nSuggested cutover readiness checklist per domain:\n\n\n\n\n\n\n\nCriterion\nTarget\n\n\n\n\nBaseline load completion\n100% of in-scope entities loaded\n\n\nEvent processing reliability\n&gt;= 99.9% successful handling over agreed observation window\n\n\nData drift\n0 critical drift defects and agreed non-critical threshold\n\n\nOperational readiness\nRunbooks, alerts, and on-call ownership signed off\n\n\nRollback readiness\nRollback drill completed successfully",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#api-and-interface-specifications",
     "href": "Book/Detailed Design & Implementation.html#api-and-interface-specifications",
-    "title": "5  Detailed Design & Implementation",
-    "section": "5.2 API and Interface Specifications",
-    "text": "5.2 API and Interface Specifications\n\n5.2.1 Event Contracts\nEvent envelope should include:\n\nEvent ID, event type, version, and timestamp.\nAggregate/entity identifier.\nTenant/context metadata.\nCorrelation and causation identifiers.\n\nEvent payload should remain compact and stable, providing enough information for consumers to fetch enriched data as required.\nExample event envelope:\n{\n    \"eventId\": \"7f3e5f6b-95b8-4f90-9d30-0f54af0b2a17\",\n    \"eventType\": \"Hub.CustomerUpdated.v1\",\n    \"occurredAtUtc\": \"2026-04-22T09:15:00Z\",\n    \"tenantId\": \"tenant-a\",\n    \"aggregateType\": \"Customer\",\n    \"aggregateId\": \"C12345\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"causationId\": \"9b6f5c5a-5f3a-4511-b2c9-c3c7d1c47ab8\",\n    \"payload\": {\n        \"changedFields\": [\"email\", \"status\"],\n        \"version\": 18\n    }\n}\n\n\n5.2.2 GraphQL Query Surface\nDesign goals:\n\nConsumer-selected fields to avoid over-fetching.\nQuery authorization by role and tenant scope.\nSchema evolution with backward-compatible deprecations.\nPagination and filtering for high-volume domains.\n\nExample consumer query:\nquery CustomerSyncProjection($id: ID!) {\n    customer(id: $id) {\n        id\n        status\n        email\n        updatedAtUtc\n        billingProfile {\n            tier\n            isActive\n        }\n    }\n}\n\n\n5.2.3 REST Command Surface\nDesign goals:\n\nExplicit resource and command semantics for create/update/delete operations.\nStandardized error contract and validation response model.\nIdempotency support where retry behavior is expected.\nContract versioning strategy with deprecation windows.\n\nExample command request:\nPATCH /api/customers/C12345\nAuthorization: Bearer &lt;token&gt;\nIdempotency-Key: 536f0ef5-b95e-4a2f-8d8b-f4f10d7aa2d6\nContent-Type: application/json\n\n{\n    \"status\": \"Active\",\n    \"email\": \"new.email@example.com\"\n}\nStandard error payload shape:\n{\n    \"code\": \"ValidationFailed\",\n    \"message\": \"Request contains invalid fields.\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"errors\": [\n        {\n            \"field\": \"email\",\n            \"reason\": \"InvalidFormat\"\n        }\n    ]\n}",
+    "title": "Detailed Design & Implementation",
+    "section": "API and Interface Specifications",
+    "text": "API and Interface Specifications\n\nEvent Contracts\nEvent envelope should include:\n\nEvent ID, event type, version, and timestamp.\nAggregate/entity identifier.\nTenant/context metadata.\nCorrelation and causation identifiers.\n\nEvent payload should remain compact and stable, providing enough information for consumers to fetch enriched data as required.\nExample event envelope:\n{\n    \"eventId\": \"7f3e5f6b-95b8-4f90-9d30-0f54af0b2a17\",\n    \"eventType\": \"Hub.CustomerUpdated.v1\",\n    \"occurredAtUtc\": \"2026-04-22T09:15:00Z\",\n    \"tenantId\": \"tenant-a\",\n    \"aggregateType\": \"Customer\",\n    \"aggregateId\": \"C12345\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"causationId\": \"9b6f5c5a-5f3a-4511-b2c9-c3c7d1c47ab8\",\n    \"payload\": {\n        \"changedFields\": [\"email\", \"status\"],\n        \"version\": 18\n    }\n}\n\n\nGraphQL Query Surface\nDesign goals:\n\nConsumer-selected fields to avoid over-fetching.\nQuery authorization by role and tenant scope.\nSchema evolution with backward-compatible deprecations.\nPagination and filtering for high-volume domains.\n\nExample consumer query:\nquery CustomerSyncProjection($id: ID!) {\n    customer(id: $id) {\n        id\n        status\n        email\n        updatedAtUtc\n        billingProfile {\n            tier\n            isActive\n        }\n    }\n}\n\n\nREST Command Surface\nDesign goals:\n\nExplicit resource and command semantics for create/update/delete operations.\nStandardized error contract and validation response model.\nIdempotency support where retry behavior is expected.\nContract versioning strategy with deprecation windows.\n\nExample command request:\nPATCH /api/customers/C12345\nAuthorization: Bearer &lt;token&gt;\nIdempotency-Key: 536f0ef5-b95e-4a2f-8d8b-f4f10d7aa2d6\nContent-Type: application/json\n\n{\n    \"status\": \"Active\",\n    \"email\": \"new.email@example.com\"\n}\nStandard error payload shape:\n{\n    \"code\": \"ValidationFailed\",\n    \"message\": \"Request contains invalid fields.\",\n    \"correlationId\": \"c4f0b3aa-0bde-4e6b-9f0e-8936a4f63f89\",\n    \"errors\": [\n        {\n            \"field\": \"email\",\n            \"reason\": \"InvalidFormat\"\n        }\n    ]\n}",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#security-and-compliance-controls",
     "href": "Book/Detailed Design & Implementation.html#security-and-compliance-controls",
-    "title": "5  Detailed Design & Implementation",
-    "section": "5.3 Security and Compliance Controls",
-    "text": "5.3 Security and Compliance Controls\n\n5.3.1 Identity and Access\n\nModern authentication for all integration clients.\nRole- and scope-based authorization for query and command endpoints.\nPrinciple of least privilege for service identities.\n\n\n\n5.3.2 Data Protection\n\nEncryption in transit for all APIs and event transport channels.\nEncryption at rest for persisted operational and projection data.\nControlled handling of sensitive data in logs and telemetry.\n\n\n\n5.3.3 Audit and Traceability\n\nImmutable audit trail for command operations.\nEvent lineage traceability from producer through consumers.\nEnd-to-end request tracing with correlation IDs.\n\n\n\n5.3.4 Compliance Readiness\n\nRetention and deletion controls aligned with policy requirements.\nData minimization in event payloads and API responses.\nSecurity review gates before production rollout milestones.",
+    "title": "Detailed Design & Implementation",
+    "section": "Security and Compliance Controls",
+    "text": "Security and Compliance Controls\n\nIdentity and Access\n\nModern authentication for all integration clients.\nRole- and scope-based authorization for query and command endpoints.\nPrinciple of least privilege for service identities.\n\n\n\nData Protection\n\nEncryption in transit for all APIs and event transport channels.\nEncryption at rest for persisted operational and projection data.\nControlled handling of sensitive data in logs and telemetry.\n\n\n\nAudit and Traceability\n\nImmutable audit trail for command operations.\nEvent lineage traceability from producer through consumers.\nEnd-to-end request tracing with correlation IDs.\n\n\n\nCompliance Readiness\n\nRetention and deletion controls aligned with policy requirements.\nData minimization in event payloads and API responses.\nSecurity review gates before production rollout milestones.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#implementation-sequence",
     "href": "Book/Detailed Design & Implementation.html#implementation-sequence",
-    "title": "5  Detailed Design & Implementation",
-    "section": "5.4 Implementation Sequence",
-    "text": "5.4 Implementation Sequence\n\nEstablish cross-cutting foundations (identity, telemetry, correlation, contract governance).\nIntroduce event publication for selected low-risk domains.\nDeliver GraphQL read models for consumer pull integration.\nExpose modernized REST command endpoints for controlled write-back.\nExpand domain coverage iteratively with domain-specific cutover criteria.\nDecommission legacy integration pathways as replacement coverage reaches target thresholds.\n\nDelivery governance at each step should include:\n\nArchitecture sign-off for contract and compatibility implications.\nSecurity sign-off for identity, authorization, and data handling controls.\nOperations sign-off for monitoring, alerting, and rollback coverage.",
+    "title": "Detailed Design & Implementation",
+    "section": "Implementation Sequence",
+    "text": "Implementation Sequence\n\nEstablish cross-cutting foundations (identity, telemetry, correlation, contract governance).\nIntroduce event publication for selected low-risk domains.\nDeliver GraphQL read models for consumer pull integration.\nExpose modernized REST command endpoints for controlled write-back.\nExpand domain coverage iteratively with domain-specific cutover criteria.\nDecommission legacy integration pathways as replacement coverage reaches target thresholds.\n\nDelivery governance at each step should include:\n\nArchitecture sign-off for contract and compatibility implications.\nSecurity sign-off for identity, authorization, and data handling controls.\nOperations sign-off for monitoring, alerting, and rollback coverage.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#acceptance-criteria",
     "href": "Book/Detailed Design & Implementation.html#acceptance-criteria",
-    "title": "5  Detailed Design & Implementation",
-    "section": "5.5 Acceptance Criteria",
-    "text": "5.5 Acceptance Criteria\nThe implementation is considered complete when all of the following are true:\n\nCritical domain events are published with required metadata and schema validation.\nConsumer sync projections are demonstrably current within agreed freshness SLO.\nCommand API contracts pass functional, security, and backward-compatibility tests.\nReconciliation jobs report no unresolved critical drift defects.\nProduction runbooks, dashboards, and alert routes are validated in drills.",
+    "title": "Detailed Design & Implementation",
+    "section": "Acceptance Criteria",
+    "text": "Acceptance Criteria\nThe implementation is considered complete when all of the following are true:\n\nCritical domain events are published with required metadata and schema validation.\nConsumer sync projections are demonstrably current within agreed freshness SLO.\nCommand API contracts pass functional, security, and backward-compatibility tests.\nReconciliation jobs report no unresolved critical drift defects.\nProduction runbooks, dashboards, and alert routes are validated in drills.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
     ]
   },
   {
     "objectID": "Book/Detailed Design & Implementation.html#non-functional-expectations",
     "href": "Book/Detailed Design & Implementation.html#non-functional-expectations",
-    "title": "5  Detailed Design & Implementation",
-    "section": "5.6 Non-Functional Expectations",
-    "text": "5.6 Non-Functional Expectations\n\nReliability: graceful degradation and retry-safe integration patterns.\nPerformance: bounded latency for event-to-consumer synchronization.\nScalability: horizontal scale for query and event consumer workloads.\nSupportability: operational dashboards and alerts aligned to SLOs.",
+    "title": "Detailed Design & Implementation",
+    "section": "Non-Functional Expectations",
+    "text": "Non-Functional Expectations\n\nReliability: graceful degradation and retry-safe integration patterns.\nPerformance: bounded latency for event-to-consumer synchronization.\nScalability: horizontal scale for query and event consumer workloads.\nSupportability: operational dashboards and alerts aligned to SLOs.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Detailed Design & Implementation</span>"
+      "Detailed Design & Implementation"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html",
+    "href": "Book/Hub/Core Platform Capabilities.html",
+    "title": "5  Core Platform Capabilities",
+    "section": "",
+    "text": "5.1 Property & Real Estate Management",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "href": "Book/Hub/Core Platform Capabilities.html#property-real-estate-management",
+    "title": "5  Core Platform Capabilities",
+    "section": "",
+    "text": "Properties management (listings, details, attributes)\nBuildings and building management\nEstates and area management\nDevelopments tracking\nResources management\nTenancies and leasing management",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#business-operations",
+    "href": "Book/Hub/Core Platform Capabilities.html#business-operations",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.2 Business Operations",
+    "text": "5.2 Business Operations\n\nBusinesses and company management\nContacts management\nAppointments scheduling\nUser management and authentication\nDepartments and organizational structure",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#document-communication",
+    "href": "Book/Hub/Core Platform Capabilities.html#document-communication",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.3 Document & Communication",
+    "text": "5.3 Document & Communication\n\nDocument templates and management\nAttachments handling\nEmail management and SMTP integration\nText messages (SMS) distribution\nNotifications system\nExternal message handling\nWOPI integration (Office Online integration)\nWatermarks and document branding\nHotDocs integration",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#transactional-features",
+    "href": "Book/Hub/Core Platform Capabilities.html#transactional-features",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.4 Transactional Features",
+    "text": "5.4 Transactional Features\n\nInstructions management (property instructions/contracts)\nOffers management\nReferrals tracking\nRequirements management (property requirements/searches)\nPhases management\nTenancy management",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
+    "href": "Book/Hub/Core Platform Capabilities.html#marketing-lead-management",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.5 Marketing & Lead Management",
+    "text": "5.5 Marketing & Lead Management\n\nMarketing lists management\nWeb enquiries and web form submissions\nReferrals processing\nCall-back lists\nConsent and preferences management\nDotmailer CRM integration",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#data-analytics",
+    "href": "Book/Hub/Core Platform Capabilities.html#data-analytics",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.6 Data & Analytics",
+    "text": "5.6 Data & Analytics\n\nDashboard creation and management\nGrid management (customizable data grids)\nLatest views tracking\nUser feed generation\nGrids for reporting and data visualization\nMetadata management",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
+    "href": "Book/Hub/Core Platform Capabilities.html#external-integrations-services",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.7 External Integrations & Services",
+    "text": "5.7 External Integrations & Services\n\nDocuSign integration (eSignature)\nSAP integration\nThirdfort integration (KYC/AML compliance)\nFixflo integration\nAzure Service Bus integration\nDotmailer email marketing\nExternal address services\nExchange rate management\nElasticsearch integration (search)",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
+    "href": "Book/Hub/Core Platform Capabilities.html#background-processing-webjobs",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.8 Background Processing (WebJobs)",
+    "text": "5.8 Background Processing (WebJobs)\n\nEmail distribution processing\nElasticsearch indexing and search updates\nFeed Centre (data feed processing)\nNotifications processing\nText message queuing and delivery\nInstructions processing\nUser feed generation\nTenancy data updates (SAP integration)\nDocument processing (CDD/Compliance updates)\nMarketing list sync\nPortal document visibility management\nClaims recalculation\nLync/Teams contact info integration\nWebsite links feed generation\nSoft opt-in processing\nCDD validity checking\nAzure Service Bus document handling",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#system-features",
+    "href": "Book/Hub/Core Platform Capabilities.html#system-features",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.9 System Features",
+    "text": "5.9 System Features\n\nPortal document visibility control\nCharacter groups and categorical data\nBusiness events tracking\nActivity logging\nCache management\nOutput caching for API performance\nConfiguration management\nQuestionnaires/form surveys\nFire safety documentation\nTyping Framework configuration\nTimezone management\nTranslations/localization\nWeb warmup endpoints",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
+    "href": "Book/Hub/Core Platform Capabilities.html#reporting-analysis",
+    "title": "5  Core Platform Capabilities",
+    "section": "5.10 Reporting & Analysis",
+    "text": "5.10 Reporting & Analysis\n\nReports generation\nQube reporting integration\nPublication events tracking\n\nThe system is built on .NET Framework 4.8 with SQL Server backend, featuring comprehensive REST API endpoints, Elasticsearch for search capabilities, and multiple Azure WebJobs for background processing and integrations.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Core Platform Capabilities</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Major entities and relationships.html",
+    "href": "Book/Hub/Major entities and relationships.html",
+    "title": "6  Major entities and relationships",
+    "section": "",
+    "text": "6.1 Illustration (ER-style overview)\nflowchart LR  \nAsset --&gt;|1.._| Activity  \nAsset --&gt;|1.._| Tenancy  \nAsset --&gt;|is-a| Property  \nAsset --&gt;|is-a| Portfolio  \nPortfolio --&gt;|1..*| Property  \nProperty --&gt;|1| Address\nActivity --&gt;|0.._| Offer  \nRequirement --&gt;|0.._| Offer  \nOffer --&gt;|0..1| Property\nActivity --&gt;|0..* via Match| Requirement  \nMatch --&gt;|1| Activity  \nMatch --&gt;|1| Requirement\nTenancy --&gt;|0..1| Activity  \nTenancy --&gt;|0..1| Requirement  \nTenancy --&gt;|1| Asset  \nTenancy --&gt;|1..*| TenancyParty  \nTenancy --&gt;|0..1 head lease| Tenancy\nContact --&gt;|0.._| ContactAddress  \nCompany --&gt;|0.._| CompanyAddress  \nContact --&gt;|0..* via CompanyContact| Company  \nContact --&gt;|0..* via ContactRelationship| Relationship\nUser --&gt;|many| Activity  \nUser --&gt;|many| Requirement  \nUser --&gt;|many| Tenancy  \nUser --&gt;|1| Business  \nUser --&gt;|1| Department",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Major entities and relationships</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html",
+    "href": "Book/Hub/Business View.html",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "",
+    "text": "7.1 What this means in plain terms:",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "href": "Book/Hub/Business View.html#what-this-means-in-plain-terms",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "",
+    "text": "People and organizations are captured as Contacts and Companies.\nDemand is captured as Requirements.\nSupply is captured as Activities on an Asset (usually a Property).\nMatching links demand and supply.\nNegotiation is captured as Offers.\nA successful offer transitions into a Tenancy.\nThen ongoing management continues through tenancy lifecycle records.",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
+    ]
+  },
+  {
+    "objectID": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "href": "Book/Hub/Business View.html#core-domain-map-simplified",
+    "title": "7  Business Flow (end-to-end)",
+    "section": "7.2 Core Domain Map (simplified)",
+    "text": "7.2 Core Domain Map (simplified)\n\n\n\n\n\nclassDiagram\n  class Asset\n  class Property\n  class Portfolio\n  class Activity\n  class Requirement\n  class Match\n  class Offer\n  class Tenancy\n  class Contact\n  class Company\n  class Address\n  class User\n  class Department\n  class Business\n\n  Asset &lt;|-- Property\n  Asset &lt;|-- Portfolio\n  Portfolio \"1\" --&gt; \"many\" Property\n  Property \"1\" --&gt; \"1\" Address\n\n  Asset \"1\" --&gt; \"many\" Activity\n  Asset \"1\" --&gt; \"many\" Tenancy\n\n  Activity \"1\" --&gt; \"many\" Offer\n  Requirement \"1\" --&gt; \"many\" Offer\n\n  Activity \"1\" --&gt; \"many\" Match\n  Requirement \"1\" --&gt; \"many\" Match\n\n  Tenancy \"many\" --&gt; \"1\" Asset\n  Tenancy \"many\" --&gt; \"0..1\" Activity\n  Tenancy \"many\" --&gt; \"0..1\" Requirement\n  Tenancy \"0..many\" --&gt; \"0..1\" Tenancy : head/sub-lease\n\n  Contact \"many\" --&gt; \"many\" Company : via CompanyContact\n  Contact \"many\" --&gt; \"many\" Address : via ContactAddress\n  Company \"many\" --&gt; \"many\" Address : via CompanyAddress\n\n  User \"many\" --&gt; \"1\" Department\n  User \"many\" --&gt; \"1\" Business\n\n\n\n\n\n\nHighest-value relationships to remember\n\nRequirement ↔︎ Activity is many-to-many (through Match).\nOffer can be tied to Requirement and/or Activity, and optionally Property.\nTenancy is the transactional anchor linked to Asset, and sometimes back to Requirement/Activity.\nContact and Company are many-to-many via CompanyContact.\nAddress is shared via link entities (not hard-wired only to one type).",
+    "crumbs": [
+      "Detailed Design & Implementation",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Business Flow (end-to-end)</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html",
     "href": "Book/Transition & Rollout Plan.html",
-    "title": "6  Transition & Rollout Plan",
+    "title": "8  Transition & Rollout Plan",
     "section": "",
-    "text": "6.1 Phased Migration Strategy\nThe transition follows incremental phases to minimize business disruption and maintain confidence in production stability.",
+    "text": "8.1 Phased Migration Strategy\nThe transition follows incremental phases to minimize business disruption and maintain confidence in production stability.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
     "href": "Book/Transition & Rollout Plan.html#phased-migration-strategy",
-    "title": "6  Transition & Rollout Plan",
+    "title": "8  Transition & Rollout Plan",
     "section": "",
-    "text": "6.1.1 Phase 0: Foundations\n\nConfirm target integration architecture and governance standards.\nEstablish identity, observability, and contract management baselines.\nAlign teams on operational readiness and ownership model.\n\n\n\n6.1.2 Phase 1: Pilot Domain Enablement\n\nSelect low-risk, high-learning business domain.\nEnable event publication and consumer read-through via GraphQL.\nValidate synchronization, traceability, and incident response runbooks.\n\n\n\n6.1.3 Phase 2: Controlled Expansion\n\nAdd additional domains in priority order.\nIntroduce REST write-back capabilities for approved external consumers.\nTrack drift, performance, and adoption KPIs against defined thresholds.\n\n\n\n6.1.4 Phase 3: Coexistence Optimization\n\nHarden dual-run operations and reduce manual reconciliation.\nRetire obsolete point-to-point dependencies.\nPrepare domain-level cutover readiness sign-off.\n\n\n\n6.1.5 Phase 4: Cutover and Decommission\n\nTransition eligible domains fully to the decoupled model.\nDecommission superseded legacy integration mechanisms.\nComplete post-cutover validation and operational handover.",
+    "text": "8.1.1 Phase 0: Foundations\n\nConfirm target integration architecture and governance standards.\nEstablish identity, observability, and contract management baselines.\nAlign teams on operational readiness and ownership model.\n\n\n\n8.1.2 Phase 1: Pilot Domain Enablement\n\nSelect low-risk, high-learning business domain.\nEnable event publication and consumer read-through via GraphQL.\nValidate synchronization, traceability, and incident response runbooks.\n\n\n\n8.1.3 Phase 2: Controlled Expansion\n\nAdd additional domains in priority order.\nIntroduce REST write-back capabilities for approved external consumers.\nTrack drift, performance, and adoption KPIs against defined thresholds.\n\n\n\n8.1.4 Phase 3: Coexistence Optimization\n\nHarden dual-run operations and reduce manual reconciliation.\nRetire obsolete point-to-point dependencies.\nPrepare domain-level cutover readiness sign-off.\n\n\n\n8.1.5 Phase 4: Cutover and Decommission\n\nTransition eligible domains fully to the decoupled model.\nDecommission superseded legacy integration mechanisms.\nComplete post-cutover validation and operational handover.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
     "href": "Book/Transition & Rollout Plan.html#milestone-timeline-planning-baseline",
-    "title": "6  Transition & Rollout Plan",
-    "section": "6.2 Milestone Timeline (Planning Baseline)",
-    "text": "6.2 Milestone Timeline (Planning Baseline)\nUse this as a planning template and refine dates during delivery governance.\n\nFoundation complete: architecture controls and telemetry in place.\nPilot go-live: first domain synchronized in production.\nMulti-domain expansion: additional domains onboarded with stable KPIs.\nWrite-back readiness: REST command flows validated for external integration.\nDomain cutover waves: progressive retirement of legacy pathways.\nProgram closeout: transition objectives met and support model stabilized.",
+    "title": "8  Transition & Rollout Plan",
+    "section": "8.2 Milestone Timeline (Planning Baseline)",
+    "text": "8.2 Milestone Timeline (Planning Baseline)\nUse this as a planning template and refine dates during delivery governance.\n\nFoundation complete: architecture controls and telemetry in place.\nPilot go-live: first domain synchronized in production.\nMulti-domain expansion: additional domains onboarded with stable KPIs.\nWrite-back readiness: REST command flows validated for external integration.\nDomain cutover waves: progressive retirement of legacy pathways.\nProgram closeout: transition objectives met and support model stabilized.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
     "href": "Book/Transition & Rollout Plan.html#risk-register-and-mitigation",
-    "title": "6  Transition & Rollout Plan",
-    "section": "6.3 Risk Register and Mitigation",
-    "text": "6.3 Risk Register and Mitigation\n\n6.3.1 Key Risks\n\nData synchronization drift between legacy and new consumers.\nContract change misalignment across producer and consumer teams.\nSkills and capacity constraints for operating dual-run architecture.\nSecurity gaps during staged exposure of integration endpoints.\nPerformance bottlenecks in high-volume event/query scenarios.\n\n\n\n6.3.2 Mitigation Measures\n\nEnforce contract versioning and compatibility review gates.\nImplement replay, reconciliation, and automated drift detection.\nUse phased onboarding and domain readiness criteria for each rollout wave.\nConduct security threat modeling and pre-release control validation.\nRun load and soak testing before each expansion milestone.",
+    "title": "8  Transition & Rollout Plan",
+    "section": "8.3 Risk Register and Mitigation",
+    "text": "8.3 Risk Register and Mitigation\n\n8.3.1 Key Risks\n\nData synchronization drift between legacy and new consumers.\nContract change misalignment across producer and consumer teams.\nSkills and capacity constraints for operating dual-run architecture.\nSecurity gaps during staged exposure of integration endpoints.\nPerformance bottlenecks in high-volume event/query scenarios.\n\n\n\n8.3.2 Mitigation Measures\n\nEnforce contract versioning and compatibility review gates.\nImplement replay, reconciliation, and automated drift detection.\nUse phased onboarding and domain readiness criteria for each rollout wave.\nConduct security threat modeling and pre-release control validation.\nRun load and soak testing before each expansion milestone.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
     "href": "Book/Transition & Rollout Plan.html#rollback-and-contingency-procedures",
-    "title": "6  Transition & Rollout Plan",
-    "section": "6.4 Rollback and Contingency Procedures",
-    "text": "6.4 Rollback and Contingency Procedures\nRollback procedures are defined per migration phase and domain.\n\n6.4.1 Operational Rollback Principles\n\nPreserve legacy execution path until new path stability is demonstrated.\nSupport feature toggles to disable new integration paths quickly.\nMaintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.\n\n\n\n6.4.2 Rollback Steps (Per Domain)\n\nPause new event-driven processing for affected domain.\nRedirect writes to validated legacy pathway.\nExecute reconciliation checks to identify and resolve drift.\nRestore service baselines and communicate status.\nConduct post-incident review and update controls before reattempt.",
+    "title": "8  Transition & Rollout Plan",
+    "section": "8.4 Rollback and Contingency Procedures",
+    "text": "8.4 Rollback and Contingency Procedures\nRollback procedures are defined per migration phase and domain.\n\n8.4.1 Operational Rollback Principles\n\nPreserve legacy execution path until new path stability is demonstrated.\nSupport feature toggles to disable new integration paths quickly.\nMaintain clear criteria for rollback triggers based on SLO breaches or data integrity exceptions.\n\n\n\n8.4.2 Rollback Steps (Per Domain)\n\nPause new event-driven processing for affected domain.\nRedirect writes to validated legacy pathway.\nExecute reconciliation checks to identify and resolve drift.\nRestore service baselines and communicate status.\nConduct post-incident review and update controls before reattempt.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Transition & Rollout Plan.html#governance-and-communication",
     "href": "Book/Transition & Rollout Plan.html#governance-and-communication",
-    "title": "6  Transition & Rollout Plan",
-    "section": "6.5 Governance and Communication",
-    "text": "6.5 Governance and Communication\n\nWeekly architecture and delivery governance forum.\nRelease readiness checkpoints per phase.\nBusiness and operations stakeholder updates at each milestone.\nDecision log maintained for scope, risk, and sequencing changes.",
+    "title": "8  Transition & Rollout Plan",
+    "section": "8.5 Governance and Communication",
+    "text": "8.5 Governance and Communication\n\nWeekly architecture and delivery governance forum.\nRelease readiness checkpoints per phase.\nBusiness and operations stakeholder updates at each milestone.\nDecision log maintained for scope, risk, and sequencing changes.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Transition & Rollout Plan</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html",
     "href": "Book/Operations & Maintenance.html",
-    "title": "7  Operations & Maintenance",
+    "title": "9  Operations & Maintenance",
     "section": "",
-    "text": "7.1 Testing Strategy\nTesting must validate both functional correctness and transition safety in a coexistence architecture.",
+    "text": "9.1 Testing Strategy\nTesting must validate both functional correctness and transition safety in a coexistence architecture.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#testing-strategy",
     "href": "Book/Operations & Maintenance.html#testing-strategy",
-    "title": "7  Operations & Maintenance",
+    "title": "9  Operations & Maintenance",
     "section": "",
-    "text": "7.1.1 Functional Testing\n\nVerify command APIs enforce business rules and return consistent error models.\nValidate event publication for relevant domain changes.\nConfirm consumer query behavior returns correct data shapes and authorization outcomes.\n\n\n\n7.1.2 Integration and Contract Testing\n\nContract tests for event envelopes and API schemas.\nBackward-compatibility tests for versioned contracts.\nEnd-to-end flow tests covering write -&gt; event -&gt; query -&gt; consumer update.\n\n\n\n7.1.3 Performance and Resilience Testing\n\nLoad tests for peak event throughput and query concurrency.\nSoak tests to identify memory, connection, or retry degradation over time.\nFailure-injection tests for transient downstream outages and retry behavior.\n\n\n\n7.1.4 Regression and Release Validation\n\nAutomated regression suites executed for each release candidate.\nRelease gates tied to critical scenario pass rates and non-functional thresholds.\nPost-deployment verification checklist for production readiness.",
+    "text": "9.1.1 Functional Testing\n\nVerify command APIs enforce business rules and return consistent error models.\nValidate event publication for relevant domain changes.\nConfirm consumer query behavior returns correct data shapes and authorization outcomes.\n\n\n\n9.1.2 Integration and Contract Testing\n\nContract tests for event envelopes and API schemas.\nBackward-compatibility tests for versioned contracts.\nEnd-to-end flow tests covering write -&gt; event -&gt; query -&gt; consumer update.\n\n\n\n9.1.3 Performance and Resilience Testing\n\nLoad tests for peak event throughput and query concurrency.\nSoak tests to identify memory, connection, or retry degradation over time.\nFailure-injection tests for transient downstream outages and retry behavior.\n\n\n\n9.1.4 Regression and Release Validation\n\nAutomated regression suites executed for each release candidate.\nRelease gates tied to critical scenario pass rates and non-functional thresholds.\nPost-deployment verification checklist for production readiness.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
     "href": "Book/Operations & Maintenance.html#monitoring-alerting-and-slos",
-    "title": "7  Operations & Maintenance",
-    "section": "7.2 Monitoring, Alerting, and SLOs",
-    "text": "7.2 Monitoring, Alerting, and SLOs\n\n7.2.1 Telemetry Model\nCapture telemetry for:\n\nAPI latency, error rate, throughput, and saturation indicators.\nEvent publication success rate and consumer lag.\nData reconciliation status and drift counts.\nSecurity events and authorization failures.\n\n\n\n7.2.2 Suggested SLO Categories\n\nAvailability SLO for command and query endpoints.\nLatency SLO for core API operations.\nFreshness SLO for event-to-consumer synchronization.\nReliability SLO for successful event processing and retries.\n\n\n\n7.2.3 Operational Dashboards and Alerts\n\nRole-specific dashboards for support, engineering, and platform teams.\nActionable alerts mapped to runbook procedures.\nCorrelation-aware tracing to accelerate incident triage.",
+    "title": "9  Operations & Maintenance",
+    "section": "9.2 Monitoring, Alerting, and SLOs",
+    "text": "9.2 Monitoring, Alerting, and SLOs\n\n9.2.1 Telemetry Model\nCapture telemetry for:\n\nAPI latency, error rate, throughput, and saturation indicators.\nEvent publication success rate and consumer lag.\nData reconciliation status and drift counts.\nSecurity events and authorization failures.\n\n\n\n9.2.2 Suggested SLO Categories\n\nAvailability SLO for command and query endpoints.\nLatency SLO for core API operations.\nFreshness SLO for event-to-consumer synchronization.\nReliability SLO for successful event processing and retries.\n\n\n\n9.2.3 Operational Dashboards and Alerts\n\nRole-specific dashboards for support, engineering, and platform teams.\nActionable alerts mapped to runbook procedures.\nCorrelation-aware tracing to accelerate incident triage.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#incident-and-problem-management",
     "href": "Book/Operations & Maintenance.html#incident-and-problem-management",
-    "title": "7  Operations & Maintenance",
-    "section": "7.3 Incident and Problem Management",
-    "text": "7.3 Incident and Problem Management\n\nStandard severity model and escalation pathway for integration incidents.\nRunbooks for common failure modes (consumer lag, contract mismatch, authorization failures).\nProblem management process to remove recurring defect classes.",
+    "title": "9  Operations & Maintenance",
+    "section": "9.3 Incident and Problem Management",
+    "text": "9.3 Incident and Problem Management\n\nStandard severity model and escalation pathway for integration incidents.\nRunbooks for common failure modes (consumer lag, contract mismatch, authorization failures).\nProblem management process to remove recurring defect classes.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#change-management",
     "href": "Book/Operations & Maintenance.html#change-management",
-    "title": "7  Operations & Maintenance",
-    "section": "7.4 Change Management",
-    "text": "7.4 Change Management\n\n7.4.1 Release Governance\n\nPlanned release calendar with architecture sign-off for contract changes.\nChange advisory checkpoints for high-impact modifications.\nVersion lifecycle policy with clear deprecation communication.\n\n\n\n7.4.2 Documentation Lifecycle\nMaintain and regularly update:\n\nArchitecture decision records.\nAPI and event contract documentation.\nOperational runbooks and support playbooks.\nTroubleshooting guides and known issue references.",
+    "title": "9  Operations & Maintenance",
+    "section": "9.4 Change Management",
+    "text": "9.4 Change Management\n\n9.4.1 Release Governance\n\nPlanned release calendar with architecture sign-off for contract changes.\nChange advisory checkpoints for high-impact modifications.\nVersion lifecycle policy with clear deprecation communication.\n\n\n\n9.4.2 Documentation Lifecycle\nMaintain and regularly update:\n\nArchitecture decision records.\nAPI and event contract documentation.\nOperational runbooks and support playbooks.\nTroubleshooting guides and known issue references.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#training-and-enablement",
     "href": "Book/Operations & Maintenance.html#training-and-enablement",
-    "title": "7  Operations & Maintenance",
-    "section": "7.5 Training and Enablement",
-    "text": "7.5 Training and Enablement\n\n7.5.1 Audience-Specific Training\n\nEngineering teams: event design, contract evolution, and secure API implementation.\nOperations teams: monitoring dashboards, alert response, and rollback execution.\nProduct and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.\n\n\n\n7.5.2 Adoption Support\n\nStructured onboarding for new consuming teams.\nOffice-hours model during active migration phases.\nPost-go-live knowledge transfer and continuous improvement reviews.",
+    "title": "9  Operations & Maintenance",
+    "section": "9.5 Training and Enablement",
+    "text": "9.5 Training and Enablement\n\n9.5.1 Audience-Specific Training\n\nEngineering teams: event design, contract evolution, and secure API implementation.\nOperations teams: monitoring dashboards, alert response, and rollback execution.\nProduct and delivery stakeholders: rollout sequencing, readiness criteria, and KPI interpretation.\n\n\n\n9.5.2 Adoption Support\n\nStructured onboarding for new consuming teams.\nOffice-hours model during active migration phases.\nPost-go-live knowledge transfer and continuous improvement reviews.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   },
   {
     "objectID": "Book/Operations & Maintenance.html#continuous-improvement",
     "href": "Book/Operations & Maintenance.html#continuous-improvement",
-    "title": "7  Operations & Maintenance",
-    "section": "7.6 Continuous Improvement",
-    "text": "7.6 Continuous Improvement\n\nQuarterly SLO and KPI review against business outcomes.\nRecurring architecture health assessments.\nPrioritized backlog for reliability, performance, and operability enhancements.",
+    "title": "9  Operations & Maintenance",
+    "section": "9.6 Continuous Improvement",
+    "text": "9.6 Continuous Improvement\n\nQuarterly SLO and KPI review against business outcomes.\nRecurring architecture health assessments.\nPrioritized backlog for reliability, performance, and operability enhancements.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Operations & Maintenance</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Operations & Maintenance</span>"
     ]
   }
 ]
