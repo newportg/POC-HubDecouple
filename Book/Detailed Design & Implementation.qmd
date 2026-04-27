@@ -6,6 +6,11 @@
 
 During transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.
 
+### Strategy
+The reason for this design is to limit the scope of changes that need to be made to hub, while still enabling downstream systems to have the data they need in a format that works for them. By using an event-driven approach, we can decouple the systems and allow for more flexibility in how downstream systems consume and use the data. This also allows us to preserve existing domain rule enforcement in hub, while still enabling downstream systems to evolve independently. Additionally, this approach can improve security posture by limiting the exposure of integration-facing interfaces and enabling incremental rollout with reversible steps.
+
+
+
 ### Data Movement Patterns
 
 * Event notification communicates that a change occurred.
@@ -19,6 +24,9 @@ Reference flow per domain transaction:
 3. Consumer receives event and requests a targeted GraphQL projection.
 4. Consumer stores its projection and records event processing checkpoint.
 5. Reconciliation jobs periodically compare authoritative and projection state.
+
+![HubEvent](HubEvent.png)
+
 
 ### Data Integrity Controls
 
