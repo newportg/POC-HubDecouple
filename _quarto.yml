@@ -13,13 +13,17 @@ book:
   chapters:
     - index.qmd
     - Book/Executive Summary & Objectives.qmd
-    - Book/Current State Assessment.qmd
-    - Book/Proposed Target Architecture.qmd
-    - part: Book/Detailed Design & Implementation.qmd
+    - part: Book/Current State Assessment.qmd
       chapters:
         - Book/Hub/Core Platform Capabilities.qmd
         - Book/Hub/Major entities and relationships.qmd
         - Book/Hub/Business View.qmd
+        - Book/Hub/Architectural Summary.qmd
+    - Book/Proposed Target Architecture.qmd
+    - part: Book/Detailed Design & Implementation.qmd
+      chapters:
+        - Book/Hub/API Authentication.qmd
+        - Book/Hub/API Auth Implementation.qmd
     - Book/Transition & Rollout Plan.qmd
     - Book/Operations & Maintenance.qmd
 

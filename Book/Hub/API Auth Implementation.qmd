@@ -1,0 +1,91 @@
+# API Auth Implementation
+
+Here is a safe dual-auth rollout you can execute in this repository.
+
+**Implementation Plan**
+
+1.  Add AD token validation in OWIN while keeping NTLM active.
+1.  Update identity extraction to prefer bearer-token claims and fallback to existing Windows identity.
+1.  Add feature flags so you can switch behavior without redeploying code.
+1.  Update SignalR auth path to use the same identity resolver.
+1.  Pilot and cut over, then disable NTLM.
+
+**Files To Change First**
+
+1.  **Startup.cs**  
+    Add bearer-token middleware before WebApi middleware.
+1.  **AppAuthorizationMessageHandler.cs**  
+    Replace hard dependency on HttpContext Windows identity with a resolver that checks token claims first.
+1.  **SignalrAuthorizationAttribute.cs**  
+    Use the same resolver to read identity from SignalR token/cookies.
+1.  **Web.config:630**
+    Add new auth flags and Entra settings; later switch auth mode after cutover.
+
+**Config You Should Add**  
+In appSettings:
+
+1.  Api.Settings.Auth.Mode = Dual | TokenOnly | WindowsOnly
+1.  Api.Settings.Auth.Entra.TenantId
+1.  Api.Settings.Auth.Entra.Audience
+1.  Api.Settings.Auth.Entra.ValidIssuers
+1.  Api.Settings.Auth.Claims.UsernamePriority = preferred_username;upn;email
+1.  Api.Settings.Auth.EnableWindowsFallback = true initially
+
+**Identity Resolution Logic**  
+Create one resolver service and use it from both API handler and SignalR:
+
+1.  If bearer token exists and is valid:
+    *   Read username claim by priority: preferred_username, then upn, then email.
+    *   Optionally map UPN to DOMAIN\samAccountName if your PrincipalUserQuery expects that.
+1.  Else if Windows principal exists:
+    *   Use existing HttpContext.Current.User.Identity.Name behavior.
+1.  Else:
+    *   Return 401/403 as now.
+
+Then keep current PrincipalUserQuery path unchanged so authorization/business rules remain stable.
+
+**Middleware Order (important)**  
+In Startup:
+
+1.  Use token auth middleware first.
+1.  Then UseWebApi.
+1.  Keep your existing delegating handlers.  
+    This ensures claims principal is available before AppAuthorizationMessageHandler runs.
+
+**SignalR Path**  
+For SignalR:
+
+1.  Accept access token in query/header (depending on client transport support).
+1.  Resolve identity using same claim priority.
+1.  Keep impersonation query parameter behavior unchanged.
+
+**Rollout Strategy**
+
+1. Stage 1 (Dual mode):
+  *   Windows auth remains on.
+  *   Bearer accepted.
+  *   Log identity source (Token vs Windows).
+1. Stage 2 (Pilot users/departments):
+    *   Force selected front-end clients to send bearer tokens.
+    *   Monitor 401/403 and user-mapping misses.
+1. Stage 3 (Token-only):
+    *   Switch Api.Settings.Auth.Mode to TokenOnly.
+    *   Enable anonymous at IIS and disable Windows auth at host level.
+1. Stage 4 (Cleanup):
+    *   Remove NTLM-only branches after 2-4 weeks stable.
+
+**Validation Checklist**
+
+1.  Existing desktop domain user opens app and gets in with no login prompt.
+1.  Token user maps to same PrincipalUser as old NTLM path.
+1.  Impersonation header still works.
+1.  Webhooks/system URLs continue to use system account path.
+1.  SignalR hub authorization still succeeds.
+1.  External app and certificate-protected endpoints still pass.
+
+**Risk Controls**
+
+1.  Keep EnableWindowsFallback true until mapping is proven.
+1.  Add audit logs for username source and mapped principal id.
+1.  Add feature flag kill switch to revert to WindowsOnly quickly.
+

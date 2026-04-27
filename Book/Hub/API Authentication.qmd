@@ -1,0 +1,149 @@
+# API Authentication
+
+The current NTLM authentication protocol is 'end of life' in early 2027, so we need to update the API authentication layer to a more modern protocol.
+The company uses AD Entra.
+
+### Flow 1 — Human SSO (Entra bearer token, domain-joined device)
+
+```{mermaid}
+sequenceDiagram
+    participant Browser
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant Resolver as AdIdentityResolver
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    Browser->>IIS: GET /api/... (no explicit login)<br/>MSAL silently acquires token via PRT/Seamless SSO
+    Note over Browser,IIS: Authorization: Bearer eyJ...
+    IIS->>EntraMiddleware: OWIN pipeline
+    EntraMiddleware->>EntraMiddleware: Validate JWT signature via OIDC discovery keys
+    EntraMiddleware->>EntraMiddleware: Stamp ClaimsPrincipal with kf_auth_source=Bearer
+    EntraMiddleware->>EntraMiddleware: Set Thread.CurrentPrincipal + HttpContext.Current.User
+    EntraMiddleware->>AuthHandler: next.Invoke()
+    AuthHandler->>Resolver: ResolveAccountName(request)
+    Resolver->>Resolver: Detect kf_auth_source=Bearer claim
+    Resolver->>Resolver: Extract preferred_username → upn → email
+    Resolver->>Resolver: MapToAccountName() → internal AD login
+    Resolver-->>AuthHandler: "SA1\DOEJO"
+    AuthHandler->>Domain: PrincipalUserQuery { ActiveDirectoryAccount="SA1\DOEJO" }
+    Domain-->>AuthHandler: PrincipalUser
+    AuthHandler-->>Browser: 200 OK
+```
+
+### Flow 2 — Human SSO (Windows / NTLM fallback, mode = Dual)
+
+```{mermaid}
+sequenceDiagram
+    participant Browser
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant Resolver as AdIdentityResolver
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    Browser->>IIS: GET /api/... (no bearer token)
+    Note over Browser,IIS: IIS Windows Auth negotiates NTLM/Kerberos
+    IIS->>EntraMiddleware: OWIN pipeline
+    EntraMiddleware->>EntraMiddleware: No Authorization: Bearer header → no-op
+    EntraMiddleware->>AuthHandler: next.Invoke()
+    AuthHandler->>Resolver: ResolveAccountName(request)
+    Resolver->>Resolver: No kf_auth_source=Bearer claim
+    Resolver->>Resolver: Mode = Dual + EnableWindowsFallback = true
+    Resolver->>Resolver: Read HttpContext.Current.User.Identity.Name
+    Resolver-->>AuthHandler: "SA1\DOEJO"
+    AuthHandler->>Domain: PrincipalUserQuery { ActiveDirectoryAccount="SA1\DOEJO" }
+    Domain-->>AuthHandler: PrincipalUser
+    AuthHandler-->>Browser: 200 OK
+```
+
+### Flow 3 — System-to-system (existing ExternalApplicationHandler — unchanged)
+
+```{mermaid}
+sequenceDiagram
+    participant CallingService as Calling Service
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant ExtHandler as ExternalApplicationHandler
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    CallingService->>IIS: POST /api/... + cert / shared-secret header
+    IIS->>EntraMiddleware: OWIN pipeline
+    EntraMiddleware->>EntraMiddleware: No bearer token (or token ignored) → no-op
+    EntraMiddleware->>AuthHandler: next.Invoke()
+    AuthHandler->>ExtHandler: IsRequestFromExternalApplication()?
+    ExtHandler-->>AuthHandler: true
+    AuthHandler->>ExtHandler: GetAuthorizedUserName()
+    ExtHandler-->>AuthHandler: "svc-account@knightfrank.com"
+    AuthHandler->>Domain: PrincipalUserQuery { ActiveDirectoryAccount="svc-account@..." }
+    Domain-->>AuthHandler: PrincipalUser
+    AuthHandler-->>CallingService: 200 OK
+    Note over AuthHandler,ExtHandler: Entire resolver path is bypassed.<br/>No change from current behaviour.
+```
+
+## Current state in your API
+1.  Windows auth is enabled in config: **Web.config:630**
+1.  Anonymous users are denied: **Web.config:631**
+1.  User identity is read from IIS Windows principal name in the auth handler: **AppAuthorizationMessageHandler.cs**
+1.  SignalR does the same pattern: **SignalrAuthorizationAttribute.cs**
+
+## Target approach (recommended)
+1.  Use Microsoft Entra ID backed by AD accounts (hybrid or cloud-only).
+1.  Frontend gets OAuth/OIDC tokens silently with SSO.
+1.  API validates bearer JWT tokens.
+1.  API maps token claims to your existing user model and continues to use PrincipalUser.
+
+## How users still avoid login prompts
+1.  Domain-joined or Entra-joined devices with Seamless SSO/PRT can get tokens silently.
+1.  Browser sessions use SSO cookies/PRT and usually do not show login pages.
+1.  Non-compliant devices can still be handled with Conditional Access rules.
+
+
+## What to change in this solution
+**Phase 1: Add token auth without breaking NTLM**
+1.  Add OWIN JWT bearer middleware in startup.
+1.  Keep current handler, but make identity source pluggable:
+    * If bearer token exists, read from claims like preferred_username or upn.
+    * Else fallback to existing HttpContext.Current.User.Identity.Name.
+1.  Keep existing webhook/system-account paths as-is in the handler.
+
+## Phase 2: Switch primary auth to AD token SSO
+1.  Change API config from Windows auth requirement to token validation path.
+1.  Update frontend to use MSAL and call API with bearer tokens.
+1.  Update SignalR auth to validate token/claims (or use negotiated auth compatible with your SignalR version).
+
+## Phase 3: retire NTLM
+1.  Disable IIS Windows authentication for the API.
+1.  Enable anonymous requests at IIS layer.
+1.  Rely on JWT middleware and API authorization.
+1.  Remove NTLM-specific code paths when stable.
+
+
+## Minimal code design change
+1.  Introduce an identity resolver abstraction:
+    *   ResolveAccountNameFromTokenOrWindowsPrincipal()
+1.  Use that in:
+    *   **AppAuthorizationMessageHandler.cs**
+    *   **SignalrAuthorizationAttribute.cs**
+1.  Keep your existing PrincipalUserQuery flow unchanged so permissions/business logic remain stable.
+
+## Claims mapping guidance
+1.  Prefer claim order:
+    *   preferred_username
+    *   upn
+    *   email
+1.  If your database stores SAM format like DOMAIN\user, add a mapping step from UPN to SAM where needed.
+1.  Store Entra object id as a stable alternate key for future-proofing.
+
+## Risk points to plan for
+1.  Legacy browsers and old WebView clients may not perform silent SSO cleanly.
+1.  Service-to-service and webhook flows must remain certificate or app-token based.
+1.  SignalR auth flow may need special handling depending on transport and token forwarding.
+1.  Cross-domain frontend/API requires strict CORS + token audience checks.
+
+## Suggested rollout pattern
+1.  Dual-auth window: support NTLM and bearer for a short period.
+1.  Pilot one department.
+1.  Monitor unauthorized responses and claim-mapping misses.
+1.  Complete cutover and disable NTLM.

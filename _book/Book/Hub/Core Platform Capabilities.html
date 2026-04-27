@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Core Platform Capabilities – Hub Decoupled Architecture</title>
+<title>3&nbsp; Core Platform Capabilities – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../Book/Hub/Major entities and relationships.html" rel="next">
-<link href="../../Book/Detailed Design &amp; Implementation.html" rel="prev">
+<link href="../../Book/Current State Assessment.html" rel="prev">
 <link href="../../coverG.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Current State Assessment.html">Current State Assessment</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,22 +125,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+            <a href="../../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Current State Assessment</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -149,19 +137,54 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Hub/Major entities and relationships.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Book/Hub/Architectural Summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Architectural Summary.html</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flow 1 — Human SSO (Entra bearer token, domain-joined device)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -169,13 +192,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
   </div>
 </li>
     </ul>
@@ -188,25 +211,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#property-real-estate-management" id="toc-property-real-estate-management" class="nav-link active" data-scroll-target="#property-real-estate-management"><span class="header-section-number">5.1</span> Property &amp; Real Estate Management</a></li>
-  <li><a href="#business-operations" id="toc-business-operations" class="nav-link" data-scroll-target="#business-operations"><span class="header-section-number">5.2</span> Business Operations</a></li>
-  <li><a href="#document-communication" id="toc-document-communication" class="nav-link" data-scroll-target="#document-communication"><span class="header-section-number">5.3</span> Document &amp; Communication</a></li>
-  <li><a href="#transactional-features" id="toc-transactional-features" class="nav-link" data-scroll-target="#transactional-features"><span class="header-section-number">5.4</span> Transactional Features</a></li>
-  <li><a href="#marketing-lead-management" id="toc-marketing-lead-management" class="nav-link" data-scroll-target="#marketing-lead-management"><span class="header-section-number">5.5</span> Marketing &amp; Lead Management</a></li>
-  <li><a href="#data-analytics" id="toc-data-analytics" class="nav-link" data-scroll-target="#data-analytics"><span class="header-section-number">5.6</span> Data &amp; Analytics</a></li>
-  <li><a href="#external-integrations-services" id="toc-external-integrations-services" class="nav-link" data-scroll-target="#external-integrations-services"><span class="header-section-number">5.7</span> External Integrations &amp; Services</a></li>
-  <li><a href="#background-processing-webjobs" id="toc-background-processing-webjobs" class="nav-link" data-scroll-target="#background-processing-webjobs"><span class="header-section-number">5.8</span> Background Processing (WebJobs)</a></li>
-  <li><a href="#system-features" id="toc-system-features" class="nav-link" data-scroll-target="#system-features"><span class="header-section-number">5.9</span> System Features</a></li>
-  <li><a href="#reporting-analysis" id="toc-reporting-analysis" class="nav-link" data-scroll-target="#reporting-analysis"><span class="header-section-number">5.10</span> Reporting &amp; Analysis</a></li>
+  <li><a href="#property-real-estate-management" id="toc-property-real-estate-management" class="nav-link active" data-scroll-target="#property-real-estate-management"><span class="header-section-number">3.1</span> Property &amp; Real Estate Management</a></li>
+  <li><a href="#business-operations" id="toc-business-operations" class="nav-link" data-scroll-target="#business-operations"><span class="header-section-number">3.2</span> Business Operations</a></li>
+  <li><a href="#document-communication" id="toc-document-communication" class="nav-link" data-scroll-target="#document-communication"><span class="header-section-number">3.3</span> Document &amp; Communication</a></li>
+  <li><a href="#transactional-features" id="toc-transactional-features" class="nav-link" data-scroll-target="#transactional-features"><span class="header-section-number">3.4</span> Transactional Features</a></li>
+  <li><a href="#marketing-lead-management" id="toc-marketing-lead-management" class="nav-link" data-scroll-target="#marketing-lead-management"><span class="header-section-number">3.5</span> Marketing &amp; Lead Management</a></li>
+  <li><a href="#data-analytics" id="toc-data-analytics" class="nav-link" data-scroll-target="#data-analytics"><span class="header-section-number">3.6</span> Data &amp; Analytics</a></li>
+  <li><a href="#external-integrations-services" id="toc-external-integrations-services" class="nav-link" data-scroll-target="#external-integrations-services"><span class="header-section-number">3.7</span> External Integrations &amp; Services</a></li>
+  <li><a href="#background-processing-webjobs" id="toc-background-processing-webjobs" class="nav-link" data-scroll-target="#background-processing-webjobs"><span class="header-section-number">3.8</span> Background Processing (WebJobs)</a></li>
+  <li><a href="#system-features" id="toc-system-features" class="nav-link" data-scroll-target="#system-features"><span class="header-section-number">3.9</span> System Features</a></li>
+  <li><a href="#reporting-analysis" id="toc-reporting-analysis" class="nav-link" data-scroll-target="#reporting-analysis"><span class="header-section-number">3.10</span> Reporting &amp; Analysis</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Current State Assessment.html">Current State Assessment</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/Core Platform Capabilities.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></h1>
 </div>
 
 
@@ -223,8 +246,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="property-real-estate-management" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="property-real-estate-management"><span class="header-section-number">5.1</span> Property &amp; Real Estate Management</h2>
+<section id="property-real-estate-management" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="property-real-estate-management"><span class="header-section-number">3.1</span> Property &amp; Real Estate Management</h2>
 <ul>
 <li>Properties management (listings, details, attributes)</li>
 <li>Buildings and building management</li>
@@ -234,8 +257,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Tenancies and leasing management</li>
 </ul>
 </section>
-<section id="business-operations" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="business-operations"><span class="header-section-number">5.2</span> Business Operations</h2>
+<section id="business-operations" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="business-operations"><span class="header-section-number">3.2</span> Business Operations</h2>
 <ul>
 <li>Businesses and company management</li>
 <li>Contacts management</li>
@@ -244,8 +267,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Departments and organizational structure</li>
 </ul>
 </section>
-<section id="document-communication" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="document-communication"><span class="header-section-number">5.3</span> Document &amp; Communication</h2>
+<section id="document-communication" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="document-communication"><span class="header-section-number">3.3</span> Document &amp; Communication</h2>
 <ul>
 <li>Document templates and management</li>
 <li>Attachments handling</li>
@@ -258,8 +281,8 @@ ul.task-list li input[type="checkbox"] {
 <li>HotDocs integration</li>
 </ul>
 </section>
-<section id="transactional-features" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="transactional-features"><span class="header-section-number">5.4</span> Transactional Features</h2>
+<section id="transactional-features" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="transactional-features"><span class="header-section-number">3.4</span> Transactional Features</h2>
 <ul>
 <li>Instructions management (property instructions/contracts)</li>
 <li>Offers management</li>
@@ -269,8 +292,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Tenancy management</li>
 </ul>
 </section>
-<section id="marketing-lead-management" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="marketing-lead-management"><span class="header-section-number">5.5</span> Marketing &amp; Lead Management</h2>
+<section id="marketing-lead-management" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="marketing-lead-management"><span class="header-section-number">3.5</span> Marketing &amp; Lead Management</h2>
 <ul>
 <li>Marketing lists management</li>
 <li>Web enquiries and web form submissions</li>
@@ -280,8 +303,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Dotmailer CRM integration</li>
 </ul>
 </section>
-<section id="data-analytics" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="data-analytics"><span class="header-section-number">5.6</span> Data &amp; Analytics</h2>
+<section id="data-analytics" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="data-analytics"><span class="header-section-number">3.6</span> Data &amp; Analytics</h2>
 <ul>
 <li>Dashboard creation and management</li>
 <li>Grid management (customizable data grids)</li>
@@ -291,8 +314,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Metadata management</li>
 </ul>
 </section>
-<section id="external-integrations-services" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="external-integrations-services"><span class="header-section-number">5.7</span> External Integrations &amp; Services</h2>
+<section id="external-integrations-services" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="external-integrations-services"><span class="header-section-number">3.7</span> External Integrations &amp; Services</h2>
 <ul>
 <li>DocuSign integration (eSignature)</li>
 <li>SAP integration</li>
@@ -305,8 +328,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Elasticsearch integration (search)</li>
 </ul>
 </section>
-<section id="background-processing-webjobs" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="background-processing-webjobs"><span class="header-section-number">5.8</span> Background Processing (WebJobs)</h2>
+<section id="background-processing-webjobs" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="background-processing-webjobs"><span class="header-section-number">3.8</span> Background Processing (WebJobs)</h2>
 <ul>
 <li>Email distribution processing</li>
 <li>Elasticsearch indexing and search updates</li>
@@ -327,8 +350,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Azure Service Bus document handling</li>
 </ul>
 </section>
-<section id="system-features" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="system-features"><span class="header-section-number">5.9</span> System Features</h2>
+<section id="system-features" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="system-features"><span class="header-section-number">3.9</span> System Features</h2>
 <ul>
 <li>Portal document visibility control</li>
 <li>Character groups and categorical data</li>
@@ -345,8 +368,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Web warmup endpoints</li>
 </ul>
 </section>
-<section id="reporting-analysis" class="level2" data-number="5.10">
-<h2 data-number="5.10" class="anchored" data-anchor-id="reporting-analysis"><span class="header-section-number">5.10</span> Reporting &amp; Analysis</h2>
+<section id="reporting-analysis" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="reporting-analysis"><span class="header-section-number">3.10</span> Reporting &amp; Analysis</h2>
 <ul>
 <li>Reports generation</li>
 <li>Qube reporting integration</li>
@@ -760,13 +783,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Book/Detailed Design &amp; Implementation.html" class="pagination-link" aria-label="Detailed Design &amp; Implementation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Detailed Design &amp; Implementation</span>
+      <a href="../../Book/Current State Assessment.html" class="pagination-link" aria-label="Current State Assessment">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Current State Assessment</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../Book/Hub/Major entities and relationships.html" class="pagination-link" aria-label="Major entities and relationships">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

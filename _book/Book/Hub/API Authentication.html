@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Gary Newport">
-<meta name="dcterms.date" content="2027-09-04">
 
-<title>Hub Decoupled Architecture</title>
+<title>8&nbsp; API Authentication – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,26 +23,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./Book/Executive Summary &amp; Objectives.html" rel="next">
-<link href="./coverG.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3ea88fb24c6fca115aefa7d130dd19cd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Book/Hub/API Auth Implementation.html" rel="next">
+<link href="../../Book/Detailed Design &amp; Implementation.html" rel="prev">
+<link href="../../coverG.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-3ea88fb24c6fca115aefa7d130dd19cd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,9 +71,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -88,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hub Decoupled Architecture</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/API Authentication.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -102,12 +101,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./coverGB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./coverGB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../coverGB.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../coverGB.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Hub Decoupled Architecture</a> 
+      <a href="../../">Hub Decoupled Architecture</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -119,19 +118,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Hub Decoupled Architecture</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Executive Summary &amp; Objectives.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Executive Summary &amp; Objectives.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Current State Assessment</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -140,25 +139,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/Major entities and relationships.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/Major entities and relationships.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/Architectural Summary.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/Architectural Summary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Architectural Summary.html</span></span></a>
   </div>
 </li>
@@ -166,13 +165,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Detailed Design &amp; Implementation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -181,13 +180,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span></a>
   </div>
 </li>
@@ -195,13 +194,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
   </div>
 </li>
@@ -215,52 +214,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hub-decoupled-architecture" id="toc-hub-decoupled-architecture" class="nav-link active" data-scroll-target="#hub-decoupled-architecture"><span class="header-section-number">1</span> Hub Decoupled Architecture</a>
-  <ul class="collapse">
-  <li><a href="#purpose-of-this-document" id="toc-purpose-of-this-document" class="nav-link" data-scroll-target="#purpose-of-this-document"><span class="header-section-number">1.1</span> Purpose of This Document</a></li>
-  <li><a href="#current-context" id="toc-current-context" class="nav-link" data-scroll-target="#current-context"><span class="header-section-number">1.2</span> Current Context</a></li>
-  <li><a href="#architectural-decision-drivers" id="toc-architectural-decision-drivers" class="nav-link" data-scroll-target="#architectural-decision-drivers"><span class="header-section-number">1.3</span> Architectural Decision Drivers</a></li>
-  <li><a href="#options-considered" id="toc-options-considered" class="nav-link" data-scroll-target="#options-considered"><span class="header-section-number">1.4</span> Options Considered</a>
-  <ul class="collapse">
-  <li><a href="#option-a-service-bus-with-rich-payload-contracts" id="toc-option-a-service-bus-with-rich-payload-contracts" class="nav-link" data-scroll-target="#option-a-service-bus-with-rich-payload-contracts"><span class="header-section-number">1.4.1</span> Option A: Service Bus with Rich Payload Contracts</a></li>
-  <li><a href="#option-b-event-notification-consumer-data-pull" id="toc-option-b-event-notification-consumer-data-pull" class="nav-link" data-scroll-target="#option-b-event-notification-consumer-data-pull"><span class="header-section-number">1.4.2</span> Option B: Event Notification + Consumer Data Pull</a></li>
-  <li><a href="#option-c-rest-command-interface-for-write-back" id="toc-option-c-rest-command-interface-for-write-back" class="nav-link" data-scroll-target="#option-c-rest-command-interface-for-write-back"><span class="header-section-number">1.4.3</span> Option C: REST Command Interface for Write-Back</a></li>
-  </ul></li>
-  <li><a href="#recommended-architecture" id="toc-recommended-architecture" class="nav-link" data-scroll-target="#recommended-architecture"><span class="header-section-number">1.5</span> Recommended Architecture</a></li>
-  <li><a href="#decision-summary-matrix" id="toc-decision-summary-matrix" class="nav-link" data-scroll-target="#decision-summary-matrix"><span class="header-section-number">1.6</span> Decision Summary Matrix</a></li>
-  <li><a href="#target-interaction-overview" id="toc-target-interaction-overview" class="nav-link" data-scroll-target="#target-interaction-overview"><span class="header-section-number">1.7</span> Target Interaction Overview</a></li>
-  <li><a href="#transition-principle" id="toc-transition-principle" class="nav-link" data-scroll-target="#transition-principle"><span class="header-section-number">1.8</span> Transition Principle</a></li>
-  <li><a href="#phase-gates-at-a-glance" id="toc-phase-gates-at-a-glance" class="nav-link" data-scroll-target="#phase-gates-at-a-glance"><span class="header-section-number">1.9</span> Phase Gates at a Glance</a></li>
-  <li><a href="#how-to-use-this-book" id="toc-how-to-use-this-book" class="nav-link" data-scroll-target="#how-to-use-this-book"><span class="header-section-number">1.10</span> How to Use This Book</a></li>
-  </ul></li>
+  <li><a href="#flow-1-human-sso-entra-bearer-token-domain-joined-device" id="toc-flow-1-human-sso-entra-bearer-token-domain-joined-device" class="nav-link active" data-scroll-target="#flow-1-human-sso-entra-bearer-token-domain-joined-device"><span class="header-section-number">8.0.1</span> Flow 1 — Human SSO (Entra bearer token, domain-joined device)</a></li>
+  <li><a href="#flow-2-human-sso-windows-ntlm-fallback-mode-dual" id="toc-flow-2-human-sso-windows-ntlm-fallback-mode-dual" class="nav-link" data-scroll-target="#flow-2-human-sso-windows-ntlm-fallback-mode-dual"><span class="header-section-number">8.0.2</span> Flow 2 — Human SSO (Windows / NTLM fallback, mode = Dual)</a></li>
+  <li><a href="#flow-3-system-to-system-existing-externalapplicationhandler-unchanged" id="toc-flow-3-system-to-system-existing-externalapplicationhandler-unchanged" class="nav-link" data-scroll-target="#flow-3-system-to-system-existing-externalapplicationhandler-unchanged"><span class="header-section-number">8.0.3</span> Flow 3 — System-to-system (existing ExternalApplicationHandler — unchanged)</a></li>
+  <li><a href="#current-state-in-your-api" id="toc-current-state-in-your-api" class="nav-link" data-scroll-target="#current-state-in-your-api"><span class="header-section-number">8.1</span> Current state in your API</a></li>
+  <li><a href="#target-approach-recommended" id="toc-target-approach-recommended" class="nav-link" data-scroll-target="#target-approach-recommended"><span class="header-section-number">8.2</span> Target approach (recommended)</a></li>
+  <li><a href="#how-users-still-avoid-login-prompts" id="toc-how-users-still-avoid-login-prompts" class="nav-link" data-scroll-target="#how-users-still-avoid-login-prompts"><span class="header-section-number">8.3</span> How users still avoid login prompts</a></li>
+  <li><a href="#what-to-change-in-this-solution" id="toc-what-to-change-in-this-solution" class="nav-link" data-scroll-target="#what-to-change-in-this-solution"><span class="header-section-number">8.4</span> What to change in this solution</a></li>
+  <li><a href="#phase-2-switch-primary-auth-to-ad-token-sso" id="toc-phase-2-switch-primary-auth-to-ad-token-sso" class="nav-link" data-scroll-target="#phase-2-switch-primary-auth-to-ad-token-sso"><span class="header-section-number">8.5</span> Phase 2: Switch primary auth to AD token SSO</a></li>
+  <li><a href="#phase-3-retire-ntlm" id="toc-phase-3-retire-ntlm" class="nav-link" data-scroll-target="#phase-3-retire-ntlm"><span class="header-section-number">8.6</span> Phase 3: retire NTLM</a></li>
+  <li><a href="#minimal-code-design-change" id="toc-minimal-code-design-change" class="nav-link" data-scroll-target="#minimal-code-design-change"><span class="header-section-number">8.7</span> Minimal code design change</a></li>
+  <li><a href="#claims-mapping-guidance" id="toc-claims-mapping-guidance" class="nav-link" data-scroll-target="#claims-mapping-guidance"><span class="header-section-number">8.8</span> Claims mapping guidance</a></li>
+  <li><a href="#risk-points-to-plan-for" id="toc-risk-points-to-plan-for" class="nav-link" data-scroll-target="#risk-points-to-plan-for"><span class="header-section-number">8.9</span> Risk points to plan for</a></li>
+  <li><a href="#suggested-rollout-pattern" id="toc-suggested-rollout-pattern" class="nav-link" data-scroll-target="#suggested-rollout-pattern"><span class="header-section-number">8.10</span> Suggested rollout pattern</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Book/Detailed Design &amp; Implementation.html">Detailed Design &amp; Implementation</a></li><li class="breadcrumb-item"><a href="../../Book/Hub/API Authentication.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Hub Decoupled Architecture</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Gary Newport </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 4, 2027</p>
-    </div>
-  </div>
   
     
   </div>
@@ -270,199 +252,207 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hub-decoupled-architecture" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Hub Decoupled Architecture</h1>
-<section id="purpose-of-this-document" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="purpose-of-this-document"><span class="header-section-number">1.1</span> Purpose of This Document</h2>
-<p>This architecture book defines the transition strategy for decoupling Hub from its current tightly coupled client-server implementation. It sets out the target integration model, the phased rollout approach, and the controls needed to migrate safely while keeping business operations stable.</p>
-</section>
-<section id="current-context" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="current-context"><span class="header-section-number">1.2</span> Current Context</h2>
-<p>Hub is a legacy platform with:</p>
-<ul>
-<li>Angular front end.</li>
-<li>C# back end that has grown into a highly coupled monolith.</li>
-<li>Entity Framework code-first data access model.</li>
-</ul>
-<p>The current architecture has become costly and high risk to change. Delivery lead times are increasing, integration complexity is rising, and broad code impact makes regression risk difficult to control.</p>
-<p>The business requires a staged migration path where legacy and target capabilities can run in parallel, remain synchronized, and preserve service continuity.</p>
-</section>
-<section id="architectural-decision-drivers" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="architectural-decision-drivers"><span class="header-section-number">1.3</span> Architectural Decision Drivers</h2>
-<p>Key drivers behind the architecture decision are:</p>
-<ul>
-<li>Reduce coupling between Hub internals and downstream consumers.</li>
-<li>Support independent consumer evolution with lower coordination overhead.</li>
-<li>Preserve existing domain rule enforcement during migration.</li>
-<li>Improve security posture for integration-facing interfaces.</li>
-<li>Enable incremental rollout with reversible steps.</li>
-</ul>
-</section>
-<section id="options-considered" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="options-considered"><span class="header-section-number">1.4</span> Options Considered</h2>
-<section id="option-a-service-bus-with-rich-payload-contracts" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="option-a-service-bus-with-rich-payload-contracts"><span class="header-section-number">1.4.1</span> Option A: Service Bus with Rich Payload Contracts</h3>
-<p>Each business operation emits change payloads directly on a service bus.</p>
-<p>Benefits:</p>
-<ul>
-<li>Familiar enterprise integration pattern.</li>
-<li>Fast consumer processing when payloads are complete.</li>
-</ul>
-<p>Challenges:</p>
-<ul>
-<li>High schema governance burden and version coordination across teams.</li>
-<li>Payload contracts can become complex and brittle over time.</li>
-<li>Cross-tenant operation and ownership can be difficult in practice.</li>
-</ul>
-</section>
-<section id="option-b-event-notification-consumer-data-pull" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="option-b-event-notification-consumer-data-pull"><span class="header-section-number">1.4.2</span> Option B: Event Notification + Consumer Data Pull</h3>
-<p>Hub publishes business events, and consumers retrieve required data projections via GraphQL.</p>
-<p>Benefits:</p>
-<ul>
-<li>Lower payload coupling and more flexible consumer data selection.</li>
-<li>Better fit for independent consumer evolution.</li>
-<li>Reduced need for centrally maintained, consumer-specific event shapes.</li>
-</ul>
-<p>Challenges:</p>
-<ul>
-<li>Requires robust query security and performance controls.</li>
-<li>Requires operational maturity for event handling and replay.</li>
-</ul>
-</section>
-<section id="option-c-rest-command-interface-for-write-back" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="option-c-rest-command-interface-for-write-back"><span class="header-section-number">1.4.3</span> Option C: REST Command Interface for Write-Back</h3>
-<p>External systems perform create, update, and delete operations via REST endpoints into Hub.</p>
-<p>Benefits:</p>
-<ul>
-<li>Centralized validation and business rule enforcement.</li>
-<li>Clear command boundary for controlled write operations.</li>
-</ul>
-<p>Challenges:</p>
-<ul>
-<li>Existing UI-focused REST interfaces must be modernized for broader integration usage.</li>
-</ul>
-</section>
-</section>
-<section id="recommended-architecture" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="recommended-architecture"><span class="header-section-number">1.5</span> Recommended Architecture</h2>
-<p>The preferred target model is a combined pattern:</p>
-<ul>
-<li>Event Bus for change notification.</li>
-<li>GraphQL for consumer-driven read projections.</li>
-<li>REST APIs for controlled write-back into Hub.</li>
-</ul>
-<p>This balances flexibility and governance by keeping write validation centralized while allowing consumers to retrieve fit-for-purpose data views.</p>
-</section>
-<section id="decision-summary-matrix" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="decision-summary-matrix"><span class="header-section-number">1.6</span> Decision Summary Matrix</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Coupling</th>
-<th>Consumer Flexibility</th>
-<th>Governance Overhead</th>
-<th>Migration Fit</th>
-<th>Overall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Service Bus with rich payloads</td>
-<td>Medium-High</td>
-<td>Medium</td>
-<td>High</td>
-<td>Medium</td>
-<td>Medium</td>
-</tr>
-<tr class="even">
-<td>Event notification + consumer pull</td>
-<td>Low</td>
-<td>High</td>
-<td>Medium</td>
-<td>High</td>
-<td>High</td>
-</tr>
-<tr class="odd">
-<td>REST command-only model</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-<td>Medium</td>
-</tr>
-<tr class="even">
-<td>Combined Event + GraphQL + REST</td>
-<td>Low</td>
-<td>High</td>
-<td>Medium</td>
-<td>High</td>
-<td>Highest</td>
-</tr>
-</tbody>
-</table>
-<p>The combined model is selected because it provides the best trade-off between migration safety, consumer autonomy, and long-term maintainability.</p>
-</section>
-<section id="target-interaction-overview" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="target-interaction-overview"><span class="header-section-number">1.7</span> Target Interaction Overview</h2>
+<p>The current NTLM authentication protocol is ‘end of life’ in early 2027, so we need to update the API authentication layer to a more modern protocol. The company uses AD Entra.</p>
+<section id="flow-1-human-sso-entra-bearer-token-domain-joined-device" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="flow-1-human-sso-entra-bearer-token-domain-joined-device"><span class="header-section-number">8.0.1</span> Flow 1 — Human SSO (Entra bearer token, domain-joined device)</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
-    A[Hub Domain Change] --&gt; B[Event Published]
-    B --&gt; C[Consumer Receives Event]
-    C --&gt; D[GraphQL Query for Projection]
-    D --&gt; E[Consumer Projection Updated]
-    F[External Command] --&gt; G[REST API Write Back]
-    G --&gt; H[Hub Validates and Persists]
-    H --&gt; B
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant Browser
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant Resolver as AdIdentityResolver
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    Browser-&gt;&gt;IIS: GET /api/... (no explicit login)&lt;br/&gt;MSAL silently acquires token via PRT/Seamless SSO
+    Note over Browser,IIS: Authorization: Bearer eyJ...
+    IIS-&gt;&gt;EntraMiddleware: OWIN pipeline
+    EntraMiddleware-&gt;&gt;EntraMiddleware: Validate JWT signature via OIDC discovery keys
+    EntraMiddleware-&gt;&gt;EntraMiddleware: Stamp ClaimsPrincipal with kf_auth_source=Bearer
+    EntraMiddleware-&gt;&gt;EntraMiddleware: Set Thread.CurrentPrincipal + HttpContext.Current.User
+    EntraMiddleware-&gt;&gt;AuthHandler: next.Invoke()
+    AuthHandler-&gt;&gt;Resolver: ResolveAccountName(request)
+    Resolver-&gt;&gt;Resolver: Detect kf_auth_source=Bearer claim
+    Resolver-&gt;&gt;Resolver: Extract preferred_username → upn → email
+    Resolver-&gt;&gt;Resolver: MapToAccountName() → internal AD login
+    Resolver--&gt;&gt;AuthHandler: "SA1\DOEJO"
+    AuthHandler-&gt;&gt;Domain: PrincipalUserQuery { ActiveDirectoryAccount="SA1\DOEJO" }
+    Domain--&gt;&gt;AuthHandler: PrincipalUser
+    AuthHandler--&gt;&gt;Browser: 200 OK
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>The read path is consumer-driven (event + query), while the write path remains centrally governed through Hub APIs.</p>
 </section>
-<section id="transition-principle" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="transition-principle"><span class="header-section-number">1.8</span> Transition Principle</h2>
-<p>The migration will be incremental, domain by domain. Legacy and target pathways will coexist until each domain meets objective readiness criteria for cutover. Rollback capability, reconciliation, and observability are mandatory controls at every phase.</p>
+<section id="flow-2-human-sso-windows-ntlm-fallback-mode-dual" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="flow-2-human-sso-windows-ntlm-fallback-mode-dual"><span class="header-section-number">8.0.2</span> Flow 2 — Human SSO (Windows / NTLM fallback, mode = Dual)</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant Browser
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant Resolver as AdIdentityResolver
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    Browser-&gt;&gt;IIS: GET /api/... (no bearer token)
+    Note over Browser,IIS: IIS Windows Auth negotiates NTLM/Kerberos
+    IIS-&gt;&gt;EntraMiddleware: OWIN pipeline
+    EntraMiddleware-&gt;&gt;EntraMiddleware: No Authorization: Bearer header → no-op
+    EntraMiddleware-&gt;&gt;AuthHandler: next.Invoke()
+    AuthHandler-&gt;&gt;Resolver: ResolveAccountName(request)
+    Resolver-&gt;&gt;Resolver: No kf_auth_source=Bearer claim
+    Resolver-&gt;&gt;Resolver: Mode = Dual + EnableWindowsFallback = true
+    Resolver-&gt;&gt;Resolver: Read HttpContext.Current.User.Identity.Name
+    Resolver--&gt;&gt;AuthHandler: "SA1\DOEJO"
+    AuthHandler-&gt;&gt;Domain: PrincipalUserQuery { ActiveDirectoryAccount="SA1\DOEJO" }
+    Domain--&gt;&gt;AuthHandler: PrincipalUser
+    AuthHandler--&gt;&gt;Browser: 200 OK
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="phase-gates-at-a-glance" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="phase-gates-at-a-glance"><span class="header-section-number">1.9</span> Phase Gates at a Glance</h2>
-<p>Each migration wave should pass the same minimum gate set:</p>
-<ul>
-<li>Technical gate: contracts validated, telemetry active, security controls in place.</li>
-<li>Data gate: baseline loaded, reconciliation passed, no unresolved critical drift.</li>
-<li>Operational gate: dashboards, runbooks, alert routing, and rollback drills completed.</li>
-<li>Business gate: stakeholder sign-off on readiness and service continuity.</li>
-</ul>
+<section id="flow-3-system-to-system-existing-externalapplicationhandler-unchanged" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="flow-3-system-to-system-existing-externalapplicationhandler-unchanged"><span class="header-section-number">8.0.3</span> Flow 3 — System-to-system (existing ExternalApplicationHandler — unchanged)</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant CallingService as Calling Service
+    participant IIS
+    participant EntraMiddleware as EntraTokenValidationMiddleware
+    participant AuthHandler as AppAuthorizationMessageHandler
+    participant ExtHandler as ExternalApplicationHandler
+    participant Domain as PrincipalUserQuery (MediatR)
+
+    CallingService-&gt;&gt;IIS: POST /api/... + cert / shared-secret header
+    IIS-&gt;&gt;EntraMiddleware: OWIN pipeline
+    EntraMiddleware-&gt;&gt;EntraMiddleware: No bearer token (or token ignored) → no-op
+    EntraMiddleware-&gt;&gt;AuthHandler: next.Invoke()
+    AuthHandler-&gt;&gt;ExtHandler: IsRequestFromExternalApplication()?
+    ExtHandler--&gt;&gt;AuthHandler: true
+    AuthHandler-&gt;&gt;ExtHandler: GetAuthorizedUserName()
+    ExtHandler--&gt;&gt;AuthHandler: "svc-account@knightfrank.com"
+    AuthHandler-&gt;&gt;Domain: PrincipalUserQuery { ActiveDirectoryAccount="svc-account@..." }
+    Domain--&gt;&gt;AuthHandler: PrincipalUser
+    AuthHandler--&gt;&gt;CallingService: 200 OK
+    Note over AuthHandler,ExtHandler: Entire resolver path is bypassed.&lt;br/&gt;No change from current behaviour.
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="how-to-use-this-book" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="how-to-use-this-book"><span class="header-section-number">1.10</span> How to Use This Book</h2>
-<p>Read the following chapters in sequence:</p>
+<section id="current-state-in-your-api" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="current-state-in-your-api"><span class="header-section-number">8.1</span> Current state in your API</h2>
 <ol type="1">
-<li>Executive Summary &amp; Objectives: strategic goals and measurable outcomes.</li>
-<li>Current State Assessment: baseline architecture and pain points.</li>
-<li>Proposed Target Architecture: future-state design and interaction model.</li>
-<li>Detailed Design &amp; Implementation: contracts, controls, and implementation sequence.</li>
-<li>Transition &amp; Rollout Plan: phases, risks, and rollback strategy.</li>
-<li>Operations &amp; Maintenance: testing, SLOs, monitoring, and support model.</li>
+<li>Windows auth is enabled in config:&nbsp;<strong>Web.config:630</strong></li>
+<li>Anonymous users are denied:&nbsp;<strong>Web.config:631</strong></li>
+<li>User identity is read from IIS Windows principal name in the auth handler:&nbsp;<strong>AppAuthorizationMessageHandler.cs</strong></li>
+<li>SignalR does the same pattern:&nbsp;<strong>SignalrAuthorizationAttribute.cs</strong></li>
+</ol>
+</section>
+<section id="target-approach-recommended" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="target-approach-recommended"><span class="header-section-number">8.2</span> Target approach (recommended)</h2>
+<ol type="1">
+<li>Use Microsoft Entra ID backed by AD accounts (hybrid or cloud-only).</li>
+<li>Frontend gets OAuth/OIDC tokens silently with SSO.</li>
+<li>API validates bearer JWT tokens.</li>
+<li>API maps token claims to your existing user model and continues to use PrincipalUser.</li>
+</ol>
+</section>
+<section id="how-users-still-avoid-login-prompts" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="how-users-still-avoid-login-prompts"><span class="header-section-number">8.3</span> How users still avoid login prompts</h2>
+<ol type="1">
+<li>Domain-joined or Entra-joined devices with Seamless SSO/PRT can get tokens silently.</li>
+<li>Browser sessions use SSO cookies/PRT and usually do not show login pages.</li>
+<li>Non-compliant devices can still be handled with Conditional Access rules.</li>
+</ol>
+</section>
+<section id="what-to-change-in-this-solution" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="what-to-change-in-this-solution"><span class="header-section-number">8.4</span> What to change in this solution</h2>
+<p><strong>Phase 1: Add token auth without breaking NTLM</strong> 1. Add OWIN JWT bearer middleware in startup. 1. Keep current handler, but make identity source pluggable: * If bearer token exists, read from claims like preferred_username or upn. * Else fallback to existing HttpContext.Current.User.Identity.Name. 1. Keep existing webhook/system-account paths as-is in the handler.</p>
+</section>
+<section id="phase-2-switch-primary-auth-to-ad-token-sso" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="phase-2-switch-primary-auth-to-ad-token-sso"><span class="header-section-number">8.5</span> Phase 2: Switch primary auth to AD token SSO</h2>
+<ol type="1">
+<li>Change API config from Windows auth requirement to token validation path.</li>
+<li>Update frontend to use MSAL and call API with bearer tokens.</li>
+<li>Update SignalR auth to validate token/claims (or use negotiated auth compatible with your SignalR version).</li>
+</ol>
+</section>
+<section id="phase-3-retire-ntlm" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="phase-3-retire-ntlm"><span class="header-section-number">8.6</span> Phase 3: retire NTLM</h2>
+<ol type="1">
+<li>Disable IIS Windows authentication for the API.</li>
+<li>Enable anonymous requests at IIS layer.</li>
+<li>Rely on JWT middleware and API authorization.</li>
+<li>Remove NTLM-specific code paths when stable.</li>
+</ol>
+</section>
+<section id="minimal-code-design-change" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="minimal-code-design-change"><span class="header-section-number">8.7</span> Minimal code design change</h2>
+<ol type="1">
+<li>Introduce an identity resolver abstraction:
+<ul>
+<li>ResolveAccountNameFromTokenOrWindowsPrincipal()</li>
+</ul></li>
+<li>Use that in:
+<ul>
+<li><strong>AppAuthorizationMessageHandler.cs</strong></li>
+<li><strong>SignalrAuthorizationAttribute.cs</strong></li>
+</ul></li>
+<li>Keep your existing PrincipalUserQuery flow unchanged so permissions/business logic remain stable.</li>
+</ol>
+</section>
+<section id="claims-mapping-guidance" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="claims-mapping-guidance"><span class="header-section-number">8.8</span> Claims mapping guidance</h2>
+<ol type="1">
+<li>Prefer claim order:
+<ul>
+<li>preferred_username</li>
+<li>upn</li>
+<li>email</li>
+</ul></li>
+<li>If your database stores SAM format like DOMAIN, add a mapping step from UPN to SAM where needed.</li>
+<li>Store Entra object id as a stable alternate key for future-proofing.</li>
+</ol>
+</section>
+<section id="risk-points-to-plan-for" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="risk-points-to-plan-for"><span class="header-section-number">8.9</span> Risk points to plan for</h2>
+<ol type="1">
+<li>Legacy browsers and old WebView clients may not perform silent SSO cleanly.</li>
+<li>Service-to-service and webhook flows must remain certificate or app-token based.</li>
+<li>SignalR auth flow may need special handling depending on transport and token forwarding.</li>
+<li>Cross-domain frontend/API requires strict CORS + token audience checks.</li>
+</ol>
+</section>
+<section id="suggested-rollout-pattern" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="suggested-rollout-pattern"><span class="header-section-number">8.10</span> Suggested rollout pattern</h2>
+<ol type="1">
+<li>Dual-auth window: support NTLM and bearer for a short period.</li>
+<li>Pilot one department.</li>
+<li>Monitor unauthorized responses and claim-mapping misses.</li>
+<li>Complete cutover and disable NTLM.</li>
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -868,10 +858,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../Book/Detailed Design &amp; Implementation.html" class="pagination-link" aria-label="Detailed Design &amp; Implementation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Detailed Design &amp; Implementation</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Book/Executive Summary &amp; Objectives.html" class="pagination-link" aria-label="Executive Summary &amp; Objectives">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Book/Hub/API Auth Implementation.html" class="pagination-link" aria-label="API Auth Implementation">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
