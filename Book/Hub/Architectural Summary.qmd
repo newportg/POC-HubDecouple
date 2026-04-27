@@ -16,22 +16,24 @@
     Owns background jobs and external systems: DocuSign, Dotmailer, SAP, Thirdfort, notifications, feeds, Elasticsearch updates, and sync/error handling.
     
 **2. Major Aggregates Per Context**
-1.  CRM  
-    Contact aggregate, Company aggregate, Contact-Company association, Contact relationship graph, address associations.
+
+1.  CRM
+    * Contact aggregate, Company aggregate, Contact-Company association, Contact relationship graph, address associations.
 1.  Listings and Demand  
-    Activity aggregate, Requirement aggregate, Match aggregate linking them, negotiator/department ownership.
+    * Activity aggregate, Requirement aggregate, Match aggregate linking them, negotiator/department ownership.
 1.  Transactions  
-    Offer aggregate with role-based parties (applicant, broker, lender, surveyor, etc.) and status progression.
+    * Offer aggregate with role-based parties (applicant, broker, lender, surveyor, etc.) and status progression.
 1.  Tenancy and PM  
-    Tenancy aggregate with linked asset/activity/requirement, tenancy parties, reviews/breaks, lease lineage.
+    * Tenancy aggregate with linked asset/activity/requirement, tenancy parties, reviews/breaks, lease lineage.
 1.  Asset and Geography  
-    Asset aggregate root with Property/Portfolio specializations and shared address model.
+    * Asset aggregate root with Property/Portfolio specializations and shared address model.
 1.  Organization and Security  
-    User aggregate, department/business membership, role bindings, resource-security attributes.
+    * User aggregate, department/business membership, role bindings, resource-security attributes.
 1.  Integration and Async  
-    WebJob handlers as process/application layer components that mutate domain aggregates and publish side effects.
+    * WebJob handlers as process/application layer components that mutate domain aggregates and publish side effects.
     
 **3. Relationship Backbone (most important)**
+
 1.  Asset to Activity: one-to-many
 1.  Asset to Tenancy: one-to-many
 1.  Requirement to Activity: many-to-many via Match
@@ -43,6 +45,7 @@
 1.  User to Department/Business: many-to-one from user perspective
 
 **4. Typical Business Flow**
+
 1.  Lead captured against Contact and optionally Company
 1.  Requirement created (demand)
 1.  Activity created on an Asset (supply)
@@ -52,12 +55,14 @@
 1.  WebJobs synchronize, notify, enrich, and index
 
 **5. Integration Points (high-value)**
+
 1.  Document and signing workflows (DocuSign)
 1.  Marketing/communications sync (Dotmailer, notifications, SMS/email jobs)
 1.  External data/compliance updates (SAP, Thirdfort, Fixflo and others)
 1.  Search indexing and feed jobs (Elasticsearch and feed webjobs)
 
 **6. Practical Implications for Change Design**
+
 1.  Changes to party roles should be made in party subtypes, not by adding fixed role columns.
 1.  Cross-context changes usually pass through Activity, Requirement, Offer, and Tenancy in that order.
 1.  Async side effects belong in WebJobs/process handlers; core invariants should remain in domain/application logic.

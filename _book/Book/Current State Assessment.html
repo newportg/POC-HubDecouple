@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Current State Assessment – Hub Decoupled Architecture</title>
+<title>Current State Assessment – Hub Decoupled Architecture</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../Book/Proposed Target Architecture.html" rel="next">
+<link href="../Book/Hub/Core Platform Capabilities.html" rel="next">
 <link href="../Book/Executive Summary &amp; Objectives.html" rel="prev">
 <link href="../coverG.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Current State Assessment.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Book/Current State Assessment.html">Current State Assessment</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -125,22 +125,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Executive Summary &amp; Objectives</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+            <a href="../Book/Current State Assessment.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Current State Assessment</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -149,19 +137,54 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Core Platform Capabilities.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Major entities and relationships.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Major entities and relationships</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Hub/Business View.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Business Flow (end-to-end)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/Architectural Summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Architectural Summary.html</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Proposed Target Architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Book/Detailed Design &amp; Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Detailed Design &amp; Implementation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span></a>
   </div>
 </li>
       </ul>
@@ -169,13 +192,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Transition &amp; Rollout Plan.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Transition &amp; Rollout Plan</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Book/Operations &amp; Maintenance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Operations &amp; Maintenance</span></span></a>
   </div>
 </li>
     </ul>
@@ -188,20 +211,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#application-inventory" id="toc-application-inventory" class="nav-link active" data-scroll-target="#application-inventory"><span class="header-section-number">3.1</span> Application Inventory</a></li>
-  <li><a href="#current-system-architecture" id="toc-current-system-architecture" class="nav-link" data-scroll-target="#current-system-architecture"><span class="header-section-number">3.2</span> Current System Architecture</a>
+  <li><a href="#application-inventory" id="toc-application-inventory" class="nav-link active" data-scroll-target="#application-inventory">Application Inventory</a></li>
+  <li><a href="#current-system-architecture" id="toc-current-system-architecture" class="nav-link" data-scroll-target="#current-system-architecture">Current System Architecture</a>
   <ul class="collapse">
-  <li><a href="#logical-structure" id="toc-logical-structure" class="nav-link" data-scroll-target="#logical-structure"><span class="header-section-number">3.2.1</span> Logical Structure</a></li>
-  <li><a href="#integration-characteristics" id="toc-integration-characteristics" class="nav-link" data-scroll-target="#integration-characteristics"><span class="header-section-number">3.2.2</span> Integration Characteristics</a></li>
+  <li><a href="#logical-structure" id="toc-logical-structure" class="nav-link" data-scroll-target="#logical-structure">Logical Structure</a></li>
+  <li><a href="#integration-characteristics" id="toc-integration-characteristics" class="nav-link" data-scroll-target="#integration-characteristics">Integration Characteristics</a></li>
   </ul></li>
-  <li><a href="#technical-debt-and-pain-points" id="toc-technical-debt-and-pain-points" class="nav-link" data-scroll-target="#technical-debt-and-pain-points"><span class="header-section-number">3.3</span> Technical Debt and Pain Points</a>
+  <li><a href="#technical-debt-and-pain-points" id="toc-technical-debt-and-pain-points" class="nav-link" data-scroll-target="#technical-debt-and-pain-points">Technical Debt and Pain Points</a>
   <ul class="collapse">
-  <li><a href="#change-cost-and-delivery-risk" id="toc-change-cost-and-delivery-risk" class="nav-link" data-scroll-target="#change-cost-and-delivery-risk"><span class="header-section-number">3.3.1</span> Change Cost and Delivery Risk</a></li>
-  <li><a href="#maintainability-and-operability" id="toc-maintainability-and-operability" class="nav-link" data-scroll-target="#maintainability-and-operability"><span class="header-section-number">3.3.2</span> Maintainability and Operability</a></li>
-  <li><a href="#integration-and-scalability-constraints" id="toc-integration-and-scalability-constraints" class="nav-link" data-scroll-target="#integration-and-scalability-constraints"><span class="header-section-number">3.3.3</span> Integration and Scalability Constraints</a></li>
-  <li><a href="#security-and-platform-readiness-gaps" id="toc-security-and-platform-readiness-gaps" class="nav-link" data-scroll-target="#security-and-platform-readiness-gaps"><span class="header-section-number">3.3.4</span> Security and Platform Readiness Gaps</a></li>
+  <li><a href="#change-cost-and-delivery-risk" id="toc-change-cost-and-delivery-risk" class="nav-link" data-scroll-target="#change-cost-and-delivery-risk">Change Cost and Delivery Risk</a></li>
+  <li><a href="#maintainability-and-operability" id="toc-maintainability-and-operability" class="nav-link" data-scroll-target="#maintainability-and-operability">Maintainability and Operability</a></li>
+  <li><a href="#integration-and-scalability-constraints" id="toc-integration-and-scalability-constraints" class="nav-link" data-scroll-target="#integration-and-scalability-constraints">Integration and Scalability Constraints</a></li>
+  <li><a href="#security-and-platform-readiness-gaps" id="toc-security-and-platform-readiness-gaps" class="nav-link" data-scroll-target="#security-and-platform-readiness-gaps">Security and Platform Readiness Gaps</a></li>
   </ul></li>
-  <li><a href="#why-change-is-required-now" id="toc-why-change-is-required-now" class="nav-link" data-scroll-target="#why-change-is-required-now"><span class="header-section-number">3.4</span> Why Change Is Required Now</a></li>
+  <li><a href="#why-change-is-required-now" id="toc-why-change-is-required-now" class="nav-link" data-scroll-target="#why-change-is-required-now">Why Change Is Required Now</a></li>
   </ul>
 </nav>
     </div>
@@ -210,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Current State Assessment</span></h1>
+<h1 class="title">Current State Assessment</h1>
 </div>
 
 
@@ -227,8 +250,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="application-inventory" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="application-inventory"><span class="header-section-number">3.1</span> Application Inventory</h2>
+<section id="application-inventory" class="level2">
+<h2 class="anchored" data-anchor-id="application-inventory">Application Inventory</h2>
 <p>The current Hub platform is a traditional client-server solution with:</p>
 <ul>
 <li>Angular-based user interface focused on transactional operations.</li>
@@ -243,10 +266,10 @@ ul.task-list li input[type="checkbox"] {
 <li>Internal orchestration that couples domain operations and integration side effects.</li>
 </ul>
 </section>
-<section id="current-system-architecture" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="current-system-architecture"><span class="header-section-number">3.2</span> Current System Architecture</h2>
-<section id="logical-structure" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="logical-structure"><span class="header-section-number">3.2.1</span> Logical Structure</h3>
+<section id="current-system-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="current-system-architecture">Current System Architecture</h2>
+<section id="logical-structure" class="level3">
+<h3 class="anchored" data-anchor-id="logical-structure">Logical Structure</h3>
 <p>The current architecture follows a layered but highly interdependent model:</p>
 <ul>
 <li>Presentation layer: Angular front end.</li>
@@ -256,8 +279,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Although these layers exist conceptually, practical coupling between layers has increased over time. Domain logic, integration concerns, and data access are frequently intermixed, resulting in broad impact when introducing changes.</p>
 </section>
-<section id="integration-characteristics" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="integration-characteristics"><span class="header-section-number">3.2.2</span> Integration Characteristics</h3>
+<section id="integration-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="integration-characteristics">Integration Characteristics</h3>
 <p>Current integration behavior is largely implementation-driven rather than contract-driven:</p>
 <ul>
 <li>APIs were optimized for GUI interaction patterns, not broad external consumer reuse.</li>
@@ -266,34 +289,34 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="technical-debt-and-pain-points" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="technical-debt-and-pain-points"><span class="header-section-number">3.3</span> Technical Debt and Pain Points</h2>
-<section id="change-cost-and-delivery-risk" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="change-cost-and-delivery-risk"><span class="header-section-number">3.3.1</span> Change Cost and Delivery Risk</h3>
+<section id="technical-debt-and-pain-points" class="level2">
+<h2 class="anchored" data-anchor-id="technical-debt-and-pain-points">Technical Debt and Pain Points</h2>
+<section id="change-cost-and-delivery-risk" class="level3">
+<h3 class="anchored" data-anchor-id="change-cost-and-delivery-risk">Change Cost and Delivery Risk</h3>
 <ul>
 <li>High regression risk when modifying shared monolithic components.</li>
 <li>Long lead times caused by cross-cutting code impact and heavy coordination.</li>
 <li>Difficult parallel work streams due to shared deployment units.</li>
 </ul>
 </section>
-<section id="maintainability-and-operability" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="maintainability-and-operability"><span class="header-section-number">3.3.2</span> Maintainability and Operability</h3>
+<section id="maintainability-and-operability" class="level3">
+<h3 class="anchored" data-anchor-id="maintainability-and-operability">Maintainability and Operability</h3>
 <ul>
 <li>Organic growth has produced complex and difficult-to-isolate code paths.</li>
 <li>Root-cause analysis is slower because responsibilities are not cleanly separated.</li>
 <li>Operational troubleshooting often requires domain and infrastructure knowledge concentrated in a small set of team members.</li>
 </ul>
 </section>
-<section id="integration-and-scalability-constraints" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="integration-and-scalability-constraints"><span class="header-section-number">3.3.3</span> Integration and Scalability Constraints</h3>
+<section id="integration-and-scalability-constraints" class="level3">
+<h3 class="anchored" data-anchor-id="integration-and-scalability-constraints">Integration and Scalability Constraints</h3>
 <ul>
 <li>Strong publisher-consumer coupling increases the cost of onboarding new systems.</li>
 <li>Rigid payload assumptions are hard to evolve across multiple consuming teams.</li>
 <li>Cross-tenant integration and governance create additional overhead when managed through centrally controlled bus schemas.</li>
 </ul>
 </section>
-<section id="security-and-platform-readiness-gaps" class="level3" data-number="3.3.4">
-<h3 data-number="3.3.4" class="anchored" data-anchor-id="security-and-platform-readiness-gaps"><span class="header-section-number">3.3.4</span> Security and Platform Readiness Gaps</h3>
+<section id="security-and-platform-readiness-gaps" class="level3">
+<h3 class="anchored" data-anchor-id="security-and-platform-readiness-gaps">Security and Platform Readiness Gaps</h3>
 <ul>
 <li>Existing REST surfaces are primarily GUI-focused and require modernization for broader integration use.</li>
 <li>Authentication and authorization patterns need to align with current enterprise standards.</li>
@@ -301,8 +324,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="why-change-is-required-now" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="why-change-is-required-now"><span class="header-section-number">3.4</span> Why Change Is Required Now</h2>
+<section id="why-change-is-required-now" class="level2">
+<h2 class="anchored" data-anchor-id="why-change-is-required-now">Why Change Is Required Now</h2>
 <p>The current platform can continue to run business workloads, but it is no longer an efficient foundation for incremental evolution. The cost, risk, and speed profile of the monolithic model directly limits delivery and migration progress. A decoupled architecture is required to support staged transformation while maintaining operational continuity.</p>
 
 
@@ -716,8 +739,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Book/Proposed Target Architecture.html" class="pagination-link" aria-label="Proposed Target Architecture">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Proposed Target Architecture</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Book/Hub/Core Platform Capabilities.html" class="pagination-link" aria-label="Core Platform Capabilities">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core Platform Capabilities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

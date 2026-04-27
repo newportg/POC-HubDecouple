@@ -178,13 +178,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Hub/API Authentication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Flow 1 — Human SSO (Entra bearer token, domain-joined device)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">API Authentication</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Book/Hub/API Auth Implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">API Auth Implementation</span></span></a>
   </div>
 </li>
       </ul>
@@ -230,18 +230,73 @@ Owns operational structure and access projection: User, Department, Business, ro
 <li>Integration and Async Processing Context<br>
 Owns background jobs and external systems: DocuSign, Dotmailer, SAP, Thirdfort, notifications, feeds, Elasticsearch updates, and sync/error handling.</li>
 </ol>
-<p><strong>2. Major Aggregates Per Context</strong> 1. CRM<br>
-Contact aggregate, Company aggregate, Contact-Company association, Contact relationship graph, address associations. 1. Listings and Demand<br>
-Activity aggregate, Requirement aggregate, Match aggregate linking them, negotiator/department ownership. 1. Transactions<br>
-Offer aggregate with role-based parties (applicant, broker, lender, surveyor, etc.) and status progression. 1. Tenancy and PM<br>
-Tenancy aggregate with linked asset/activity/requirement, tenancy parties, reviews/breaks, lease lineage. 1. Asset and Geography<br>
-Asset aggregate root with Property/Portfolio specializations and shared address model. 1. Organization and Security<br>
-User aggregate, department/business membership, role bindings, resource-security attributes. 1. Integration and Async<br>
-WebJob handlers as process/application layer components that mutate domain aggregates and publish side effects.</p>
-<p><strong>3. Relationship Backbone (most important)</strong> 1. Asset to Activity: one-to-many 1. Asset to Tenancy: one-to-many 1. Requirement to Activity: many-to-many via Match 1. Activity to Offer: one-to-many 1. Requirement to Offer: one-to-many 1. Tenancy to Asset: many-to-one 1. Contact to Company: many-to-many via association entity 1. Contact to Address and Company to Address: association-based (not direct single owner) 1. User to Department/Business: many-to-one from user perspective</p>
-<p><strong>4. Typical Business Flow</strong> 1. Lead captured against Contact and optionally Company 1. Requirement created (demand) 1. Activity created on an Asset (supply) 1. Match links demand to supply 1. Offer tracks negotiation 1. Accepted/completed progression produces Tenancy 1. WebJobs synchronize, notify, enrich, and index</p>
-<p><strong>5. Integration Points (high-value)</strong> 1. Document and signing workflows (DocuSign) 1. Marketing/communications sync (Dotmailer, notifications, SMS/email jobs) 1. External data/compliance updates (SAP, Thirdfort, Fixflo and others) 1. Search indexing and feed jobs (Elasticsearch and feed webjobs)</p>
-<p><strong>6. Practical Implications for Change Design</strong> 1. Changes to party roles should be made in party subtypes, not by adding fixed role columns. 1. Cross-context changes usually pass through Activity, Requirement, Offer, and Tenancy in that order. 1. Async side effects belong in WebJobs/process handlers; core invariants should remain in domain/application logic. 1. Security and visibility are cross-cutting and should be treated as first-class when modifying aggregates.</p>
+<p><strong>2. Major Aggregates Per Context</strong></p>
+<ol type="1">
+<li>CRM
+<ul>
+<li>Contact aggregate, Company aggregate, Contact-Company association, Contact relationship graph, address associations.</li>
+</ul></li>
+<li>Listings and Demand
+<ul>
+<li>Activity aggregate, Requirement aggregate, Match aggregate linking them, negotiator/department ownership.</li>
+</ul></li>
+<li>Transactions
+<ul>
+<li>Offer aggregate with role-based parties (applicant, broker, lender, surveyor, etc.) and status progression.</li>
+</ul></li>
+<li>Tenancy and PM
+<ul>
+<li>Tenancy aggregate with linked asset/activity/requirement, tenancy parties, reviews/breaks, lease lineage.</li>
+</ul></li>
+<li>Asset and Geography
+<ul>
+<li>Asset aggregate root with Property/Portfolio specializations and shared address model.</li>
+</ul></li>
+<li>Organization and Security
+<ul>
+<li>User aggregate, department/business membership, role bindings, resource-security attributes.</li>
+</ul></li>
+<li>Integration and Async
+<ul>
+<li>WebJob handlers as process/application layer components that mutate domain aggregates and publish side effects.</li>
+</ul></li>
+</ol>
+<p><strong>3. Relationship Backbone (most important)</strong></p>
+<ol type="1">
+<li>Asset to Activity: one-to-many</li>
+<li>Asset to Tenancy: one-to-many</li>
+<li>Requirement to Activity: many-to-many via Match</li>
+<li>Activity to Offer: one-to-many</li>
+<li>Requirement to Offer: one-to-many</li>
+<li>Tenancy to Asset: many-to-one</li>
+<li>Contact to Company: many-to-many via association entity</li>
+<li>Contact to Address and Company to Address: association-based (not direct single owner)</li>
+<li>User to Department/Business: many-to-one from user perspective</li>
+</ol>
+<p><strong>4. Typical Business Flow</strong></p>
+<ol type="1">
+<li>Lead captured against Contact and optionally Company</li>
+<li>Requirement created (demand)</li>
+<li>Activity created on an Asset (supply)</li>
+<li>Match links demand to supply</li>
+<li>Offer tracks negotiation</li>
+<li>Accepted/completed progression produces Tenancy</li>
+<li>WebJobs synchronize, notify, enrich, and index</li>
+</ol>
+<p><strong>5. Integration Points (high-value)</strong></p>
+<ol type="1">
+<li>Document and signing workflows (DocuSign)</li>
+<li>Marketing/communications sync (Dotmailer, notifications, SMS/email jobs)</li>
+<li>External data/compliance updates (SAP, Thirdfort, Fixflo and others)</li>
+<li>Search indexing and feed jobs (Elasticsearch and feed webjobs)</li>
+</ol>
+<p><strong>6. Practical Implications for Change Design</strong></p>
+<ol type="1">
+<li>Changes to party roles should be made in party subtypes, not by adding fixed role columns.</li>
+<li>Cross-context changes usually pass through Activity, Requirement, Offer, and Tenancy in that order.</li>
+<li>Async side effects belong in WebJobs/process handlers; core invariants should remain in domain/application logic.</li>
+<li>Security and visibility are cross-cutting and should be treated as first-class when modifying aggregates.</li>
+</ol>
 
 
 
