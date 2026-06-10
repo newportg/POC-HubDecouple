@@ -249,6 +249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-design-and-migration-strategy" id="toc-data-design-and-migration-strategy" class="nav-link active" data-scroll-target="#data-design-and-migration-strategy">Data Design and Migration Strategy</a>
   <ul class="collapse">
   <li><a href="#source-of-truth-and-ownership" id="toc-source-of-truth-and-ownership" class="nav-link" data-scroll-target="#source-of-truth-and-ownership">Source of Truth and Ownership</a></li>
+  <li><a href="#strategy" id="toc-strategy" class="nav-link" data-scroll-target="#strategy">Strategy</a></li>
+  <li><a href="#capability-entity-and-integration-decomposition" id="toc-capability-entity-and-integration-decomposition" class="nav-link" data-scroll-target="#capability-entity-and-integration-decomposition">Capability, Entity, and Integration Decomposition</a></li>
   <li><a href="#data-movement-patterns" id="toc-data-movement-patterns" class="nav-link" data-scroll-target="#data-movement-patterns">Data Movement Patterns</a></li>
   <li><a href="#data-integrity-controls" id="toc-data-integrity-controls" class="nav-link" data-scroll-target="#data-integrity-controls">Data Integrity Controls</a></li>
   <li><a href="#migration-approach" id="toc-migration-approach" class="nav-link" data-scroll-target="#migration-approach">Migration Approach</a></li>
@@ -299,6 +301,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="source-of-truth-and-ownership" class="level3">
 <h3 class="anchored" data-anchor-id="source-of-truth-and-ownership">Source of Truth and Ownership</h3>
 <p>During transition, Hub remains the authoritative source for core transactional domain data. Downstream systems maintain consumer-specific projections built from event notifications and query-driven retrieval.</p>
+</section>
+<section id="strategy" class="level3">
+<h3 class="anchored" data-anchor-id="strategy">Strategy</h3>
+<p>The reason for this design is to limit the scope of changes that need to be made to hub, while still enabling downstream systems to have the data they need in a format that works for them. By using an event-driven approach, we can decouple the systems and allow for more flexibility in how downstream systems consume and use the data. This also allows us to preserve existing domain rule enforcement in hub, while still enabling downstream systems to evolve independently. Additionally, this approach can improve security posture by limiting the exposure of integration-facing interfaces and enabling incremental rollout with reversible steps.</p>
+</section>
+<section id="capability-entity-and-integration-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="capability-entity-and-integration-decomposition">Capability, Entity, and Integration Decomposition</h3>
+<p>The detailed design decomposes the Hub domain across three complementary views: capabilities, entities, and integration patterns. This provides a structured basis for implementation decisions by separating functional responsibility, data ownership, and cross-system interaction design.</p>
+<p>Capabilities describe what the platform does. In the Hub context, these include concerns such as identity and access, domain transaction processing, notification, reporting, audit, and consumer synchronization. Defining these capabilities makes it possible to assign clear ownership boundaries and determine which responsibilities remain within Hub versus which can be externalized over time.</p>
+<p>Entities describe the business objects managed by those capabilities. Examples include customer, account, policy, claim, billing profile, user credential, and event checkpoint. For each entity, the design should identify the authoritative source, lifecycle events, validation boundaries, and downstream consumers. This is essential for deciding which data can be projected externally and which data must continue to be governed within Hub.</p>
+<p>Integration patterns describe how capabilities and entities interact across system boundaries. In this target approach, interaction patterns are intentionally separated by purpose: event notifications signal that a change occurred, GraphQL queries retrieve consumer-specific read projections, and REST commands provide controlled write-back for approved use cases. Mapping these patterns clarifies where coupling exists today and how it is reduced in the target state through stable contracts, explicit ownership, and replayable synchronization flows.</p>
+<p>Taken together, this decomposition ensures the implementation is not treated as a generic interface modernization exercise. Instead, it establishes a traceable model from business capability, to entity ownership, to interaction mechanism, which supports phased delivery, clearer governance, and lower-risk decoupling.</p>
 </section>
 <section id="data-movement-patterns" class="level3">
 <h3 class="anchored" data-anchor-id="data-movement-patterns">Data Movement Patterns</h3>

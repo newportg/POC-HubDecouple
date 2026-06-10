@@ -1,0 +1,319 @@
+```{mermaid}
+flowchart LR
+
+%% =========================
+%% Core Capabilities
+%% =========================
+subgraph CRM[Client Relationship Management]
+    CRM1[Manage contacts]
+    CRM2[Manage companies]
+    CRM3[Search properties]
+end
+
+subgraph BDM[Business Development and Marketing]
+    BDM1[Build marketing lists]
+    BDM2[Manage events]
+    BDM3[Publish web listings]
+    BDM4[Publish deal listings]
+    BDM5[Manage lease events]
+    BDM6[Capture applicant requirements]
+    BDM7[Send applicant communications]
+    BDM8[Manage ConneXions activity]
+    BDM9[Support business generation]
+    BDM10[Manage MAs]
+    BDM11[Publish portal listings]
+    BDM12[Match requirements to activities]
+    BDM13[Manage web enquiries]
+end
+
+subgraph OPS[Transaction Management and Operations]
+    OPS1[Record KF activities]
+    OPS2[Record third-party activities]
+    OPS3[Search activities and create reports]
+    OPS4[Save and share reports]
+    OPS5[Produce development pipeline reports]
+    OPS6[Use personalised dashboards]
+    OPS7[Create tenancies]
+    OPS8[Manage viewings]
+    OPS9[Manage offers]
+    OPS10[Track activity progression]
+    OPS11[Track tenancy progression]
+    OPS12[Manage reletting and renewals]
+    OPS13[Export activities into templates]
+    OPS14[Create instructions and invoices]
+    OPS15[Manage fee splits]
+end
+
+subgraph COMP[Compliance]
+    COMP1[Manage CDDs]
+    COMP2[Support property management compliance]
+    COMP3[Record offers for compliance]
+    COMP4[Manage BFS]
+    COMP5[Produce conflict of interest reports]
+end
+
+%% =========================
+%% Supporting Entities
+%% =========================
+subgraph ENT[Supporting Entities]
+    ENT1[Contact]
+    ENT2[Company]
+    ENT3[Property]
+    ENT4[Listing]
+    ENT5[Deal]
+    ENT6[Event]
+    ENT7[Applicant]
+    ENT8[Requirement]
+    ENT9[Enquiry]
+    ENT10[Activity]
+    ENT11[Viewing]
+    ENT12[Offer]
+    ENT13[Tenancy]
+    ENT14[Instruction]
+    ENT15[Invoice]
+    ENT16[Report]
+    ENT17[Dashboard]
+    ENT18[Template]
+    ENT19[Fee Split]
+    ENT20[CDD Record]
+    ENT21[BFS Record]
+    ENT22[Conflict Report]
+    ENT23[Property Management Record]
+end
+
+%% =========================
+%% Capability to Entity Relationships
+%% =========================
+ENT1 --> CRM1
+ENT2 --> CRM2
+ENT3 --> CRM3
+
+ENT1 --> BDM1
+ENT2 --> BDM1
+ENT6 --> BDM2
+ENT3 --> BDM3
+ENT4 --> BDM3
+ENT5 --> BDM4
+ENT6 --> BDM5
+ENT7 --> BDM6
+ENT8 --> BDM6
+ENT7 --> BDM7
+ENT6 --> BDM8
+ENT1 --> BDM9
+ENT2 --> BDM9
+ENT3 --> BDM10
+ENT4 --> BDM11
+ENT8 --> BDM12
+ENT10 --> BDM12
+ENT9 --> BDM13
+
+ENT10 --> OPS1
+ENT10 --> OPS2
+ENT10 --> OPS3
+ENT16 --> OPS3
+ENT16 --> OPS4
+ENT16 --> OPS5
+ENT17 --> OPS6
+ENT13 --> OPS7
+ENT11 --> OPS8
+ENT12 --> OPS9
+ENT10 --> OPS10
+ENT13 --> OPS11
+ENT13 --> OPS12
+ENT18 --> OPS13
+ENT14 --> OPS14
+ENT15 --> OPS14
+ENT19 --> OPS15
+
+ENT20 --> COMP1
+ENT23 --> COMP2
+ENT12 --> COMP3
+ENT21 --> COMP4
+ENT22 --> COMP5
+```
+
+# Suggested Integration Methods
+
+The capability map above shows what the platform does. The section below suggests a primary integration method for each capability so you can demonstrate a mix of integration patterns across the landscape.
+
+These recommendations assume a modern application estate where:
+
+- synchronous reads and transactional updates are best handled through APIs
+- business notifications and process state changes are better distributed through events
+- external channel updates are often best exposed through webhooks
+- high-volume or scheduled exchanges are often best handled through batch file integration
+
+## Integration Pattern Overview
+
+```{mermaid}
+flowchart LR
+    subgraph SYNC[Synchronous Patterns]
+        API[REST API]
+        GQL[GraphQL API]
+    end
+
+    subgraph ASYNC[Asynchronous Patterns]
+        EVT[Event Bus]
+        WH[Webhook]
+        MQ[Message Queue]
+    end
+
+    subgraph BULK[Bulk and Scheduled Patterns]
+        BATCH[Batch File / SFTP]
+        CDC[Change Data Capture]
+    end
+
+    CRMX[Client Relationship Management] --> API
+    CRMX --> GQL
+
+    BDMX[Business Development and Marketing] --> WH
+    BDMX --> EVT
+    BDMX --> BATCH
+
+    OPSX[Transaction Management and Operations] --> API
+    OPSX --> EVT
+    OPSX --> MQ
+    OPSX --> CDC
+
+    COMPX[Compliance] --> API
+    COMPX --> EVT
+    COMPX --> BATCH
+```
+
+```{mermaid}
+    flowchart LR
+        subgraph CLIENT[Client Patterns]
+            subgraph CLNSYNC[Synchronous Patterns]
+                API[REST API]
+                GQL[GraphQL API]
+            end
+
+            subgraph CLNASYNC[Asynchronous Patterns]
+                EVT[Event Bus]
+            end
+        end
+
+        subgraph SYSTEM[System Patterns]
+            subgraph SYSASYNC[Asynchronous Patterns]
+                WH[Webhook]
+                MQ[Message Queue]
+            end
+
+            subgraph SYSBULK[Bulk and Scheduled Patterns]
+                BATCH[Batch File / SFTP]
+                CDC[Change Data Capture]
+            end
+        end
+
+        API --> CRMX[Client Relationship Management]
+        GQL--> CRMX
+        EVT --> CRMX
+
+        API --> BDMX[Business Development and Marketing]
+        GQL --> BDMX
+        EVT --> BDMX
+        
+        API --> OPSX[Transaction Management and Operations]
+        GQL --> OPSX
+        EVT --> OPSX
+    
+        API --> COMPX[Compliance]
+        GQL --> COMPX
+        EVT --> COMPX
+         
+        BDMX --> CDC
+        BDMX --> BATCH
+        BDMX --> WH
+
+        OPSX --> MQ
+        OPSX --> CDC
+
+        COMPX --> BATCH
+```
+
+
+## Pattern Key
+
+| Method | Use when |
+| --- | --- |
+| REST API | A consuming system needs synchronous create, update, or query behaviour. |
+| GraphQL API | A consuming experience needs flexible read access across related entities. |
+| Event Bus | Multiple systems need to react to a business event without tight coupling. |
+| Webhook | An external platform needs to be notified immediately when something changes. |
+| Message Queue | Work should be processed asynchronously and reliably, often with retries. |
+| Batch File / SFTP | Large scheduled data exchanges are acceptable and near-real-time is not required. |
+| Change Data Capture | Downstream analytics or integration services need a stream of data changes. |
+
+## Capability-by-Capability Recommendations
+
+### Client Relationship Management
+
+| Capability | Suggested primary integration method | Why this fits |
+| --- | --- | --- |
+| Manage contacts | REST API | Contact create and update actions usually require synchronous validation and immediate response. |
+| Manage companies | REST API | Company mastering is typically handled as a transactional system-of-record service. |
+| Search properties | GraphQL API | Property search often needs flexible filtering and shaped read models for multiple channels. |
+
+### Business Development and Marketing
+
+| Capability | Suggested primary integration method | Why this fits |
+| --- | --- | --- |
+| Build marketing lists | Batch File / SFTP | Marketing audiences are often assembled on a schedule and shared in bulk with campaign tools. |
+| Manage events | REST API | Event creation and maintenance usually need direct operational control from upstream users or systems. |
+| Publish web listings | Webhook | Listing changes should trigger immediate push notifications to downstream web publishing platforms. |
+| Publish deal listings | Event Bus | Deal publication is a business event that may need to notify multiple subscribers at once. |
+| Manage lease events | Event Bus | Lease milestones naturally emit state changes consumed by internal and partner systems. |
+| Capture applicant requirements | REST API | Requirement capture is interactive and usually part of a guided user workflow. |
+| Send applicant communications | Message Queue | Communication jobs benefit from decoupling, retries, and throughput control. |
+| Manage ConneXions activity | Event Bus | Relationship activity is typically useful to several interested systems without direct coupling. |
+| Support business generation | Change Data Capture | Pipeline and lead-generation analytics often depend on a steady feed of underlying record changes. |
+| Manage MAs | REST API | MA maintenance appears operational and likely needs controlled synchronous updates. |
+| Publish portal listings | Webhook | External portals commonly consume push-based notifications when listing content changes. |
+| Match requirements to activities | Event Bus | Matching outcomes can trigger several follow-on processes such as alerts, tasks, and recommendations. |
+| Manage web enquiries | Webhook | Enquiry capture from external digital channels is commonly delivered via inbound webhook. |
+
+### Transaction Management and Operations
+
+| Capability | Suggested primary integration method | Why this fits |
+| --- | --- | --- |
+| Record KF activities | REST API | Internal activity capture generally requires immediate validation and confirmation. |
+| Record third-party activities | Webhook | External partners often push activity updates into the platform in near real time. |
+| Search activities and create reports | GraphQL API | Reporting consumers often need read-optimized access across several related operational entities. |
+| Save and share reports | Message Queue | Report distribution can be processed asynchronously, especially where rendering and notifications are involved. |
+| Produce development pipeline reports | Change Data Capture | Pipeline reporting is well served by streaming operational changes into an analytical store. |
+| Use personalised dashboards | Change Data Capture | Dashboards usually depend on continuously refreshed read models rather than direct transactional calls. |
+| Create tenancies | REST API | Tenancy creation is a high-control transactional workflow with strong validation requirements. |
+| Manage viewings | REST API | Booking and updating viewings typically require immediate conflict checking and confirmation. |
+| Manage offers | REST API | Offer creation and amendment are core business transactions that need deterministic responses. |
+| Track activity progression | Event Bus | Progression state changes are classic business events useful to several downstream listeners. |
+| Track tenancy progression | Event Bus | Tenancy status changes are important lifecycle events for billing, compliance, and customer communications. |
+| Manage reletting and renewals | Event Bus | Renewal and reletting milestones often trigger tasks and notifications across multiple systems. |
+| Export activities into templates | Batch File / SFTP | Template-based export is often document-oriented and suitable for scheduled or bulk generation. |
+| Create instructions and invoices | Message Queue | Document generation and invoice creation often benefit from asynchronous processing and retry handling. |
+| Manage fee splits | REST API | Fee split management usually needs synchronous maintenance of commercial rules and allocations. |
+
+### Compliance
+
+| Capability | Suggested primary integration method | Why this fits |
+| --- | --- | --- |
+| Manage CDDs | REST API | Due diligence checks usually sit inside guided workflows that need immediate responses from screening services. |
+| Support property management compliance | Batch File / SFTP | Compliance evidence and periodic submissions are often exchanged in scheduled bulk files. |
+| Record offers for compliance | Event Bus | A recorded offer is a useful trigger for downstream compliance screening and governance processes. |
+| Manage BFS | REST API | Compliance case handling usually requires controlled transactional updates with auditable outcomes. |
+| Produce conflict of interest reports | Change Data Capture | Conflict reporting is often analytics-driven and benefits from continuous change feeds into a reporting layer. |
+
+## Example End-to-End Demonstration Story
+
+If you want to show different integration methods working together in one scenario, a simple narrative would be:
+
+1. A web channel submits a new enquiry through a webhook into Manage web enquiries.
+2. A user captures applicant requirements through a REST API.
+3. Matching logic publishes a match event on the event bus.
+4. Applicant communications are queued through a message queue.
+5. A portal listing is pushed to an external site through a webhook.
+6. Offer creation happens through a REST API, which emits an Offer Recorded event.
+7. Compliance and reporting consume that event, while dashboards update through change data capture.
+
+## Design Note
+
+Each capability has a suggested primary method, not an exclusive one. In practice, the most robust architecture often combines methods, for example REST API for command, Event Bus for notification, and Change Data Capture for analytics.

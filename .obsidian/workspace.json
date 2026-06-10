@@ -1,0 +1,206 @@
+{
+  "main": {
+    "id": "14a71e0aa69ed582",
+    "type": "split",
+    "children": [
+      {
+        "id": "58a30038bf34f556",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "75049b70107c4a34",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3cf6e632ee5e2a06",
+    "type": "split",
+    "children": [
+      {
+        "id": "1fe332c324bb553c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "43ed46e7904107af",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c0b7f43e0f818207",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "55d10bdbc49829d0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "157df1d2eb97bc00",
+    "type": "split",
+    "children": [
+      {
+        "id": "375b88da701bdeb9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c608d24417583874",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
+            }
+          },
+          {
+            "id": "6ca23ea5c42716dd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Book/Transition & Rollout Plan.qmd",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Transition & Rollout Plan"
+            }
+          },
+          {
+            "id": "94236646832d8a77",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "cc05a1dd4547b6c0",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "4c7fd78f5535ecc3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Book/Transition & Rollout Plan.qmd",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Transition & Rollout Plan"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "qmd-as-md-obsidian:Toggle Quarto Preview": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "75049b70107c4a34",
+  "lastOpenFiles": [
+    "Book/Street.md",
+    "Book/Current State Assessment.qmd",
+    "Book/Hub/API Auth Implementation.qmd",
+    "Book/Transition & Rollout Plan.qmd",
+    "Book/Hub/Core Platform Capabilities.qmd",
+    "Book/Hub/Business View.qmd",
+    "Book/Hub/Architectural Summary.qmd",
+    "Book/Hub/API Authentication.qmd",
+    "index.qmd",
+    "Book/HubEvent.png",
+    "cover.png",
+    "coverG.png",
+    "coverGB.png",
+    "fingers.jpeg",
+    "KF.webp",
+    "README.md"
+  ]
+}
